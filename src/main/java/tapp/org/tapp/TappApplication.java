@@ -1,4 +1,4 @@
-package tapp.org.tapp2;
+package tapp.org.tapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
