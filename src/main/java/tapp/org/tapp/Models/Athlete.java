@@ -1,30 +1,37 @@
-package tapp.org.tapp2.Models;
+package tapp.org.tapp.Models;
 
 import java.util.Objects;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "athletes")
-public class Athlet {
+public class Athlete {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Column(name="firstname")
 	private String firstName;
+	@Column(name="lastname")
 	private String lastName;
+	@Column(name="club")
 	private String club;
 
-	public Athlet() {
+
+
+	public Athlete() {
 	}
 
-	public Athlet(Long id, String firstName, String lastName, String club) {
-		this.id = id;
+	public Athlete(String firstName, String lastName, String club) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.club = club;
+
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	public String getFirstName() {
@@ -38,6 +45,7 @@ public class Athlet {
 	public String getClub() {
 		return club;
 	}
+
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -55,8 +63,8 @@ public class Athlet {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		Athlet athlet = (Athlet) o;
-		return id.equals(athlet.id) && firstName.equals(athlet.firstName) && lastName.equals(athlet.lastName) && club.equals(athlet.club);
+		Athlete athlete = (Athlete) o;
+		return id.equals(athlete.id) && firstName.equals(athlete.firstName) && lastName.equals(athlete.lastName) && club.equals(athlete.club);
 	}
 
 	@Override

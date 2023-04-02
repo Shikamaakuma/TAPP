@@ -1,10 +1,10 @@
-package tapp.org.tapp2.Controllers;
+package tapp.org.tapp.Controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import tapp.models.DemoModel;
+import tapp.org.tapp.Models.DemoModel;
 @Controller
 public class DemoController {
 
