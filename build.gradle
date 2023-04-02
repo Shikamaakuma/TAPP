@@ -1,3 +1,5 @@
+import java.nio.file.Paths
+
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.0.4'
@@ -21,3 +23,21 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+tasks.register('flutterBuild') {
+    File flutterDir = project.projectDir
+    String flutter_paht
+
+    doFirst {
+        println 'Flutter'
+        flutterDir = new File(project.projectDir.toString(), "frontend")
+        println flutterDir
+
+        exec {
+            workingDir flutterDir.toString()
+            commandLine 'flutter', 'build', 'web'
+        }
+    }
+}
+
+
