@@ -11,9 +11,6 @@ class TappApplicationTests {
     void contextLoads() {
     }
 
-    @Test
-    void failingTestForBuildPipeline() {
-        assertEquals(1,2,"need to fail to test workflow");
-    }
+    // failing test removed now -> CI-should work
 
 }
