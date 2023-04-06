@@ -1,4 +1,4 @@
-package tapp.org.tapp2.Controllers;
+package tapp.org.tapp.Controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
