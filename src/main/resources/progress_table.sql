@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS progress;
 CREATE TABLE progress(
                          skill_id int8,
                          athlete_id int8,
