@@ -31,3 +31,7 @@ jacocoTestReport {
         html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
     }
 }
+
+jar {
+    enabled = false // With that, no *-plain.jar will be generated
+}
