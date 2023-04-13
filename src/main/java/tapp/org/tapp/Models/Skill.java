@@ -2,7 +2,6 @@ package tapp.org.tapp.Models;
 
 import jakarta.persistence.*;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 @Entity
@@ -17,46 +16,49 @@ public class Skill {
 	@Lob
 	@Column(name="description")
 	private String skillDescription;
-	@Column(name="related_skills")
-	private int[] relatedSkills;
 
+	@Column(name="level")
+	private int skillLevel;
 
 	public Skill() {
 	}
 
-	public Skill(String skillName, String skillDescription, int[] relatedSkills) {
+	public Skill(String skillName, String skillDescription, int skillLevel) {
 		this.skillName = skillName;
 		this.skillDescription = skillDescription;
-		this.relatedSkills = relatedSkills;
+		this.skillLevel = skillLevel;
 	}
 
 	public Long getId() {
 		return id;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getSkillName() {
 		return skillName;
+	}
+
+	public void setSkillName(String skillName) {
+		this.skillName = skillName;
 	}
 
 	public String getSkillDescription() {
 		return skillDescription;
 	}
 
-	public int[] getRelatedSkills() {
-		return relatedSkills;
-	}
-
-
-	public void setSkillName(String skillName) {
-		this.skillName = skillName;
-	}
-
-	public void setDescription(String skillDescription) {
+	public void setSkillDescription(String skillDescription) {
 		this.skillDescription = skillDescription;
 	}
 
-	public void setRelatedSkills(int[] relatedSkills) {
-		this.relatedSkills = relatedSkills;
+	public int getSkillLevel() {
+		return skillLevel;
+	}
+
+	public void setSkillLevel(int skillLevel) {
+		this.skillLevel = skillLevel;
 	}
 
 	@Override
@@ -64,14 +66,12 @@ public class Skill {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Skill skill = (Skill) o;
-		return skillName.equals(skill.skillName) && skillDescription.equals(skill.skillDescription) && Arrays.equals(relatedSkills, skill.relatedSkills);
+		return skillLevel == skill.skillLevel && id.equals(skill.id) && skillName.equals(skill.skillName) && Objects.equals(skillDescription, skill.skillDescription);
 	}
 
 	@Override
 	public int hashCode() {
-		int result = Objects.hash(skillName, skillDescription);
-		result = 31 * result + Arrays.hashCode(relatedSkills);
-		return result;
+		return Objects.hash(id, skillName, skillDescription, skillLevel);
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class Skill {
 				"id=" + id +
 				", skillName='" + skillName + '\'' +
 				", skillDescription='" + skillDescription + '\'' +
-				", relatedSkills=" + relatedSkills +
+				", skillLevel=" + skillLevel +
 				'}';
 	}
 }
