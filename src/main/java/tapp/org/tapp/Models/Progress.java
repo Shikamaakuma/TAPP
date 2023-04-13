@@ -17,9 +17,6 @@ public class Progress {
 	@Column(name="athlete_id")
 	private long athleteId;
 
-	@Column(name="type")
-	private String type;
-
 	@Lob
 	@Column(name="comment")
 	private String comment;
@@ -32,10 +29,9 @@ public class Progress {
 	public Progress() {
 	}
 
-	public Progress(long skillId, long athleteId, String type, String comment, int score) {
+	public Progress(long skillId, long athleteId, String comment, int score) {
 		this.skillId = skillId;
 		this.athleteId = athleteId;
-		this.type = type;
 		this.comment = comment;
 		this.score = score;
 	}
@@ -54,14 +50,6 @@ public class Progress {
 
 	public void setAthleteId(long athleteId) {
 		this.athleteId = athleteId;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	public String getComment() {
@@ -86,12 +74,12 @@ public class Progress {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Progress progress = (Progress) o;
-		return skillId == progress.skillId && athleteId == progress.athleteId && score == progress.score && type.equals(progress.type) && Objects.equals(comment, progress.comment);
+		return skillId == progress.skillId && athleteId == progress.athleteId && score == progress.score && Objects.equals(comment, progress.comment);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(skillId, athleteId, type, comment, score);
+		return Objects.hash(skillId, athleteId, comment, score);
 	}
 
 	@Override
@@ -99,7 +87,6 @@ public class Progress {
 		return "Progress{" +
 				"skillId='" + skillId + '\'' +
 				", athleteId='" + athleteId + '\'' +
-				", type='" + type + '\'' +
 				", comment='" + comment + '\'' +
 				", score=" + score +
 				'}';

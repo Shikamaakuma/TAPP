@@ -15,18 +15,18 @@ public class Athlete {
 	private String firstName;
 	@Column(name="lastname")
 	private String lastName;
-	@Column(name="club")
-	private String club;
+	@Column(name="tenant")
+	private Long tenantID;
 
 
 
 	public Athlete() {
 	}
 
-	public Athlete(String firstName, String lastName, String club) {
+	public Athlete(String firstName, String lastName, Long tenantID) {
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.club = club;
+		this.tenantID = tenantID;
 
 	}
 
@@ -42,8 +42,8 @@ public class Athlete {
 		return lastName;
 	}
 
-	public String getClub() {
-		return club;
+	public Long getTenant() {
+		return tenantID;
 	}
 
 
@@ -55,8 +55,8 @@ public class Athlete {
 		this.lastName = lastName;
 	}
 
-	public void setClub(String club) {
-		this.club = club;
+	public void setClub(Long tenantID) {
+		this.tenantID = tenantID;
 	}
 
 	@Override
@@ -64,12 +64,12 @@ public class Athlete {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Athlete athlete = (Athlete) o;
-		return id.equals(athlete.id) && firstName.equals(athlete.firstName) && lastName.equals(athlete.lastName) && club.equals(athlete.club);
+		return id.equals(athlete.id) && firstName.equals(athlete.firstName) && lastName.equals(athlete.lastName) && tenantID.equals(athlete.tenantID);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, firstName, lastName, club);
+		return Objects.hash(id, firstName, lastName, tenantID);
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public class Athlete {
 				"id=" + id +
 				", firstName='" + firstName + '\'' +
 				", lastName='" + lastName + '\'' +
-				", club='" + club + '\'' +
+				", tenenatID='" + tenantID + '\'' +
 				'}';
 	}
 }
