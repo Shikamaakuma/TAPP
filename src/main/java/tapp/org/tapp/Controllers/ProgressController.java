@@ -22,9 +22,9 @@ public class ProgressController {
 	}
 
 	@Transactional  // is needed because of the Lob field (comment)
-	@GetMapping("/training")
-	public List<Progress> findAllTraining(){
-		return progressRepository.findAllTraining();
+	@GetMapping("/progress/{athleteId}")
+	public List<Progress> findProgressByAthleteId(@PathVariable Long athleteId){
+		return progressRepository.findByathleteId(athleteId);
 	}
 
 	@Transactional

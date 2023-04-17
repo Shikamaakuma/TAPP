@@ -10,10 +10,13 @@ import java.util.List;
 
 @Repository
 public interface ProgressRepository extends JpaRepository<Progress, Long> {
-	@Query(value = "SELECT * FROM progress p WHERE p.type = 'training'", nativeQuery = true)
-	List<Progress> findAllTraining();
+	@Query(value = "SELECT * FROM progress p WHERE p.athlete_id = 'training'", nativeQuery = true)
+	List<Progress> findProgressesByScore();
 
 	@Query(value = "SELECT * FROM progress p WHERE p.type = 'learned'", nativeQuery = true)
 	List<Progress> findAllLearned();
+
+
+	List<Progress> findByathleteId(long athleteId);
 
 }

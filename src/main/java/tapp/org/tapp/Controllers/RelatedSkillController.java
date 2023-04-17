@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tapp.org.tapp.Models.RelatedSkill;
 import tapp.org.tapp.Repository.RelatedSkillRepository;
+import tapp.org.tapp.Repository.RelatedSkillsId;
 
 import java.util.List;
 
@@ -23,5 +24,17 @@ public class RelatedSkillController {
 	public RelatedSkill addRelatedSkill(@RequestBody RelatedSkill relatedSkill) {
 		return relatedSkillRepository.save(relatedSkill);
 	}
+
+	@GetMapping("/required/{skillId}")
+	public List<RelatedSkillsId> findAllrequiredskillByskillid(@PathVariable Long skillId){
+			return relatedSkillRepository.findAllrequiredskillByskillId(skillId);
+	}
+
+	@GetMapping("/required_whole/{skillId}")
+	public List<RelatedSkillsId> findAllrequiredskillByskillid2(@PathVariable Long skillId){
+		return relatedSkillRepository.findAllrequiredskillByskillId(skillId);
+	}
+
+
 }
 

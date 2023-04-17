@@ -9,7 +9,7 @@ import java.util.Objects;
 public class Skill {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long skillId;
 
 	@Column(name="name")
 	private String skillName;
@@ -29,12 +29,12 @@ public class Skill {
 		this.skillLevel = skillLevel;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getSkillId() {
+		return skillId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setSkillId(Long skillId) {
+		this.skillId = skillId;
 	}
 
 	public String getSkillName() {
@@ -66,18 +66,18 @@ public class Skill {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Skill skill = (Skill) o;
-		return skillLevel == skill.skillLevel && id.equals(skill.id) && skillName.equals(skill.skillName) && Objects.equals(skillDescription, skill.skillDescription);
+		return skillLevel == skill.skillLevel && skillId.equals(skill.skillId) && skillName.equals(skill.skillName) && Objects.equals(skillDescription, skill.skillDescription);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, skillName, skillDescription, skillLevel);
+		return Objects.hash(skillId, skillName, skillDescription, skillLevel);
 	}
 
 	@Override
 	public String toString() {
 		return "Skill{" +
-				"id=" + id +
+				"id=" + skillId +
 				", skillName='" + skillName + '\'' +
 				", skillDescription='" + skillDescription + '\'' +
 				", skillLevel=" + skillLevel +

@@ -7,6 +7,8 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "athletes")
 public class Athlete {
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -55,7 +57,7 @@ public class Athlete {
 		this.lastName = lastName;
 	}
 
-	public void setClub(Long tenantID) {
+	public void setTenantID(Long tenantID) {
 		this.tenantID = tenantID;
 	}
 

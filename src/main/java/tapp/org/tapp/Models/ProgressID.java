@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Class is need for the Progress Class with uses a composite primary key.
+ * Class is needed for the Progress Class which uses a composite primary key.
  */
 
 public  class ProgressID implements Serializable {
