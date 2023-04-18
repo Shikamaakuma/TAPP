@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import tapp.org.tapp.Repository.AthleteRepository;
 import tapp.org.tapp.Models.Athlete;
 
+import static org.springframework.data.jpa.domain.Specification.where;
+import static tapp.org.tapp.Repository.AthleteRepository.firstNameContains;
+import static tapp.org.tapp.Repository.AthleteRepository.lastNameContains;
+
 @RestController
 @RequestMapping("/api/v1/")
 public class AthleteController {
@@ -26,5 +30,21 @@ public class AthleteController {
 	public Athlete addAthlet(@RequestBody Athlete athlete) {
 		return athleteRepository.save(athlete);
 	}
+
+	/**
+	 * Searches first and last name case-insensitive for the given input.
+	 * At the moment it does not work if given both a first and a last name!
+	 * @param searchinput
+	 * @return List of athletes which match the search criteria
+	 */
+	@GetMapping("/search_athlete/{searchinput}")
+	public List<Athlete> search(@PathVariable String searchinput) {return athleteRepository.findAll(where(firstNameContains(searchinput).or(lastNameContains(searchinput))));}
+
+	@GetMapping("/search_athlete_firstname/{searchinput}")
+	public List<Athlete> searchFirstName(@PathVariable String searchinput) {return athleteRepository.findAll(where(firstNameContains(searchinput)));}
+
+	@GetMapping("/search_athlete_lastname/{searchinput}")
+	public List<Athlete> searchLastName(@PathVariable String searchinput) {return athleteRepository.findAll(where(lastNameContains(searchinput)));}
+
 }
 

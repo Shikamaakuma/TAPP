@@ -23,7 +23,8 @@ public class Skill {
 	public Skill() {
 	}
 
-	public Skill(String skillName, String skillDescription, int skillLevel) {
+	public Skill(Long skillId, String skillName, String skillDescription, int skillLevel) {
+		this.skillId = skillId;
 		this.skillName = skillName;
 		this.skillDescription = skillDescription;
 		this.skillLevel = skillLevel;
@@ -61,6 +62,7 @@ public class Skill {
 		this.skillLevel = skillLevel;
 	}
 
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -77,7 +79,7 @@ public class Skill {
 	@Override
 	public String toString() {
 		return "Skill{" +
-				"id=" + skillId +
+				"skillId=" + skillId +
 				", skillName='" + skillName + '\'' +
 				", skillDescription='" + skillDescription + '\'' +
 				", skillLevel=" + skillLevel +
