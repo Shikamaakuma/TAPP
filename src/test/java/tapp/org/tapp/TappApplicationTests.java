@@ -7,7 +7,6 @@ import org.springframework.test.context.ActiveProfiles;
 @DataJpaTest
 @ActiveProfiles("testpostgres")
 class TappApplicationTests {
-    // test code
 
     @Test
     void contextLoads() {
