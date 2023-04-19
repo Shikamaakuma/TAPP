@@ -6,6 +6,12 @@ plugins {
     id "org.sonarqube" version "4.0.0.2929"
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
 group = 'TAPP.org'
 version = '0.0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
