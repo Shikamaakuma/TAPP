@@ -27,6 +27,13 @@ public class AthleteController {
 		return athleteRepository.findAll();
 	}
 
+	@GetMapping("/allAthletes")
+	public String listAllAthletes(Model model)
+	{
+		athleteRepository.findAll();
+		return "AthletesOverview";
+	}
+
 	@PostMapping("/add_athlete")
 	public Athlete addAthlet(@RequestBody Athlete athlete) {
 		return athleteRepository.save(athlete);
