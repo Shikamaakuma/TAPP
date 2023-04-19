@@ -4,6 +4,8 @@ package tapp.org.tapp.Controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -14,8 +16,7 @@ import static org.springframework.data.jpa.domain.Specification.where;
 import static tapp.org.tapp.Repository.AthleteRepository.firstNameContains;
 import static tapp.org.tapp.Repository.AthleteRepository.lastNameContains;
 
-@RestController
-@RequestMapping("/api/v1/")
+@Controller
 public class AthleteController {
 	@Autowired
 	private AthleteRepository athleteRepository;
@@ -29,6 +30,13 @@ public class AthleteController {
 	@PostMapping("/add_athlete")
 	public Athlete addAthlet(@RequestBody Athlete athlete) {
 		return athleteRepository.save(athlete);
+	}
+
+	@GetMapping("/listAthletes")
+	public String listAthlete(Model model) {
+		model.addAttribute("athleteList", getAllAthletes());
+
+		return "AthletesWhere";
 	}
 
 	/**

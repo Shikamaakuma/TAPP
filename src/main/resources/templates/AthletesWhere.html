@@ -6,5 +6,13 @@
     <title>Yeehaw</title>
 </head>
 <body>
-<p th:text="${a.firstName}"></p>
+<tbody>
+<tr th:if="${athleteList.isEmpty()}">
+    <td colspan="2"> No athletes found </td>
+</tr>
+<tr th:each="athlete : ${athleteList}">
+    <td><span th:text="${athlete.firstName}"> Title </span></td>
+    <td><span th:text="${athlete.lastName}"> Author </span></td><br>
+</tr>
+</tbody>
 </body>
