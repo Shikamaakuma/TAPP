@@ -4,6 +4,7 @@ package tapp.org.tapp.Controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -24,6 +25,13 @@ public class AthleteController {
 	@GetMapping("/athletes")
 	public List<Athlete> getAllAthletes(){
 		return athleteRepository.findAll();
+	}
+
+	@GetMapping("/allAthletes")
+	public String listAllAthletes(Model model)
+	{
+		athleteRepository.findAll();
+		return "AthletesOverview";
 	}
 
 	@PostMapping("/add_athlete")
