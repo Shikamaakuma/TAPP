@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### application.properties (Database credentials) ###
+src/main/resources/application.properties

@@ -1,16 +1,15 @@
 package tapp.org.tapp;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
 
-@SpringBootTest
+@DataJpaTest
+@ActiveProfiles("testpostgres")
 class TappApplicationTests {
 
     @Test
     void contextLoads() {
     }
-    
-    // Testing Web-hook
 
 }
