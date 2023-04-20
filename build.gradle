@@ -26,7 +26,6 @@ tasks.named('test') {
 
 tasks.register('flutterBuild') {
     File flutterDir = project.projectDir
-    String flutter_paht
 
     doFirst {
         println 'Flutter'
@@ -35,7 +34,8 @@ tasks.register('flutterBuild') {
 
         exec {
             workingDir flutterDir.toString()
-            commandLine 'flutter', 'build', 'web'
+            commandLine '/home/dominik/flutter/bin/flutter', 'build', 'web'
+
         }
     }
 }
