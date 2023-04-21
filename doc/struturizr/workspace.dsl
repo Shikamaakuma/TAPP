@@ -64,12 +64,10 @@ workspace {
     views {
         systemContext softwareSystem "Diagram1" {
             include *
-            autoLayout
         }
         
         container softwareSystem "Containers_All" {
             include *
-            autolayout
         }
         
         styles {
