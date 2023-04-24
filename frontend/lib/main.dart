@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:frontend/ui/navigation/pages.dart';
 import 'package:get/get.dart';
 
 void main() {
+  //HttpOverrides.global = MyHttpOverrides();
   runApp(const MyApp());
 }
 
@@ -12,7 +15,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
+    print('MyApp');
     return GetMaterialApp(
       title: 'TAPP',
       initialRoute: '/user',
@@ -37,6 +40,15 @@ class MyApp extends StatelessWidget {
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
      */
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }
 
@@ -124,3 +136,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+

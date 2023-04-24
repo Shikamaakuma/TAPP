@@ -16,7 +16,8 @@ import static org.springframework.data.jpa.domain.Specification.where;
 import static tapp.org.tapp.Repository.AthleteRepository.firstNameContains;
 import static tapp.org.tapp.Repository.AthleteRepository.lastNameContains;
 
-@Controller
+@RestController
+@RequestMapping("/api/v1/")
 public class AthleteController {
 	@Autowired
 	private AthleteRepository athleteRepository;

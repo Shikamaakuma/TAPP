@@ -1,5 +1,5 @@
 import 'package:frontend/data/provider/user_provider.dart';
-import 'package:frontend/ui/user_controller.dart';
+import 'package:frontend/ui/view/athlete/user_controller.dart';
 import 'package:get/get.dart';
 
 class DefaultBindings implements Bindings {

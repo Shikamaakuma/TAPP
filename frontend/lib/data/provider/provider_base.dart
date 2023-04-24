@@ -10,9 +10,7 @@ abstract class ProviderBase extends GetConnect {
     super.onInit();
 
     /// Base url
-    //httpClient.baseUrl = 'https://deviot.infrasupport.ch/api';
-    //httpClient.baseUrl = 'https://127.0.0.1:5000/api';
-    httpClient.baseUrl = 'https://127:8080/api/v1/';
+    httpClient.baseUrl = 'https://localhost:8081/api/v1';
 
     /// Allow self singed certificates for local dev servers.
     allowAutoSignedCert = true;

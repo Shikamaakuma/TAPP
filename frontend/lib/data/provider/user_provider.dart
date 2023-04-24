@@ -7,16 +7,18 @@ class UserProvider extends ProviderBase {
   Future<List<UserDto>> listUsers() async {
     Response response = await get('/athletes');
 
+    // TODO: remove await
+    await Future.delayed(const Duration(seconds: 3));
+
     if (response.isOk) {
       List<UserDto> user =[];
       for (var a in response.body){
-        user.add(UserDto(a['firstname']));
+        user.add(UserDto(a['firstName']));
       }
       return user;
     }
-    else{
+    else {
       throw Exception('error');
     }
 }
-
 }
