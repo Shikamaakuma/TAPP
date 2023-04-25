@@ -1,11 +1,11 @@
 
 import 'package:frontend/data/dto/user_dto.dart';
-import 'package:frontend/data/provider/user_provider.dart';
+import 'package:frontend/data/provider/api/user_provider.dart';
 import 'package:frontend/packages/gettools/stateful_controller.dart';
 import 'package:frontend/ui/widget/snackbar.dart';
 import 'package:get/get.dart';
 
-class UserController extends StatefulGetxController {
+class AthleteController extends StatefulGetxController {
 
   UserProvider get userProvider => Get.find();
 

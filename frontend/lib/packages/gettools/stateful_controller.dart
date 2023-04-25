@@ -32,7 +32,7 @@ abstract class StatefulGetxController extends GetxController {
     errorMessage.value = null;
   }
 
-  void setError(String errorMessage) {
+  void setError(String errorMessage, {bool forceUpdate = false}) {
     success.value = false;
     loading.value = false;
     loadingMore.value = false;
