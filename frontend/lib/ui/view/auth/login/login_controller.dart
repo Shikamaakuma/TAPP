@@ -34,7 +34,7 @@ class LoginController extends StatefulGetxController {
       await authController.login(
         LoginRequestDto(emailController.value.text, passwordController.value.text),
       );
-      Get.offNamed('/');
+      Get.offAllNamed('/tenants');
     } catch (e) {
       setError('Error');
       update();

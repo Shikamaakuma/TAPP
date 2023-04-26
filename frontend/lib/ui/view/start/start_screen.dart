@@ -1,9 +1,12 @@
 
 import 'package:flutter/material.dart';
-import 'package:frontend/ui/view/start_up/start_controller.dart';
 import 'package:get/get.dart';
 
+import 'start_controller.dart';
+
 class StartScreen extends StatelessWidget {
+  const StartScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<StartController>(

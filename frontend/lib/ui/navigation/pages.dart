@@ -1,16 +1,20 @@
-import 'package:frontend/ui/navigation/bindings.dart';
-import 'package:frontend/ui/view/athlete/athletes_view.dart';
-import 'package:frontend/ui/view/auth/login/login_controller.dart';
-import 'package:frontend/ui/view/auth/login/login_screen.dart';
-import 'package:frontend/ui/view/auth/password_recovery/password_recovery_screen.dart';
-import 'package:frontend/ui/view/auth/registration/registration_screen.dart';
-import 'package:frontend/ui/view/start_up/start_screen.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/src/routes/get_route.dart';
+
+import '../view/athlete/athletes_view.dart';
+import '../view/auth/login/login_controller.dart';
+import '../view/auth/login/login_screen.dart';
+import '../view/auth/password_recovery/password_recovery_screen.dart';
+import '../view/auth/registration/registration_screen.dart';
+import '../view/start/start_screen.dart';
+import '../view/tenant/tenant_screen.dart';
+import '../view/tenant_list/tenant_list_view.dart';
+import 'bindings.dart';
+import 'middleware/auth_guard.dart';
 
 List<GetPage> get pages => [
       GetPage(name: '/start', page: () => StartScreen()),
-      GetPage(name: '/', page: page)
+      GetPage(name: '/tenants', page: () => TenantListScreen(), middlewares: [AuthGuard()]),
+      GetPage(name: '/tenant/:tenantId', page: () => TenantScreen(), middlewares: [AuthGuard()]),
       GetPage(name: '/login', page: () => const LoginScreen(), binding: BindingsBuilder(() {
         Get.lazyPut(() => LoginController());
       })),
