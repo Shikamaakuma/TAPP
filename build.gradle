@@ -59,10 +59,20 @@ tasks.register('flutterBuild') {
 
         exec {
             workingDir flutterDir.toString()
-            commandLine '/home/dominik/flutter/bin/flutter', 'build', 'web'
-
+            commandLine '/home/dominik/software/flutter/flutter/bin/flutter', 'build', 'web'
         }
     }
 }
 
+tasks.register('flutterCopy', Copy) {
+    dependsOn(flutterBuild)
+    from layout.projectDirectory.dir('frontend').dir('build').dir('web')
+    include "**/*.*"
+    into layout.projectDirectory.dir('src').dir('main').dir('resources').dir('static')
+}
+
+tasks.register('flutterServerStart') {
+    dependsOn(flutterCopy)
+    dependsOn(build)
+}
 

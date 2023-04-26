@@ -1,5 +1,6 @@
 import 'package:frontend/data/provider/api_definitions.dart';
 import 'package:frontend/data/provider/api_moked/auth_provider.dart';
+import 'package:frontend/data/provider/api_moked/tenant_provider.dart';
 import 'package:frontend/data/provider/api_moked/user_provider.dart';
 
 class APIProvider {
@@ -9,6 +10,7 @@ class APIProvider {
 
   AuthProviderDef get authProvider => AuthProvider();
   UserProviderDef get userProvider => UserProvider();
+  TenantProvider get tenantProvider => TenantProviderMocked();
 
 
 }

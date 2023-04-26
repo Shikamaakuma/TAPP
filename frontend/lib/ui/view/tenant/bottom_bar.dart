@@ -3,24 +3,25 @@ import 'package:get/get.dart';
 
 class BottomMenu extends StatelessWidget {
   final int selectedIndex;
+  final int selectedTenantId;
 
-  const BottomMenu({super.key, required this.selectedIndex});
+  const BottomMenu({super.key, required this.selectedIndex, required this.selectedTenantId});
 
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: const Icon(Icons.calendar_month),
-          label: 'reservations'.tr,
+          icon: const Icon(Icons.sports),
+          label: 'Tenant',
         ),
         BottomNavigationBarItem(
-          icon: const Icon(Icons.help_outline),
-          label: 'help'.tr,
+          icon: const Icon(Icons.person),
+          label: 'Athletes',
         ),
         BottomNavigationBarItem(
-          icon: const Icon(Icons.settings),
-          label: 'settings'.tr,
+          icon: const Icon(Icons.lightbulb),
+          label: 'Skills',
         ),
       ],
       currentIndex: selectedIndex,
@@ -31,14 +32,14 @@ class BottomMenu extends StatelessWidget {
       iconSize: 24,
       onTap: (value) {
         if (value == 0 && value != selectedIndex) {
-          Get.offAndToNamed('/');
+          Get.offNamed('/tenant/$selectedTenantId');
         }
         if (value == 1 && value != selectedIndex) {
-          Get.offNamedUntil('help', (route) => false);
+          Get.offNamed('/tenant/$selectedTenantId/athletes');
           //Get.offAndToNamed('/help');
         }
         if (value == 2 && value != selectedIndex) {
-          Get.offAndToNamed('/settings');
+          Get.offNamed('/tenant/$selectedTenantId/skills');
         }
       },
       elevation: 5,

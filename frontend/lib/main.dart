@@ -1,6 +1,3 @@
-import 'dart:html';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:frontend/domain/service/auth_service.dart';
 import 'package:frontend/ui/navigation/pages.dart';
@@ -43,15 +40,6 @@ class MyApp extends StatelessWidget {
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
      */
-  }
-}
-
-class MyHttpOverrides extends HttpOverrides {
-  @override
-  HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-      ..badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
   }
 }
 

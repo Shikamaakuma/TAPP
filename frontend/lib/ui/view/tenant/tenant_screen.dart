@@ -6,6 +6,9 @@ import 'package:frontend/ui/widget/shimmer_widgets.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 
+import 'bottom_bar.dart';
+
+
 class TenantScreen extends StatelessWidget {
   const TenantScreen({super.key});
 
@@ -17,10 +20,17 @@ class TenantScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text(controller.tenantModel.name),
         ),
+        bottomNavigationBar: BottomMenu(selectedIndex: 0,
+            selectedTenantId: controller.tenantModel.id),
         body: StatefulGetBuilder<TenantController>(
-          success: (c) => Column(
+          success: (c) => Container(
+            margin: EdgeInsets.all(4),
+            child: LoadingShimmer(
+              isLoading: c.loading.value,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AspectRatio(aspectRatio: 16/9,
+              AspectRatio(aspectRatio: 16/9,
               child: Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
@@ -28,19 +38,20 @@ class TenantScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16)
                 ),
                 child: Image.network(
-                  'https://fluttfer'
+                  'https://flutter'
                       '.dev/docs/cookbook/img-files/effects/split-check/Food1.jpg',
                   fit: BoxFit.cover,
                 ),
               ),),
-            Shimmer.fromColors(
-                enabled: true,
-                baseColor: Colors.grey[400]!,
-            highlightColor: Colors.grey[200]!,
-            child: ShimmerText()),
-            ShimmerLoading(isLoading: true, child: ShimmerText()),
-            ShimmerText(width: 250,)
-          ]),),
+            const SizedBox(height: 24,),
+            if (c.loading.value)
+              const ShimmerTextMultiLine(
+                lastWidth: 240,
+                numberOfLines: 3,
+              ),
+            if (c.loading.isFalse)
+              Text(c.tenantDetailModel.description)
+          ]),),),),
         ),
       );
   }

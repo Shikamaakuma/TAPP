@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:frontend/domain/model/tenant.dart';
 import 'package:frontend/ui/view/tenant_list/tenant_list_controller.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 import '../../../packages/gettools/statefull_getbuilder.dart';
 

@@ -13,5 +13,7 @@ abstract class UserDataStorage {
   Future<List<TenantModel>> loadTenants();
   Future<void> saveUser(UserModel user);
   Future<void> saveTentants(List<TenantModel> tenants);
+  Future<int> loadSelectedTenantId();
+  Future<void> saveSelectedTenantId(int? selectedTenantId);
   Future<void> delete();
 }

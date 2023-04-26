@@ -9,12 +9,14 @@ class UserDataSharedPreferences implements UserDataStorage{
 
   static const _userDataKey = 'user_data';
   static const _tenantDataKey = 'tenant_data';
+  static const _selectedTenantKey = 'selected_tenant';
 
   @override
   Future<void> delete() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove(_userDataKey);
     await prefs.remove(_tenantDataKey);
+    await prefs.remove(_selectedTenantKey);
   }
 
   @override
@@ -54,6 +56,28 @@ class UserDataSharedPreferences implements UserDataStorage{
   Future<void> saveUser(UserModel user) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString(_userDataKey, jsonEncode(user.toMap));
+  }
+
+  @override
+  Future<int> loadSelectedTenantId() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    int? selectedTenantId = prefs.getInt(_selectedTenantKey);
+    if (selectedTenantId != null) {
+      return selectedTenantId;
+    } else {
+      // TODO: throw custom exception
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<void> saveSelectedTenantId(int? selectedTenantId) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (selectedTenantId != null) {
+      await prefs.setInt(_selectedTenantKey, selectedTenantId);
+    } else {
+      await prefs.remove(_selectedTenantKey);
+    }
   }
   
 }

@@ -30,7 +30,8 @@ class AuthService extends GetxController {
             (value) async {
               UserModel user = await userDataStorage.loadUser();
               List<TenantModel> tenants = await userDataStorage.loadTenants();
-              Get.put(UserService(user, tenants), permanent: true);
+              int selectedTenant = await userDataStorage.loadSelectedTenantId();
+              Get.put(UserService(user, tenants, selectedTenant), permanent: true);
               accessToken.value = value;
               isLoading.value = false;
             }
