@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'TAPP.org'
-version = '0.0.0.1-SNAPSHOT'
+version = '0.0.0.2-SNAPSHOT'
 sourceCompatibility = '17'
 
 repositories {
@@ -59,7 +59,7 @@ tasks.register('flutterBuild') {
 
         exec {
             workingDir flutterDir.toString()
-            commandLine '/home/dominik/software/flutter/flutter/bin/flutter', 'build', 'web'
+            commandLine 'flutter', 'build', 'web'
         }
     }
 }
@@ -71,7 +71,7 @@ tasks.register('flutterCopy', Copy) {
     into layout.projectDirectory.dir('src').dir('main').dir('resources').dir('static')
 }
 
-tasks.register('flutterServerStart') {
+tasks.register('fullBuild') {
     dependsOn(flutterCopy)
     dependsOn(build)
 }
