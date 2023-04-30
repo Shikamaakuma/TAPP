@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'TAPP.org'
-version = '0.0.0.1-SNAPSHOT'
+version = '0.0.0.2-SNAPSHOT'
 sourceCompatibility = '17'
 
 repositories {
@@ -49,3 +49,30 @@ sonarqube {
 jar {
     enabled = false // With that, no *-plain.jar will be generated
 }
+tasks.register('flutterBuild') {
+    File flutterDir = project.projectDir
+
+    doFirst {
+        println 'Flutter'
+        flutterDir = new File(project.projectDir.toString(), "frontend")
+        println flutterDir
+
+        exec {
+            workingDir flutterDir.toString()
+            commandLine 'flutter', 'build', 'web'
+        }
+    }
+}
+
+tasks.register('flutterCopy', Copy) {
+    dependsOn(flutterBuild)
+    from layout.projectDirectory.dir('frontend').dir('build').dir('web')
+    include "**/*.*"
+    into layout.projectDirectory.dir('src').dir('main').dir('resources').dir('static')
+}
+
+tasks.register('fullBuild') {
+    dependsOn(flutterCopy)
+    dependsOn(build)
+}
+
