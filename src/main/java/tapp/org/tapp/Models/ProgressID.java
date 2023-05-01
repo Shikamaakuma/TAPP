@@ -8,12 +8,17 @@ import java.util.Objects;
  */
 
 public  class ProgressID implements Serializable {
+
+	private long progressId;
 	private long skillId;
 	private long athleteId;
 
+
+
 	public ProgressID(){};
 
-	public ProgressID(long skillId, long athleteId) {
+	public ProgressID(long progressId, long skillId, long athleteId) {
+		this.progressId = progressId;
 		this.skillId = skillId;
 		this.athleteId = athleteId;
 	}
@@ -23,11 +28,11 @@ public  class ProgressID implements Serializable {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		ProgressID that = (ProgressID) o;
-		return skillId == that.skillId && athleteId == that.athleteId;
+		return progressId == that.progressId && skillId == that.skillId && athleteId == that.athleteId;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(skillId, athleteId);
+		return Objects.hash(skillId, athleteId, progressId);
 	}
 }

@@ -1,7 +1,9 @@
 package tapp.org.tapp.Models;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.util.Date;
 import java.util.Objects;
 
 
@@ -11,12 +13,20 @@ import java.util.Objects;
 public class Progress {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long progressId;
+
+	@Id
 	@Column(name="skill_id")
 	private long skillId;
 
 	@Id
 	@Column(name="athlete_id")
 	private long athleteId;
+
+	@Column(nullable = false, updatable = false)
+	@CreationTimestamp
+	private Date created_at;
 
 	@Lob
 	@Column(name="comment")
@@ -35,6 +45,22 @@ public class Progress {
 		this.athleteId = athleteId;
 		this.comment = comment;
 		this.score = score;
+	}
+
+	public long getProgressId() {
+		return progressId;
+	}
+
+	public void setProgressId(long progressId) {
+		this.progressId = progressId;
+	}
+
+	public Date getCreated_at() {
+		return created_at;
+	}
+
+	public void setCreated_at(Date created_at) {
+		this.created_at = created_at;
 	}
 
 	public long getSkillId() {
