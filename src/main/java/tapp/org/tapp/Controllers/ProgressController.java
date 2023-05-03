@@ -27,13 +27,6 @@ public class ProgressController {
 		return progressRepository.findByathleteId(athleteId);
 	}
 
-	@Transactional
-	@GetMapping("/learned")
-	public List<Progress> findAllLearned(){
-		return progressRepository.findAllLearned();
-	}
-
-
 	@PostMapping("/add_progress")
 	public Progress addAthlet(@RequestBody Progress progress) {
 		return progressRepository.save(progress);

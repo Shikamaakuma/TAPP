@@ -13,8 +13,7 @@ import tapp.org.tapp.Repository.AthleteRepository;
 import tapp.org.tapp.Models.Athlete;
 
 import static org.springframework.data.jpa.domain.Specification.where;
-import static tapp.org.tapp.Repository.AthleteRepository.firstNameContains;
-import static tapp.org.tapp.Repository.AthleteRepository.lastNameContains;
+import static tapp.org.tapp.Repository.AthleteRepository.*;
 
 @RestController
 @RequestMapping("/api/v1/")
@@ -23,28 +22,29 @@ public class AthleteController {
 	private AthleteRepository athleteRepository;
 
 	// get all athletes
-	@GetMapping("/athletes")
-	public List<Athlete> getAllAthletes(){
-		return athleteRepository.findAll();
+	@GetMapping("/{tenantID}/athletes")
+	public List<Athlete> getAllAthletes(@PathVariable String tenantID){
+		return athleteRepository.findAll(where(isTenantID(tenantID)));
 	}
 
-	@GetMapping("/allAthletes")
-	public String listAllAthletes(Model model)
-	{
-		athleteRepository.findAll();
-		return "AthletesOverview";
-	}
-
-	@PostMapping("/add_athlete")
-	public Athlete addAthlet(@RequestBody Athlete athlete) {
+	@PostMapping("/{tenantID}/add_athlete")
+	public Athlete addAthlete(@PathVariable Long tenantID, @RequestBody Athlete athlete) {
+		athlete.setTenantID(tenantID);
 		return athleteRepository.save(athlete);
 	}
 
-	@GetMapping("/listAthletes")
-	public String listAthlete(Model model) {
-		model.addAttribute("athleteList", getAllAthletes());
+	@DeleteMapping("/{tenantID}/athlete/{athleteID}")
+	public void deleteAthlete(@PathVariable Long tenantID, @PathVariable Long athleteID){
+		Athlete athlete = athleteRepository.getReferenceById(athleteID);
+		if(athlete.getTenant() != tenantID) {
+			return;
+		}
+		athleteRepository.deleteById(athleteID);
+	}
 
-		return "AthletesWhere";
+	@PostMapping("/{tenantID}/athlete/{athleteID}")
+	public void updateAthlete(@PathVariable Long tenantID,@PathVariable Long athleteID, @RequestBody Athlete athlete){
+		athleteRepository.updateAthlete(tenantID,athleteID,athlete.getFirstName(),athlete.getLastName());
 	}
 
 	/**
@@ -53,14 +53,20 @@ public class AthleteController {
 	 * @param searchinput
 	 * @return List of athletes which match the search criteria
 	 */
-	@GetMapping("/search_athlete/{searchinput}")
-	public List<Athlete> search(@PathVariable String searchinput) {return athleteRepository.findAll(where(firstNameContains(searchinput).or(lastNameContains(searchinput))));}
+	@GetMapping("/{tenantID}/search_athlete/{searchinput}")
+	public List<Athlete> search(@PathVariable String tenantID, @PathVariable String searchinput) {
+		return athleteRepository.findAll(where(isTenantID(tenantID).and(firstNameContains(searchinput).or(lastNameContains(searchinput)))));
+	}
 
-	@GetMapping("/search_athlete_firstname/{searchinput}")
-	public List<Athlete> searchFirstName(@PathVariable String searchinput) {return athleteRepository.findAll(where(firstNameContains(searchinput)));}
+	@GetMapping("/{tenantID}/search_athlete_firstname/{searchinput}")
+	public List<Athlete> searchFirstName(@PathVariable String tenantID, @PathVariable String searchinput) {
+		return athleteRepository.findAll(where(isTenantID(tenantID).and(firstNameContains(searchinput))));
+	}
 
-	@GetMapping("/search_athlete_lastname/{searchinput}")
-	public List<Athlete> searchLastName(@PathVariable String searchinput) {return athleteRepository.findAll(where(lastNameContains(searchinput)));}
+	@GetMapping("/{tenantID}/search_athlete_lastname/{searchinput}")
+	public List<Athlete> searchLastName(@PathVariable String tenantID, @PathVariable String searchinput) {
+		return athleteRepository.findAll(where(isTenantID(tenantID).and(lastNameContains(searchinput))));
+	}
 
 }
 
