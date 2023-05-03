@@ -24,9 +24,11 @@ public interface SkillRepository extends JpaRepository<Skill, Long>, JpaSpecific
 		return (skill, cq, cb) -> cb.like(cb.lower(cb.trim(skill.get("skillDescription"))), "%" + searchinput.toLowerCase() + "%");
 	}
 
+	@Transactional
 	@Query("SELECT S FROM Skill S INNER JOIN TenantSkill TS ON S.skillId = TS.skillId WHERE TS.tenantId=?1" )
 	List<Skill> getSkillsByTenant(Long tenantID);
 
+	@Transactional
 	@Query("SELECT S FROM Skill S INNER JOIN TenantSkill TS ON S.skillId = TS.skillId WHERE TS.tenantId=?1 AND TS.skillId=?2" )
 	List<Skill> getSkillByTenant(Long tenantID, Long skillID);
 
