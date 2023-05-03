@@ -26,9 +26,13 @@ public class AthleteController {
 	@Autowired
 	EntityManager entityManager;
 
-	// get all athletes
+	/**
+	 * Returns all athletes for a given tenant ID
+	 * @param tenantID
+	 * @return list of athletes with tenantId
+	 */
 	@GetMapping("/{tenantID}/athletes")
-	public List<Athlete> getAllAthletes(@PathVariable String tenantID){
+	public List<Athlete> getAthletesOfTenant(@PathVariable String tenantID){
 		return athleteRepository.findAll(where(isTenantID(tenantID)));
 	}
 
@@ -36,6 +40,11 @@ public class AthleteController {
 	public Athlete addAthlete(@PathVariable Long tenantID, @RequestBody Athlete athlete) {
 		athlete.setTenantID(tenantID);
 		return athleteRepository.save(athlete);
+	}
+
+	@PostMapping("/{tenantID}/athletes/{athleteID}")
+	public void updateAthlete(@PathVariable Long tenantID,@PathVariable Long athleteID, @RequestBody Athlete athlete) {
+		athleteRepository.updateAthlete(tenantID, athleteID, athlete.getFirstName(), athlete.getLastName());
 	}
 
 	@DeleteMapping("/{tenantID}/athletes/{athleteID}")
@@ -52,34 +61,11 @@ public class AthleteController {
 	 * @param athleteId
 	 * @return Athlete with the given athlete ID
 	 */
-
-	@PostMapping("/{tenantID}/athletes/{athleteID}")
-	public void updateAthlete(@PathVariable Long tenantID,@PathVariable Long athleteID, @RequestBody Athlete athlete){
-		athleteRepository.updateAthlete(tenantID,athleteID,athlete.getFirstName(),athlete.getLastName());
 	@GetMapping("{tenantId}/athlete/{athleteId}")
 	public Athlete findAthleteById(@PathVariable long tenantId, @PathVariable long athleteId){
 		return athleteRepository.findAthletesByIdAndTenantID(tenantId, athleteId);
 	}
 
-	/**
-	 * Returns all athletes for a given tenant ID
-	 * @param tenantId
-	 * @return list of athletes with tenantId
-	 */
-	@GetMapping("/{tenantID}/search_athlete/{searchinput}")
-	public List<Athlete> search(@PathVariable String tenantID, @PathVariable String searchinput) {
-		return athleteRepository.findAll(where(isTenantID(tenantID).and(firstNameContains(searchinput).or(lastNameContains(searchinput)))));
-	}
-
-	@GetMapping("/{tenantID}/search_athlete_firstname/{searchinput}")
-	public List<Athlete> searchFirstName(@PathVariable String tenantID, @PathVariable String searchinput) {
-		return athleteRepository.findAll(where(isTenantID(tenantID).and(firstNameContains(searchinput))));
-	}
-
-	@GetMapping("/{tenantID}/search_athlete_lastname/{searchinput}")
-	public List<Athlete> searchLastName(@PathVariable String tenantID, @PathVariable String searchinput) {
-		return athleteRepository.findAll(where(isTenantID(tenantID).and(lastNameContains(searchinput))));
-	}
 	/**
 	 * Searches athletes with the first or last name containing the search term and the correct tenant ID
 	 * @param tenantID
