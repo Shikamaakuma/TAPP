@@ -35,7 +35,7 @@ public class SkillController {
 	}
 
 	@PostMapping("/{tenantID}/add_skill")
-	public Skill addSkillToTenant(@PathVariable Long tenantID, @RequestBody Skill skill) {
+	public Skill addSkillWithTenant(@PathVariable Long tenantID, @RequestBody Skill skill) {
 		Skill saved = addSkill(skill);
 		tenantSkillRepository.save(new TenantSkill(saved.getSkillId(),tenantID));
 		return saved;
