@@ -28,7 +28,7 @@ public class ProgressController {
 	}
 
 	@PostMapping("/add_progress")
-	public Progress addAthlet(@RequestBody Progress progress) {
+	public Progress addProgress(@RequestBody Progress progress) {
 		return progressRepository.save(progress);
 	}
 }
