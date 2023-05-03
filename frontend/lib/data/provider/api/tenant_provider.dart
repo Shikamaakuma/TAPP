@@ -6,7 +6,7 @@ import 'package:frontend/data/provider/api_definitions.dart';
 
 import '../../dto/athlete_dto.dart';
 
-class TenantProviderMocked extends ProviderBase implements TenantProviderDef {
+class TenantApiProvider extends ProviderBase implements TenantProviderDef {
   @override
   Future<TenantDetailDto> tenantDetails(int tenantId) async {
     await Future.delayed(Duration(seconds: 3));
@@ -18,9 +18,8 @@ class TenantProviderMocked extends ProviderBase implements TenantProviderDef {
         AthleteDto(1, 'Dominik', 'Villiger')
       ],
       [
-        SkillDto(1, 'Klettern', 'Am berg', 1)
+        SkillDto(1, 'Klettern', 'draussen', 6)
       ]
     );
   }
-
 }

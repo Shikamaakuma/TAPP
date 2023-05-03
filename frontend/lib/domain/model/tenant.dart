@@ -5,22 +5,23 @@ import 'skill.dart';
 
 class TenantModel extends IdentifiedModel {
   final String name;
+  final String description;
 
-  TenantModel(super.id, this.name);
+  TenantModel(super.id, this.name, this.description);
 
   factory TenantModel.fromJson(dynamic json) {
-    return TenantModel(json['id'], json['name']);
+    return TenantModel(json['id'], json['name'], json['description']);
   }
 
   Map<String, dynamic> get toMap => {
     'id': id,
     'name': name,
+    'description': description,
   };
 }
 
 class TenantDetailModel extends TenantModel {
 
-  final String description;
   final String imageLink;
   final List<SkillModel> skills;
   final List<AthleteModel> athletes;
@@ -29,7 +30,7 @@ class TenantDetailModel extends TenantModel {
   TenantDetailModel(
       super.id,
       super.name,
-      this.description,
+      super.description,
       this.imageLink,
       this.skills,
       this.athletes

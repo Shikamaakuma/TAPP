@@ -2,6 +2,7 @@ import 'package:frontend/domain/features/tenant.dart';
 import 'package:frontend/domain/model/tenant.dart';
 import 'package:frontend/domain/service/user_service.dart';
 import 'package:frontend/packages/gettools/stateful_controller.dart';
+import 'package:frontend/ui/widget/snackbar.dart';
 import 'package:get/get.dart';
 
 class TenantController extends StatefulGetxController {
@@ -20,6 +21,9 @@ class TenantController extends StatefulGetxController {
     } else {
       TenantFeatures.loadTenant(tenantModel).then((value) {
         setSuccess();
+      }).onError((error, stackTrace) {
+        setError(error.toString());
+        showErrorSnackBar('Error', error.toString());
       });
     }
   }

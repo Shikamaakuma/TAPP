@@ -6,6 +6,8 @@ import 'package:frontend/ui/view/tenant/tenant_controller.dart';
 import 'package:frontend/ui/widget/shimmer_widgets.dart';
 import 'package:get/get.dart';
 
+import '../../../../packages/alert_banner.dart';
+
 class SkillListScreen extends StatelessWidget {
   const SkillListScreen({super.key});
 
@@ -17,22 +19,26 @@ class SkillListScreen extends StatelessWidget {
       ),
       body: StatefulGetBuilder<TenantController>(
         success: (controller) => Container(
-          child: ListView.builder(
+          padding: const EdgeInsets.all(8),
+          child: controller.tenantDetailModel.skills.isNotEmpty ? ListView.builder(
             itemCount: controller.tenantDetailModel.skills.length,
             itemBuilder: (BuildContext context, int index) {
               SkillModel model = controller.tenantDetailModel.skills[index];
               return SkillListTile(name: model.name);
-            },
+            }) : AlertBanner.info('No Skills added yet'),
 
           ),
-        ),
         loading: (controller) => LoadingShimmer(isLoading: true, child: ListView.builder(
           itemCount: 5,
           itemBuilder: (context, index) => SkillLoadingListTile(),),
 
         ),
       ),
-      bottomNavigationBar: BottomMenu(selectedIndex: 2, selectedTenantId: 1,),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {  },
+        child: const Icon(Icons.add),
+      ),
+      bottomNavigationBar: const BottomMenu(selectedIndex: 2, selectedTenantId: 1,),
     );
   }
 }

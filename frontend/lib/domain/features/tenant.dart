@@ -14,17 +14,23 @@ class TenantFeatures {
   final TenantDetailModel tenant;
   TenantFeatures(this.tenant);
 
-  TenantProvider get tenantProvider => APIProvider.instance.tenantProvider;
+  TenantProviderDef get tenantProvider => APIProvider.instance.tenantProvider;
+  SkillProviderDef get skillProvider => APIProvider.instance.skillProvider;
+  AthleteProviderDef get athleteProvider => APIProvider.instance.athleteProvider;
 
   static Future<TenantFeatures> loadTenant(TenantModel tenantModel) async {
-    TenantDetailDto detailDto =
-        await APIProvider.instance.tenantProvider.tenantDetails(tenantModel.id);
+    //TenantDetailDto detailDto =
+    //    await APIProvider.instance.tenantProvider.tenantDetails(tenantModel.id);
+
+    List<AthleteDto> athletes = await APIProvider.instance.athleteProvider.tenantAthletes(tenantModel.id);
+    List<SkillDto> skill = await APIProvider.instance.skillProvider.skills();
+    List<TenantSkillsDto> tenantSkills = await APIProvider.instance.skillProvider.tenantSkills(tenantModel.id);
 
     TenantDetailModel tenantDetailModel = TenantDetailModel(tenantModel.id,
-        tenantModel.name, detailDto.description, detailDto.imageLink, [
-      for (SkillDto skill in detailDto.skill) SkillModel.fromDto(skill)
+        tenantModel.name, tenantModel.description, 'No image yet', [
+      for (SkillDto skill in skill) SkillModel.fromDto(skill)
     ], [
-      for (AthleteDto athlete in detailDto.athletes)
+      for (AthleteDto athlete in athletes)
         AthleteModel.fromDto(athlete)
     ]);
 

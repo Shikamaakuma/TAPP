@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/domain/model/athlete.dart';
 import 'package:frontend/domain/model/skill.dart';
+import 'package:frontend/packages/alert_banner.dart';
 import 'package:frontend/packages/gettools/statefull_getbuilder.dart';
 import 'package:frontend/ui/view/tenant/bottom_bar.dart';
 import 'package:frontend/ui/view/tenant/tenant_controller.dart';
@@ -14,23 +15,23 @@ class AthleteListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Skills'),
+        title: const Text('Athletes'),
       ),
       body: StatefulGetBuilder<TenantController>(
         success: (controller) => Container(
-          child: ListView.builder(
+          padding: const EdgeInsets.all(8),
+          child: controller.tenantDetailModel.athletes.isNotEmpty ? ListView.builder(
             itemCount: controller.tenantDetailModel.athletes.length,
             itemBuilder: (BuildContext context, int index) {
               AthleteModel model = controller.tenantDetailModel.athletes[index];
               return AthleteListTile(name: model.fullName);
             },
 
-          ),
-        ),
+          ): AlertBanner.info('No Athletes added yet'),
+        )  ,
         loading: (controller) => ListView.builder(
           itemCount: 5,
           itemBuilder: (context, index) => AthleteLoadingListTile(),
-
         ),
       ),
       floatingActionButton: FloatingActionButton(
