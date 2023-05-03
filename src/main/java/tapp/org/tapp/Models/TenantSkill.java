@@ -27,6 +27,21 @@ public class TenantSkill {
 		this.tenantId = tenantId;
 	}
 
+	public long getSkillId() {
+		return skillId;
+	}
+
+	public void setSkillId(long skillId) {
+		this.skillId = skillId;
+	}
+
+	public long getTenantId() {
+		return tenantId;
+	}
+
+	public void setTenantId(long tenantId) {
+		this.tenantId = tenantId;
+	}
 
 	@Override
 	public int hashCode() {

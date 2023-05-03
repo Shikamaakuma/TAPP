@@ -3,9 +3,12 @@ package tapp.org.tapp.Controllers;
 
 import java.util.List;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -13,54 +16,78 @@ import tapp.org.tapp.Repository.AthleteRepository;
 import tapp.org.tapp.Models.Athlete;
 
 import static org.springframework.data.jpa.domain.Specification.where;
-import static tapp.org.tapp.Repository.AthleteRepository.firstNameContains;
-import static tapp.org.tapp.Repository.AthleteRepository.lastNameContains;
+import static tapp.org.tapp.Repository.AthleteRepository.*;
 
 @RestController
 @RequestMapping("/api/v1/")
 public class AthleteController {
 	@Autowired
 	private AthleteRepository athleteRepository;
+	@Autowired
+	EntityManager entityManager;
 
-	// get all athletes
-	@GetMapping("/athletes")
-	public List<Athlete> getAllAthletes(){
-		return athleteRepository.findAll();
+	/**
+	 * Returns all athletes for a given tenant ID
+	 * @param tenantID
+	 * @return list of athletes with tenantId
+	 */
+	@GetMapping("/{tenantID}/athletes")
+	public List<Athlete> getAthletesOfTenant(@PathVariable String tenantID){
+		return athleteRepository.findAll(where(isTenantID(tenantID)));
 	}
 
-	@GetMapping("/allAthletes")
-	public String listAllAthletes(Model model)
-	{
-		athleteRepository.findAll();
-		return "AthletesOverview";
-	}
-
-	@PostMapping("/add_athlete")
-	public Athlete addAthlet(@RequestBody Athlete athlete) {
+	@PostMapping("/{tenantID}/add_athlete")
+	public Athlete addAthlete(@PathVariable Long tenantID, @RequestBody Athlete athlete) {
+		athlete.setTenantID(tenantID);
 		return athleteRepository.save(athlete);
 	}
 
-	@GetMapping("/listAthletes")
-	public String listAthlete(Model model) {
-		model.addAttribute("athleteList", getAllAthletes());
+	@PostMapping("/{tenantID}/athletes/{athleteID}")
+	public void updateAthlete(@PathVariable Long tenantID,@PathVariable Long athleteID, @RequestBody Athlete athlete) {
+		athleteRepository.updateAthlete(tenantID, athleteID, athlete.getFirstName(), athlete.getLastName());
+	}
 
-		return "AthletesWhere";
+	@DeleteMapping("/{tenantID}/athletes/{athleteID}")
+	public void deleteAthlete(@PathVariable Long tenantID, @PathVariable Long athleteID){
+		Athlete athlete = athleteRepository.getReferenceById(athleteID);
+		if(athlete.getTenant() != tenantID) {
+			return;
+		}
+		athleteRepository.deleteById(athleteID);
+	}
+	/**
+	 * Find athlete by athlete ID and tenant ID
+	 * @param tenantId
+	 * @param athleteId
+	 * @return Athlete with the given athlete ID
+	 */
+	@GetMapping("{tenantId}/athlete/{athleteId}")
+	public Athlete findAthleteById(@PathVariable long tenantId, @PathVariable long athleteId){
+		return athleteRepository.findAthletesByIdAndTenantID(tenantId, athleteId);
 	}
 
 	/**
-	 * Searches first and last name case-insensitive for the given input.
-	 * At the moment it does not work if given both a first and a last name!
-	 * @param searchinput
-	 * @return List of athletes which match the search criteria
+	 * Searches athletes with the first or last name containing the search term and the correct tenant ID
+	 * @param tenantID
+	 * @param searchterm
+	 * @return List of athletes with tenantId and searchterm
 	 */
-	@GetMapping("/search_athlete/{searchinput}")
-	public List<Athlete> search(@PathVariable String searchinput) {return athleteRepository.findAll(where(firstNameContains(searchinput).or(lastNameContains(searchinput))));}
+	@GetMapping("/{tenantID}/athletes/{searchterm}")
+	public List<Athlete> findAthletesByName(@PathVariable long tenantID, @PathVariable String searchterm) {
 
-	@GetMapping("/search_athlete_firstname/{searchinput}")
-	public List<Athlete> searchFirstName(@PathVariable String searchinput) {return athleteRepository.findAll(where(firstNameContains(searchinput)));}
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Athlete> criteriaQuery = cb.createQuery(Athlete.class);
+		Root<Athlete> athlete = criteriaQuery.from(Athlete.class);
 
-	@GetMapping("/search_athlete_lastname/{searchinput}")
-	public List<Athlete> searchLastName(@PathVariable String searchinput) {return athleteRepository.findAll(where(lastNameContains(searchinput)));}
+		Predicate predicateFirstName = cb.like(cb.lower(athlete.get("firstName")), "%" + searchterm.toLowerCase().trim() + "%");
+		Predicate predicateLastName = cb.like(cb.lower(athlete.get("lastName")), "%" + searchterm.toLowerCase().trim() + "%");
+		Predicate predicateTenant = cb.equal(athlete.get("tenantID"), tenantID);
 
+		Predicate predicateName = cb.or(predicateLastName, predicateFirstName);
+		Predicate predicateTenantAndName = cb.and(predicateName, predicateTenant);
+		criteriaQuery.where(predicateTenantAndName);
+		List<Athlete> athletes = entityManager.createQuery(criteriaQuery).getResultList();
+		return athletes;
+	}
 }
 

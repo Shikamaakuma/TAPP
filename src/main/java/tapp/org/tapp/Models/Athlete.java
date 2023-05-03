@@ -80,7 +80,7 @@ public class Athlete {
 				"id=" + id +
 				", firstName='" + firstName + '\'' +
 				", lastName='" + lastName + '\'' +
-				", tenenatID='" + tenantID + '\'' +
+				", tenantID='" + tenantID + '\'' +
 				'}';
 	}
 }
