@@ -34,7 +34,7 @@ public class SkillController {
 		return skillRepository.getSkillByTenant(tenantID, skillID);
 	}
 
-	@PostMapping("/{tenantID}/add_skill}")
+	@PostMapping("/{tenantID}/add_skill")
 	public Skill addSkillToTenant(@PathVariable Long tenantID, @RequestBody Skill skill) {
 		Skill saved = addSkill(skill);
 		tenantSkillRepository.save(new TenantSkill(saved.getSkillId(),tenantID));
@@ -61,6 +61,11 @@ public class SkillController {
 	@PostMapping("/add_skill")
 	public Skill addSkill(@RequestBody Skill skill) {
 		return skillRepository.save(skill);
+	}
+
+	@PostMapping("/skills/{skillID}")
+	public void updateSkill(@PathVariable Long skillID, @RequestBody Skill skill){
+		skillRepository.updateSkill(skillID,skill.getSkillDescription(),skill.getSkillLevel(),skill.getSkillName());
 	}
 
 	@DeleteMapping("/skills/{skillID}")
