@@ -35,8 +35,29 @@ class TenantFeatures {
     ]);
 
     UserService userService = Get.find();
-    userService.tenantDetailModel = tenantDetailModel;
+    userService.tenantDetailModel.value = tenantDetailModel;
 
     return TenantFeatures(tenantDetailModel);
+  }
+
+  Future<void> addAthlete(AthleteDto athleteDto) async {
+    await athleteProvider.addAthlete(tenant.id, athleteDto);
+    List<AthleteDto> athletes = await athleteProvider.tenantAthletes(tenant.id);
+    tenant.athletes = [
+      for (AthleteDto athlete in athletes)
+        AthleteModel.fromDto(athlete)
+    ];
+    UserService userService = Get.find();
+    userService.tenantDetailModel.value = tenant;
+  }
+
+  Future<void> addSkill(SkillDto skillDto) async {
+    await skillProvider.addSkill(tenant.id, skillDto);
+    List<SkillDto> skills = await skillProvider.skills();
+    tenant.skills = [
+      for (SkillDto skill in skills) SkillModel.fromDto(skill)
+    ];
+    UserService userService = Get.find();
+    userService.tenantDetailModel.value = tenant;
   }
 }

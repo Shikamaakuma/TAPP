@@ -23,8 +23,8 @@ class TenantModel extends IdentifiedModel {
 class TenantDetailModel extends TenantModel {
 
   final String imageLink;
-  final List<SkillModel> skills;
-  final List<AthleteModel> athletes;
+  List<SkillModel> skills;
+  List<AthleteModel> athletes;
 
 
   TenantDetailModel(

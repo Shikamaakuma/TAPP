@@ -12,7 +12,7 @@ class UserService extends GetxController {
   final UserModel user;
   final List<TenantModel> tenants;
   int? _selectedTenantId;
-  TenantDetailModel? tenantDetailModel;
+  final tenantDetailModel = Rxn<TenantDetailModel>();
 
   UserDataStorage get userDataStorage => UserDataSharedPreferences();
 

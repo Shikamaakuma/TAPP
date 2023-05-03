@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:frontend/data/dto/base_dto.dart';
 
 class SkillDto extends IdentifiedDTO {
@@ -15,4 +17,11 @@ class SkillDto extends IdentifiedDTO {
       json['skillLevel']
     );
   }
+
+  get toMap => {
+    'skillId': id,
+      'skillName': name,
+    'skillDescription': description,
+    'skillLevel': level
+  };
 }

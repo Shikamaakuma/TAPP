@@ -9,4 +9,10 @@ class AthleteDto extends IdentifiedDTO {
   factory AthleteDto.fromJson(dynamic json) {
     return AthleteDto(json['id'], json['firstName'], json['lastName']);
   }
+
+  Map<String, dynamic> get toMap => {
+    'id': id,
+    'firstName': firstName,
+    'lastName': lastName
+  };
 }

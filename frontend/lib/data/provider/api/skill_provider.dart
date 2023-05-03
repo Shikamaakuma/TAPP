@@ -1,5 +1,6 @@
 
 
+import 'package:flutter/material.dart';
 import 'package:frontend/data/dto/skill_dto.dart';
 import 'package:frontend/data/dto/tenant_dto.dart';
 import 'package:frontend/data/provider/api/provider_base.dart';
@@ -25,4 +26,9 @@ class SkillApiProvider extends ProviderBase implements SkillProviderDef  {
     ];
   }
 
+  @override
+  Future<void> addSkill(int tenantId, SkillDto skillDto) async {
+    Response response = await post('https://localhost:8081/api/v1/add_skill', skillDto.toMap);
+    debugPrint('Add Skill: ${response.statusCode}');
+  }
 }

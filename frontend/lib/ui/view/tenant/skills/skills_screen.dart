@@ -13,7 +13,7 @@ class SkillListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return GetBuilder<TenantController>(builder: (controller) => Scaffold(
       appBar: AppBar(
         title: const Text('Skills'),
       ),
@@ -35,11 +35,11 @@ class SkillListScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {  },
+        onPressed: controller.addSkillPressed,
         child: const Icon(Icons.add),
       ),
-      bottomNavigationBar: const BottomMenu(selectedIndex: 2, selectedTenantId: 1,),
-    );
+      bottomNavigationBar: BottomMenu(selectedIndex: 2, selectedTenantId: Get.find<TenantController>().tenantModel.id,),
+    ),);
   }
 }
 

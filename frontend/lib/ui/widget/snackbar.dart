@@ -25,3 +25,7 @@ void _showSnackBar(String title,
 void showErrorSnackBar(String title, String body) {
   _showSnackBar(title, body, Colors.white, Colors.red);
 }
+
+void showSuccessSnackBar(String title, String body) {
+  _showSnackBar(title, body, Colors.white, Colors.green);
+}

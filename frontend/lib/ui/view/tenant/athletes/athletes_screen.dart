@@ -13,32 +13,39 @@ class AthleteListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Athletes'),
-      ),
-      body: StatefulGetBuilder<TenantController>(
-        success: (controller) => Container(
-          padding: const EdgeInsets.all(8),
-          child: controller.tenantDetailModel.athletes.isNotEmpty ? ListView.builder(
-            itemCount: controller.tenantDetailModel.athletes.length,
-            itemBuilder: (BuildContext context, int index) {
-              AthleteModel model = controller.tenantDetailModel.athletes[index];
-              return AthleteListTile(name: model.fullName);
-            },
-
-          ): AlertBanner.info('No Athletes added yet'),
-        )  ,
-        loading: (controller) => ListView.builder(
-          itemCount: 5,
-          itemBuilder: (context, index) => AthleteLoadingListTile(),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {  },
-        child: Icon(Icons.person_add),
-      ),
-      bottomNavigationBar: BottomMenu(selectedIndex: 1, selectedTenantId: 1,),
+    return GetBuilder<TenantController>(
+      builder: ((controller) => Scaffold(
+            appBar: AppBar(
+              title: const Text('Athletes'),
+            ),
+            body: StatefulGetBuilder<TenantController>(
+              success: (controller) => Container(
+                padding: const EdgeInsets.all(8),
+                child: controller.tenantDetailModel.athletes.isNotEmpty
+                    ? ListView.builder(
+                        itemCount: controller.tenantDetailModel.athletes.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          AthleteModel model =
+                              controller.tenantDetailModel.athletes[index];
+                          return AthleteListTile(name: model.fullName);
+                        },
+                      )
+                    : AlertBanner.info('No Athletes added yet'),
+              ),
+              loading: (controller) => ListView.builder(
+                itemCount: 5,
+                itemBuilder: (context, index) => AthleteLoadingListTile(),
+              ),
+            ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: controller.addAthletePressed,
+              child: const Icon(Icons.person_add),
+            ),
+            bottomNavigationBar: BottomMenu(
+              selectedIndex: 1,
+              selectedTenantId: Get.find<TenantController>().tenantModel.id,
+            ),
+          )),
     );
   }
 }
@@ -63,12 +70,12 @@ class AthleteListTile extends StatelessWidget {
           ),
         ),
         title: Text(name),
-      ),);
+      ),
+    );
   }
 }
 
 class AthleteLoadingListTile extends StatelessWidget {
-
   const AthleteLoadingListTile({super.key});
 
   @override
@@ -76,16 +83,25 @@ class AthleteLoadingListTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8),
       child: ListTile(
-        leading: LoadingShimmer(isLoading: true, child: Container(
-          width: 54,
-          height: 54,
-          margin: EdgeInsets.symmetric(vertical: 4),
-          decoration: const BoxDecoration(
-            color: Colors.black,
-            shape: BoxShape.circle,
+        leading: LoadingShimmer(
+          isLoading: true,
+          child: Container(
+            width: 54,
+            height: 54,
+            margin: EdgeInsets.symmetric(vertical: 4),
+            decoration: const BoxDecoration(
+              color: Colors.black,
+              shape: BoxShape.circle,
+            ),
           ),
-        ),),
-        title: LoadingShimmer(isLoading: true, child: const ShimmerText(width: 120,),),
-      ),);
+        ),
+        title: LoadingShimmer(
+          isLoading: true,
+          child: const ShimmerText(
+            width: 120,
+          ),
+        ),
+      ),
+    );
   }
 }
