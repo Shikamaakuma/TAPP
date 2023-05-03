@@ -33,7 +33,7 @@ public class AthleteController {
 		return athleteRepository.save(athlete);
 	}
 
-	@DeleteMapping("/{tenantID}/athlete/{athleteID}")
+	@DeleteMapping("/{tenantID}/athletes/{athleteID}")
 	public void deleteAthlete(@PathVariable Long tenantID, @PathVariable Long athleteID){
 		Athlete athlete = athleteRepository.getReferenceById(athleteID);
 		if(athlete.getTenant() != tenantID) {
@@ -42,7 +42,7 @@ public class AthleteController {
 		athleteRepository.deleteById(athleteID);
 	}
 
-	@PostMapping("/{tenantID}/athlete/{athleteID}")
+	@PostMapping("/{tenantID}/athletes/{athleteID}")
 	public void updateAthlete(@PathVariable Long tenantID,@PathVariable Long athleteID, @RequestBody Athlete athlete){
 		athleteRepository.updateAthlete(tenantID,athleteID,athlete.getFirstName(),athlete.getLastName());
 	}

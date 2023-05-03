@@ -1,8 +1,11 @@
 package tapp.org.tapp.Repository;
 
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import tapp.org.tapp.Models.Skill;
 
@@ -21,4 +24,11 @@ public interface SkillRepository extends JpaRepository<Skill, Long>, JpaSpecific
 		return (skill, cq, cb) -> cb.like(cb.lower(cb.trim(skill.get("skillDescription"))), "%" + searchinput.toLowerCase() + "%");
 	}
 
+	@Modifying
+	@Query("SELECT S FROM Skill S INNER JOIN TenantSkill TS ON S.skillId = TS.skillId WHERE TS.tenantId=?1" )
+	List<Skill> getSkillsByTenant(Long tenantID);
+
+	@Modifying
+	@Query("SELECT S FROM Skill S INNER JOIN TenantSkill TS ON S.skillId = TS.skillId WHERE TS.tenantId=?1 AND TS.skillId=?2" )
+	List<Skill> getSkillByTenant(Long tenantID, Long skillID);
 }
