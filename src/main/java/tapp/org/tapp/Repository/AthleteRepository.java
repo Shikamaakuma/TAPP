@@ -11,7 +11,8 @@ import java.util.List;
 @Repository
 public interface AthleteRepository extends JpaRepository<Athlete, Long>, JpaSpecificationExecutor<Athlete> {
 
-	List<Athlete> findAthletesByName(long tenantId, String name);
-	List<Athlete> findAthletesByTenant(long tenantId);
+	List<Athlete> findAthletesByTenantID(long tenantId);
+
+	Athlete findAthletesByIdAndTenantID(long tenantId, long athleteId);
 
 }

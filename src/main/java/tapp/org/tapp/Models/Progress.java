@@ -9,24 +9,22 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "progress")
-@IdClass(ProgressID.class)
 public class Progress {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long progressId;
 
-	@Id
-	@Column(name="skill_id")
+
+	@Column(name="skill_id", nullable = false)
 	private long skillId;
 
-	@Id
-	@Column(name="athlete_id")
+	@Column(name="athlete_id", nullable = false)
 	private long athleteId;
 
-	@Column(nullable = false, updatable = false)
+	@Column(nullable = false, updatable = false, name="created_at")
 	@CreationTimestamp
-	private Date created_at;
+	private Date createdAt;
 
 	@Lob
 	@Column(name="comment")
@@ -56,11 +54,11 @@ public class Progress {
 	}
 
 	public Date getCreated_at() {
-		return created_at;
+		return createdAt;
 	}
 
-	public void setCreated_at(Date created_at) {
-		this.created_at = created_at;
+	public void setCreated_at(Date created) {
+		this.createdAt = created;
 	}
 
 	public long getSkillId() {

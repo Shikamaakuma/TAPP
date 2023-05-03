@@ -26,12 +26,12 @@ public class SkillController {
 	}
 
 	@GetMapping("/skill/{skillId}")
-	public List<Skill> getSkillByskillId(@PathVariable Long skillId){
+	public List<Skill> getSkillByskillId(@PathVariable long skillId){
 		return skillRepository.findAllByskillId(skillId);
 	}
 
 
-	@PostMapping("/add_skill")
+	@PostMapping("/skill")
 	public Skill addSkill(@RequestBody Skill skill) {
 		return skillRepository.save(skill);
 	}

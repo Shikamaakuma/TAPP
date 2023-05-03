@@ -14,14 +14,16 @@ public class TenantSkillController {
 	@Autowired
 	private TenantSkillRepository tenantSkillRepository;
 
-	@GetMapping("/tenantskills")
-	public List<TenantSkill> getAllTenantSkills(){
-		return tenantSkillRepository.findAll();
+	@GetMapping("/{tenantId}/tenantskills")
+	public List<TenantSkill> getAllTenantSkills(@PathVariable long tenantId){
+		return tenantSkillRepository.findByTenantId(tenantId);
 	}
 
-	@PostMapping("/add_tenantskill")
-	public TenantSkill addTenantskill(@RequestBody TenantSkill tenantskill) {
-		return tenantSkillRepository.save(tenantskill);
+	@PostMapping("/{tenantId}/tenantskill/{skillId}")
+	public TenantSkill addTenantskill(@PathVariable long tenantId, @PathVariable long skillId, @RequestBody TenantSkill tenantSkill) {
+		tenantSkill.setTenantId(tenantId);
+		tenantSkill.setSkillId(skillId);
+		return tenantSkillRepository.save(tenantSkill);
 	}
 }
 
