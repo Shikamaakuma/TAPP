@@ -14,13 +14,10 @@ import java.util.List;
 
 @Repository
 public interface AthleteRepository extends JpaRepository<Athlete, Long>, JpaSpecificationExecutor<Athlete> {
-	static Specification<Athlete> firstNameContains(String searchinput) {
-		return (athlete, cq, cb) -> cb.like(cb.lower(athlete.get("firstName")), "%" + searchinput.toLowerCase().trim() + "%");
-	}
 
-	static Specification<Athlete> lastNameContains(String searchinput) {
-		return (athlete, cq, cb) -> cb.like(cb.lower(athlete.get("lastName")), "%" + searchinput.toLowerCase().trim() + "%");  //replaceAll("\\s","")
-	}
+	List<Athlete> findAthletesByTenantID(long tenantId);
+
+	Athlete findAthletesByIdAndTenantID(long tenantId, long athleteId);
 
 	static Specification<Athlete> isTenantID(String tenantID){
 		return (athlete, cq, cb) -> cb.equal(athlete.get("tenantID"), tenantID);
