@@ -28,7 +28,7 @@ class SkillApiProvider extends ProviderBase implements SkillProviderDef  {
 
   @override
   Future<void> addSkill(int tenantId, SkillDto skillDto) async {
-    Response response = await post('https://localhost:8081/api/v1/add_skill', skillDto.toMap);
+    Response response = await post('https://160.85.252.235:8080/api/v1/add_skill', skillDto.toMap);
     debugPrint('Add Skill: ${response.statusCode}');
   }
 }

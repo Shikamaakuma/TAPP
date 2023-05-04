@@ -19,6 +19,18 @@ class TenantScreen extends StatelessWidget {
       builder: (controller) => Scaffold(
         appBar: AppBar(
           title: Text(controller.tenantModel.name),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.logout),
+              tooltip: 'Logout',
+              onPressed: controller.logout,
+            ),
+            IconButton(
+              icon: const Icon(Icons.cases),
+              tooltip: 'Select tenant',
+              onPressed: controller.selectTenant,
+            ),
+          ],
         ),
         bottomNavigationBar: BottomMenu(selectedIndex: 0,
             selectedTenantId: controller.tenantModel.id),
@@ -37,11 +49,9 @@ class TenantScreen extends StatelessWidget {
                   color: Colors.black,
                   borderRadius: BorderRadius.circular(16)
                 ),
-                child: Image.network(
-                  'https://flutter'
-                      '.dev/docs/cookbook/img-files/effects/split-check/Food1.jpg',
-                  fit: BoxFit.cover,
-                ),
+                child: Container( color: Colors.grey ,child: Expanded(
+                child: Center(child: Text('No image yet'),),
+                ),),
               ),),
             const SizedBox(height: 24,),
             if (c.loading.value)

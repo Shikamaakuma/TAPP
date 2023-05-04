@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/domain/features/tenant.dart';
 import 'package:frontend/domain/model/tenant.dart';
+import 'package:frontend/domain/service/auth_service.dart';
 import 'package:frontend/domain/service/user_service.dart';
 import 'package:frontend/packages/gettools/stateful_controller.dart';
 import 'package:frontend/ui/view/tenant/athletes/add_athlete/add_athlete_view.dart';
@@ -55,6 +56,19 @@ class TenantController extends StatefulGetxController {
         showErrorSnackBar('Error', 'Could not add skill');
       }
     });
+  }
+
+  void logout() {
+    AuthService authService = Get.find();
+    authService.logout();
+    Get.offAllNamed('login');
+  }
+
+  void selectTenant() {
+    _userService.selectedTenant = null;
+    _userService.userDataStorage.saveSelectedTenantId(null);
+    _userService.tenantDetailModel.value = null;
+    Get.offAllNamed('tenants');
   }
 
 }
