@@ -2,7 +2,6 @@ import 'package:frontend/ui/view/tenant/athletes/athletes_screen.dart';
 import 'package:frontend/ui/view/tenant/skills/skills_screen.dart';
 import 'package:get/get.dart';
 
-import '../view/athlete/athletes_view.dart';
 import '../view/auth/login/login_controller.dart';
 import '../view/auth/login/login_screen.dart';
 import '../view/auth/password_recovery/password_recovery_screen.dart';
@@ -47,5 +46,4 @@ List<GetPage> get pages => [
       GetPage(name: '/register', page: () => const RegistrationScreen()),
       GetPage(
           name: '/reset-password', page: () => const PasswordRecoveryScreen()),
-      GetPage(name: '/user', page: () => UserView(), binding: UserBindings()),
     ];

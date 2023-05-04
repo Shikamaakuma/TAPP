@@ -19,3 +19,14 @@ class TenantDetailDto extends IdentifiedDTO {
   TenantDetailDto(super.id, this.description, this.imageLink,
       this.athletes, this.skill);
 }
+
+class TenantSkillsDto {
+  final int skillId;
+  final int tenantId;
+
+  TenantSkillsDto(this.skillId, this.tenantId);
+
+  factory TenantSkillsDto.fromJson(dynamic json) {
+    return TenantSkillsDto(json['skillId'], json['tenantId']);
+  }
+}

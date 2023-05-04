@@ -10,6 +10,7 @@ class StatefulGetBuilder<T extends StatefulGetxController> extends StatefulWidge
   final Widget Function(T  controller) success;
   final Widget Function(T controller)? loading;
   final Widget Function(T controller)? error;
+  final Widget Function(T controller)? empty;
   
   final T? init;
   final String? tag;
@@ -20,7 +21,7 @@ class StatefulGetBuilder<T extends StatefulGetxController> extends StatefulWidge
     required this.success, 
     this.loading, 
     this.error, 
-    this.init, this.tag, this.initState});
+    this.init, this.tag, this.initState, this.empty});
 
   @override
   StatefulGetBuilderState<T> createState() => StatefulGetBuilderState<T>();
@@ -60,6 +61,8 @@ class StatefulGetBuilderState<T extends StatefulGetxController> extends State<St
         return widget.loading!(controller!);
       } else if (widget.error != null && controller!.error.isTrue) {
         return widget.error!(controller!);
+      } else if (widget.empty != null && controller!.success.isTrue && controller!.empty.isTrue) {
+        return widget.empty!(controller!);
       } else {
         return widget.success(controller!);
       }
