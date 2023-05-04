@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 class SkillApiProvider extends ProviderBase implements SkillProviderDef  {
   @override
   Future<List<SkillDto>> skills() async {
-    Response response = await get('https://localhost:8081/api/v1/skills');
+    Response response = await get('https://160.85.252.235:8080/api/v1/skills');
     return [
       for(dynamic json in response.body)
         SkillDto.fromJson(json)
@@ -19,7 +19,7 @@ class SkillApiProvider extends ProviderBase implements SkillProviderDef  {
 
   @override
   Future<List<TenantSkillsDto>> tenantSkills(int tenantId) async {
-    Response response = await get('https://localhost:8081/api/v1/$tenantId/tenantskills');
+    Response response = await get('https://160.85.252.235:8080/api/v1/$tenantId/tenantskills');
     return [
       for(dynamic json in response.body)
         TenantSkillsDto.fromJson(json)

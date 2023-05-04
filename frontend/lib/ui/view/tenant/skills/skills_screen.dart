@@ -13,7 +13,9 @@ class SkillListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<TenantController>(builder: (controller) => Scaffold(
+    return GetBuilder<TenantController>(
+      init: TenantController(),
+      builder: (controller) => Scaffold(
       appBar: AppBar(
         title: const Text('Skills'),
       ),

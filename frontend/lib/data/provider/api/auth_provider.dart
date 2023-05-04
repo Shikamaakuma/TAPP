@@ -10,7 +10,7 @@ class AuthApiProvider extends ProviderBase implements AuthProviderDef  {
   @override
   Future<LoginResponseDto> login(LoginRequestDto loginRequest) async {
 
-    Response response = await post('https://localhost:8081/api/v1/login', loginRequest.toMap);
+    Response response = await post('https://160.85.252.235:8080/api/v1/login', loginRequest.toMap);
     String username = loginRequest.email.split('@')[0];
 
     return LoginResponseDto('token_$username', UserDto(

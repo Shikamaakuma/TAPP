@@ -10,7 +10,8 @@ abstract class ProviderBase extends GetConnect {
     super.onInit();
 
     /// Base url
-    httpClient.baseUrl = 'https://localhost:8081/api/v1';
+    //httpClient.baseUrl = 'https://localhost:8081/api/v1';
+    httpClient.baseUrl = 'https://160.85.252.235:8080/api/v1';
 
     /// Allow self singed certificates for local dev servers.
     allowAutoSignedCert = true;
