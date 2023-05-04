@@ -10,17 +10,17 @@ class BottomMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      items: <BottomNavigationBarItem>[
+      items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: const Icon(Icons.sports),
+          icon: Icon(Icons.sports),
           label: 'Tenant',
         ),
         BottomNavigationBarItem(
-          icon: const Icon(Icons.person),
+          icon: Icon(Icons.person),
           label: 'Athletes',
         ),
         BottomNavigationBarItem(
-          icon: const Icon(Icons.lightbulb),
+          icon: Icon(Icons.lightbulb),
           label: 'Skills',
         ),
       ],

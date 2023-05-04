@@ -66,6 +66,8 @@ class AuthService extends GetxController {
       await authDataStorage.deleteAccessToken();
       await userDataStorage.delete();
       Get.delete<UserService>();
+      UserService userService = Get.find();
+      userService.selectedTenant = null;
     } catch (e) {
       print(e);
     }
