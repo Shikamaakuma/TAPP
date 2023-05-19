@@ -31,4 +31,10 @@ class SkillApiProvider extends ProviderBase implements SkillProviderDef  {
     Response response = await post('$tenantId/add_skill', skillDto.toMap);
     debugPrint('Add Skill: ${response.statusCode}');
   }
+
+  @override
+  Future<void> deleteSkill(int tenantId, int skillId) async {
+    Response response = await delete('$tenantId/skills/$skillId');
+    debugPrint('Delete Skill: ${response.statusCode}');
+  }
 }

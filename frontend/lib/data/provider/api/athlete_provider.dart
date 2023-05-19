@@ -22,5 +22,11 @@ class AthleteApiProvider extends ProviderBase implements AthleteProviderDef {
     Response response = await post('$tenantId/add_athlete', athleteDto.toMap);
     debugPrint('Add Athlete: ${response.statusCode}');
   }
+
+  @override
+  Future<void> deleteAthlete(int tenantId, int athleteId) async {
+    Response response = await delete('$tenantId/skills/$athleteId');
+    debugPrint('Delete athlete: ${response.statusCode}');
+  }
   
 }
