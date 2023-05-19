@@ -24,7 +24,7 @@ class TenantFeatures {
 
     List<AthleteDto> athletes = await APIProvider.instance.athleteProvider.tenantAthletes(tenantModel.id);
     List<SkillDto> skill = await APIProvider.instance.skillProvider.skills();
-    List<TenantSkillsDto> tenantSkills = await APIProvider.instance.skillProvider.tenantSkills(tenantModel.id);
+    //List<TenantSkillsDto> tenantSkills = await APIProvider.instance.skillProvider.tenantSkills(tenantModel.id);
 
     TenantDetailModel tenantDetailModel = TenantDetailModel(tenantModel.id,
         tenantModel.name, tenantModel.description, 'No image yet', [

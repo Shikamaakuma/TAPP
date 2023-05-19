@@ -23,19 +23,23 @@ class AthleteListScreen extends StatelessWidget {
               success: (controller) => Container(
                 padding: const EdgeInsets.all(8),
                 child: controller.tenantDetailModel.athletes.isNotEmpty
-                    ? ListView.builder(
+                    ? ReorderableListView.builder(
                         itemCount: controller.tenantDetailModel.athletes.length,
                         itemBuilder: (BuildContext context, int index) {
                           AthleteModel model =
                               controller.tenantDetailModel.athletes[index];
-                          return AthleteListTile(name: model.fullName);
+                          return AthleteListTile(
+                            model: model,
+                            key: Key('${model.id}'),
+                          );
                         },
+                        onReorder: controller.onAthleteReorder,
                       )
                     : AlertBanner.info('No Athletes added yet'),
               ),
               loading: (controller) => ListView.builder(
                 itemCount: 5,
-                itemBuilder: (context, index) => AthleteLoadingListTile(),
+                itemBuilder: (context, index) => const AthleteLoadingListTile(),
               ),
             ),
             floatingActionButton: FloatingActionButton(
@@ -52,25 +56,39 @@ class AthleteListScreen extends StatelessWidget {
 }
 
 class AthleteListTile extends StatelessWidget {
-  final String name;
+  final AthleteModel model;
 
-  const AthleteListTile({super.key, required this.name});
+
+
+  const AthleteListTile({required super.key, required this.model});
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.all(8),
-      child: ListTile(
-        leading: Container(
-          width: 54,
-          height: 54,
-          margin: EdgeInsets.symmetric(vertical: 4),
-          decoration: const BoxDecoration(
-            color: Colors.black,
-            shape: BoxShape.circle,
+    return Dismissible(
+      key: key!,
+      direction: DismissDirection.startToEnd,
+      confirmDismiss: (direction) => Get.find<TenantController>().confirmAthleteDismissed(model),
+      onDismissed: (direction) => Get.find<TenantController>().onAthleteDismissed(model),
+      background: Container(color: Colors.red, child: Row(
+        children: [
+          Icon(Icons.delete_forever),
+          //Text('Delete'),
+        ],
+      ),),
+      child: Card(
+        margin: const EdgeInsets.all(8),
+        child: ListTile(
+          leading: Container(
+            width: 54,
+            height: 54,
+            margin: EdgeInsets.symmetric(vertical: 4),
+            decoration: const BoxDecoration(
+              color: Colors.black,
+              shape: BoxShape.circle,
+            ),
           ),
+          title: Text(model.fullName),
         ),
-        title: Text(name),
       ),
     );
   }

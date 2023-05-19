@@ -19,7 +19,7 @@ class AddSkillView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    Get.find();
     return GetBuilder<AddSkillController>(
       init: AddSkillController(tenant),
       builder: (controller) => AlertDialog(
