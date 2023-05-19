@@ -12,7 +12,7 @@ import '../../data/storage/definitions.dart';
 
 
 /// The service contains the authentication state of the app.
-class AuthService extends GetxController {
+class AuthService extends GetxController with GetxServiceMixin {
   /// Logged in if access token is set.
   bool get isLoggedIn => accessToken.value?.isNotEmpty ?? false;
 

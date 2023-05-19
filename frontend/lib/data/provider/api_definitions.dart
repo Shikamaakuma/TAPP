@@ -22,7 +22,7 @@ abstract class AthleteProviderDef {
 }
 
 abstract class SkillProviderDef {
-  Future<List<TenantSkillsDto>> tenantSkills(int tenantId);
+  Future<List<SkillDto>> tenantSkills(int tenantId);
   Future<List<SkillDto>> skills();
   Future<void> addSkill(int tenantId, SkillDto skillDto);
 }
