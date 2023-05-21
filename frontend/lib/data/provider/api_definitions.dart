@@ -36,5 +36,6 @@ abstract class TenantProviderDef {
 
 abstract class ProgressProviderDef {
   Future<List<ProgressDto>> athleteProgress(int tenantId, int athleteId);
+  Future<List<ProgressDto>> progress(int tenantId);
   Future<void> addProgress(int tenantId, ProgressDto progressDto);
 }

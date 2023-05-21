@@ -11,24 +11,11 @@ import '../../../../../packages/gettools/stateful_controller.dart';
 import '../../../../widget/snackbar.dart';
 
 class AthleteDetailController extends StatefulGetxController {
-  final int athleteId;
-  late final AthleteModel athleteModel;
+  final AthleteModel athleteModel;
 
-  AthleteDetailController(this.athleteId);
+  AthleteDetailController(this.athleteModel);
 
   UserService get _userService => Get.find();
-
-  @override
-  void onInit() {
-    super.onInit();
-
-    _userService.getAthlete(athleteId).then((value) {
-      athleteModel = value;
-      setSuccess();
-      update();
-    });
-  }
-
 
   List<SkillProgressModel> get skillProgress {
     final result = <SkillProgressModel>[];

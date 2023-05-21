@@ -15,9 +15,10 @@ class AddProgressView extends StatelessWidget {
     return GetBuilder(
       init: AddProgressController(athleteModel, skillModel),
       builder: (controller) => AlertDialog(
-        title: Text('Add progress'),
+        title: const Text('Add progress'),
         content: Form(
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               TextFormField(
                 controller: controller.scoreController,
@@ -26,8 +27,9 @@ class AddProgressView extends StatelessWidget {
                   hintText: 'Score 1 - 9',
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               TextFormField(
+                maxLines: 4,
                 controller: controller.commentController,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),

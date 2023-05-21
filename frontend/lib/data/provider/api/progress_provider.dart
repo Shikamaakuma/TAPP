@@ -13,6 +13,15 @@ class ProgressApiProvider extends ProviderBase implements ProgressProviderDef {
   }
 
   @override
+  Future<List<ProgressDto>> progress(int tenantId) async {
+    Response response = await get('$tenantId/progress');
+    return [
+      for(dynamic json in response.body)
+        ProgressDto.fromJson(json)
+    ];
+  }
+
+  @override
   Future<List<ProgressDto>> athleteProgress(int tenantId, int athleteId) async {
     Response response = await get('$tenantId/progress/$athleteId');
     return [

@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:frontend/data/dto/athlete_dto.dart';
+import 'package:frontend/data/dto/progress_dto.dart';
 import 'package:frontend/data/dto/skill_dto.dart';
 import 'package:frontend/data/dto/tenant_dto.dart';
 import 'package:frontend/data/provider/api.dart';
@@ -9,6 +11,7 @@ import 'package:frontend/domain/service/user_service.dart';
 import 'package:get/get.dart';
 
 import '../../data/provider/api_definitions.dart';
+import '../model/progress.dart';
 
 class TenantFeatures {
   final TenantDetailModel tenant;
@@ -19,12 +22,9 @@ class TenantFeatures {
   AthleteProviderDef get athleteProvider => APIProvider.instance.athleteProvider;
 
   static Future<TenantFeatures> loadTenant(TenantModel tenantModel) async {
-    //TenantDetailDto detailDto =
-    //    await APIProvider.instance.tenantProvider.tenantDetails(tenantModel.id);
 
     List<AthleteDto> athletes = await APIProvider.instance.athleteProvider.tenantAthletes(tenantModel.id);
     List<SkillDto> skill = await APIProvider.instance.skillProvider.skills();
-    //List<TenantSkillsDto> tenantSkills = await APIProvider.instance.skillProvider.tenantSkills(tenantModel.id);
 
     TenantDetailModel tenantDetailModel = TenantDetailModel(tenantModel.id,
         tenantModel.name, tenantModel.description, 'No image yet', [
@@ -34,6 +34,19 @@ class TenantFeatures {
         AthleteModel.fromDto(athlete)
     ]);
 
+    for (AthleteModel athleteModel in tenantDetailModel.athletes) {
+      List<ProgressDto> progress = await APIProvider.instance.progressProvider.athleteProgress(tenantModel.id, athleteModel.id);
+      for (ProgressDto progressDto in progress) {
+        try {
+          SkillModel skillModel = tenantDetailModel.skills.firstWhere((element) => element.id == progressDto.skillId);
+          final currentProgress = athleteModel.skillProgress[skillModel] ?? [];
+          currentProgress.add(ProgressModel(progressDto.progressId, progressDto.score, progressDto.comment));
+          athleteModel.skillProgress[skillModel] = currentProgress;
+        } on StateError {
+          debugPrint('No athlete found for id ${progressDto.athleteId}');
+        }
+      }
+    }
 
     UserService userService = Get.find();
     userService.tenantDetailModel.value = tenantDetailModel;

@@ -43,4 +43,8 @@ class UserService extends GetxController {
     return athleteMap[id]!;
   }
 
+  List<AthleteModel> get athletesSorted => tenantDetailModel.value!.athletes;
+
+  int indexOfId(int athleteId) => athletesSorted.indexOf(athletesSorted.firstWhere((element) => element.id == athleteId));
+
 }

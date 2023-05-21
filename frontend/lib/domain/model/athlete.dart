@@ -7,9 +7,9 @@ import 'base.dart';
 class AthleteModel extends IdentifiedModel {
   final String firstName;
   final String lastName;
-  Map<SkillModel, List<ProgressModel>>? skillProgress;
+  Map<SkillModel, List<ProgressModel>> skillProgress = {};
 
-  AthleteModel(super.id, this.firstName, this.lastName, [this.skillProgress]);
+  AthleteModel(super.id, this.firstName, this.lastName);
 
   factory AthleteModel.fromDto(AthleteDto dto) {
     return AthleteModel(dto.id, dto.firstName, dto.lastName);
@@ -19,7 +19,7 @@ class AthleteModel extends IdentifiedModel {
 
   Map<SkillModel, ProgressModel> get currentProgress => {
         for (MapEntry<SkillModel, List<ProgressModel>> entry
-            in skillProgress?.entries ?? [])
+            in skillProgress.entries)
           entry.key: entry.value.reduce(
               (value, element) => value.id > element.id ? value : element)
       };

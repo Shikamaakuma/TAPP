@@ -1,4 +1,4 @@
-import 'package:frontend/ui/view/tenant/athletes/athlete_details/athlete_details_screen.dart';
+import 'package:frontend/ui/view/tenant/athletes/athlete_details/athlete_detail_screen.dart';
 import 'package:frontend/ui/view/tenant/athletes/athletes_screen.dart';
 import 'package:frontend/ui/view/tenant/skills/skills_screen.dart';
 import 'package:get/get.dart';
@@ -8,6 +8,7 @@ import '../view/auth/login/login_screen.dart';
 import '../view/auth/password_recovery/password_recovery_screen.dart';
 import '../view/auth/registration/registration_screen.dart';
 import '../view/start/start_screen.dart';
+import '../view/tenant/athletes/athlete_details/athlete_detail_page_view.dart';
 import '../view/tenant/tenant_screen.dart';
 import '../view/tenant_list/tenant_list_view.dart';
 import 'bindings.dart';
@@ -38,7 +39,7 @@ List<GetPage> get pages => [
                   GetPage(
                       middlewares: [AuthGuard()],
                       name: '/:athleteId',
-                      page: () => AthleteDetailScreen())
+                      page: () => AthleteDetailsPageView())
                 ]),
             GetPage(
               name: '/skills',

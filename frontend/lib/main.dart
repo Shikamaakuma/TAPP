@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/domain/service/auth_service.dart';
 import 'package:frontend/ui/navigation/pages.dart';
@@ -20,6 +21,17 @@ class MyApp extends StatelessWidget {
       title: 'TAPP',
       initialRoute: '/start',
       getPages: pages,
+      debugShowCheckedModeBanner: false,
+      scrollBehavior: AppScrollBehavior(),
     );
   }
+}
+
+class AppScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+    PointerDeviceKind.touch,
+    PointerDeviceKind.mouse,
+    PointerDeviceKind.trackpad,
+  };
 }
