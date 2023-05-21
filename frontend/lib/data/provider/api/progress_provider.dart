@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:frontend/data/dto/progress_dto.dart';
 import 'package:frontend/data/provider/api/provider_base.dart';

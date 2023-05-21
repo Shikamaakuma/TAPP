@@ -13,7 +13,8 @@ class AthleteApiProvider extends ProviderBase implements AthleteProviderDef {
     Response response = await get('$tenantId/athletes');
     return [
       for(dynamic json in response.body)
-        AthleteDto.fromJson(json)
+        if (json['firstName'] != null && json['lastName'] != null)
+          AthleteDto.fromJson(json)
     ];
   }
 

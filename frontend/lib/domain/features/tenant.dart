@@ -34,6 +34,7 @@ class TenantFeatures {
         AthleteModel.fromDto(athlete)
     ]);
 
+
     UserService userService = Get.find();
     userService.tenantDetailModel.value = tenantDetailModel;
 

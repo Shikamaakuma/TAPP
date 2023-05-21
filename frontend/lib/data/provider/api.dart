@@ -1,3 +1,4 @@
+import 'package:frontend/data/provider/api/progress_provider.dart';
 import 'package:frontend/packages/gettools/getx_extension.dart';
 import 'package:get/get.dart';
 
@@ -16,6 +17,8 @@ class APIProvider {
   TenantProviderDef get tenantProvider => Get.findOrPut(() => TenantApiProvider());
   SkillProviderDef get skillProvider => Get.findOrPut(() => SkillApiProvider());
   AthleteProviderDef get athleteProvider => Get.findOrPut(() => AthleteApiProvider());
+
+  ProgressProviderDef get progressProvider => Get.findOrPut(() => ProgressApiProvider());
 
 
 }

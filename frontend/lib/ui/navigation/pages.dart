@@ -1,3 +1,4 @@
+import 'package:frontend/ui/view/tenant/athletes/athlete_details/athlete_details_screen.dart';
 import 'package:frontend/ui/view/tenant/athletes/athletes_screen.dart';
 import 'package:frontend/ui/view/tenant/skills/skills_screen.dart';
 import 'package:get/get.dart';
@@ -27,10 +28,18 @@ List<GetPage> get pages => [
           ],
           children: [
             GetPage(
-              name: '/athletes',
-              page: () => AthleteListScreen(),
-              binding: TenantScreenBinding(),
-            ),
+                name: '/athletes',
+                page: () => AthleteListScreen(),
+                binding: TenantScreenBinding(),
+                middlewares: [
+                  AuthGuard()
+                ],
+                children: [
+                  GetPage(
+                      middlewares: [AuthGuard()],
+                      name: '/:athleteId',
+                      page: () => AthleteDetailScreen())
+                ]),
             GetPage(
               name: '/skills',
               page: () => SkillListScreen(),

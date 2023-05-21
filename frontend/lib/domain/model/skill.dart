@@ -12,3 +12,16 @@ class SkillModel extends IdentifiedModel{
     return SkillModel(dto.id, dto.name);
   }
 }
+
+
+class SkillProgressModel {
+  final int? progressId;
+  final int skillId;
+  final String skillName;
+  final String? comment;
+  final int? score;
+
+  SkillProgressModel(this.progressId, this.skillId, this.skillName, this.comment, this.score);
+
+
+}

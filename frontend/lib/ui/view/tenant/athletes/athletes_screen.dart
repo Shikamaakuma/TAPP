@@ -29,10 +29,12 @@ class AthleteListScreen extends StatelessWidget {
                         itemBuilder: (BuildContext context, int index) {
                           AthleteModel model =
                               controller.tenantDetailModel.athletes[index];
-                          return AthleteListTile(
+                          return GestureDetector(key: Key('${model.id}'), 
+                          onTap: () => Get.toNamed('/tenant/${controller.tenantModel.id}/athletes/${model.id}'),
+                          child: AthleteListTile(
                             model: model,
                             key: Key('${model.id}'),
-                          );
+                          ),);
                         },
                         onReorder: controller.onAthleteReorder,
                       )
@@ -49,7 +51,7 @@ class AthleteListScreen extends StatelessWidget {
             ),
             bottomNavigationBar: BottomMenu(
               selectedIndex: 1,
-              selectedTenantId: Get.find<TenantController>().tenantModel.id,
+              selectedTenantId: controller.tenantModel.id
             ),
           )),
     );
