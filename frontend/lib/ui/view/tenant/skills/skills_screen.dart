@@ -24,7 +24,7 @@ class SkillListScreen extends StatelessWidget {
       body: StatefulGetBuilder<TenantController>(
         success: (controller) => Container(
           padding: const EdgeInsets.all(8),
-          child: controller.tenantDetailModel.skills.isNotEmpty ? ListView.builder(
+          child: controller.tenantDetailModel.skills.isNotEmpty ? ListView.separated(
             itemCount: controller.tenantDetailModel.skills.length,
             itemBuilder: (BuildContext context, int index) {
               SkillModel model = controller.tenantDetailModel.skills[index];
@@ -32,7 +32,10 @@ class SkillListScreen extends StatelessWidget {
               return GestureDetector(
                 onTap: () => controller.onSkillTap(model),
                 child: SkillListTile(key: key, skillModel: model,),);
-            }) : AlertBanner.info('No Skills added yet'),
+            }, separatorBuilder: (BuildContext context, int index) => const Divider(
+            color: Colors.grey,
+            height: 0,
+          ),) : AlertBanner.info('No Skills added yet'),
 
           ),
         loading: (controller) => LoadingShimmer(isLoading: true, child: ListView.builder(

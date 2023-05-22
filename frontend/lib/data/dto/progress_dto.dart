@@ -4,7 +4,7 @@ class ProgressDto {
   final int skillId;
   final int athleteId;
   final int score;
-  final String comment;
+  final String? comment;
 
   ProgressDto(this.progressId, this.skillId, this.athleteId, this.score, this.comment);
 

@@ -25,7 +25,7 @@ class AthleteDetailScreen extends StatelessWidget {
           ),
           child: AutoSizedIcon(Icons.person, color: Colors.white,),
         ),),
-        ListView.builder(
+        ListView.separated(
           shrinkWrap: true,
           itemCount: controller.skillProgress.length,
           itemBuilder: (context, index) {
@@ -37,7 +37,11 @@ class AthleteDetailScreen extends StatelessWidget {
                 trailing: Text(skillProgress.score.toString()),
               ),
             );
-          },
+          }, separatorBuilder: (BuildContext context, int index) => Divider(
+          color: Colors.grey,
+          indent: 16,
+          endIndent: 16,
+        ),
         ),
       ],),
     );

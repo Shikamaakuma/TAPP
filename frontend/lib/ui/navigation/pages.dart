@@ -53,6 +53,7 @@ List<GetPage> get pages => [
                   GetPage(
                       middlewares: [AuthGuard()],
                       name: '/:skillId',
+                      binding: TenantScreenBinding(),
                       page: () => SkillDetailsPageView())
                 ]
             ),

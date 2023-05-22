@@ -23,6 +23,7 @@ class UserService extends GetxController {
   UserService(this.user, this.tenants, [int? selectedTenantId])
       : _selectedTenantId = selectedTenantId;
 
+
   TenantModel? get selectedTenant => tenants.firstWhere((element) => element.id == _selectedTenantId);
   set selectedTenant(TenantModel? tenantId) {
     _selectedTenantId = tenantId?.id;

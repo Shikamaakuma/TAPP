@@ -26,6 +26,15 @@ class TenantController extends StatefulGetxController {
     _userService.addListener(() {
       update();
     });
+    if (_userService.selectedTenant == null) {
+      try {
+        int? tenantId = Get.parameters['tenantId'] as int;
+        if (tenantId != null) {
+          _userService.selectedTenant = _userService.tenants.firstWhere((element) => element.id == tenantId);
+        }
+      } catch (e) {}
+    }
+
 
     if (_userService.tenantDetailModel.value != null) {
       setSuccess();

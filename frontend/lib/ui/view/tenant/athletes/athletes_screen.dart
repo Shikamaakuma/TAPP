@@ -38,7 +38,7 @@ class AthleteListScreen extends StatelessWidget {
                         },
                         onReorder: controller.onAthleteReorder,
                       )
-                    : ListView.builder(
+                    : ListView.separated(
                   itemCount: controller.tenantDetailModel.athletes.length,
                     itemBuilder: (context, index) {
                       AthleteModel model =
@@ -50,7 +50,9 @@ class AthleteListScreen extends StatelessWidget {
                           key: Key('${model.id}'),
                           editMode: false,
                         ),);
-                    },
+                    }, separatorBuilder: (BuildContext context, int index) => Divider(
+                  color: Colors.grey,
+                ),
                 )
                     : AlertBanner.info('No Athletes added yet'),
               ),

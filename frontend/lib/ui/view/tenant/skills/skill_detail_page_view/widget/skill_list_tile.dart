@@ -29,6 +29,7 @@ class SkillListTile extends StatelessWidget {
             child: ListTile(
               leading: ProfileImagePlaceholder(Icons.lightbulb, padding: EdgeInsets.symmetric(vertical: 4),),
               title: Text(skillModel.name),
+              subtitle: Text(skillModel.description, maxLines: 1, overflow: TextOverflow.ellipsis,),
             ),)),
     );
   }
