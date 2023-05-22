@@ -7,6 +7,7 @@ import 'package:frontend/ui/widget/shimmer_widgets.dart';
 import 'package:get/get.dart';
 
 import '../../../../packages/alert_banner.dart';
+import '../../../widget/placeholder/profile_image_placeholder.dart';
 
 class SkillListScreen extends StatelessWidget {
   const SkillListScreen({super.key});
@@ -55,15 +56,7 @@ class SkillListTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8),
       child: ListTile(
-        leading: Container(
-          width: 54,
-          height: 54,
-          margin: EdgeInsets.symmetric(vertical: 4),
-          decoration: const BoxDecoration(
-            color: Colors.black,
-            shape: BoxShape.circle,
-          ),
-        ),
+        leading: ProfileImagePlaceholder(Icons.lightbulb, padding: EdgeInsets.symmetric(vertical: 4),),
         title: Text(name),
       ),);
   }

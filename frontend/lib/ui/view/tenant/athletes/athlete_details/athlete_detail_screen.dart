@@ -3,6 +3,7 @@ import 'package:frontend/domain/model/athlete.dart';
 import 'package:frontend/domain/model/skill.dart';
 import 'package:frontend/packages/gettools/statefull_getbuilder.dart';
 import 'package:frontend/ui/view/tenant/athletes/athlete_details/athlete_detail_controller.dart';
+import 'package:frontend/ui/widget/auto_sized_icon.dart';
 import 'package:get/get.dart';
 
 class AthleteDetailScreen extends StatelessWidget {
@@ -16,7 +17,14 @@ class AthleteDetailScreen extends StatelessWidget {
       init: AthleteDetailController(athleteModel),
       tag: athleteModel.id.toString(),
       builder: (controller) => Column(children: [
-        Text(controller.athleteModel.fullName),
+        AspectRatio(aspectRatio: 16/9,
+        child: Container(
+          decoration: const BoxDecoration(
+            color: Colors.grey,
+            shape: BoxShape.circle,
+          ),
+          child: AutoSizedIcon(Icons.person, color: Colors.white,),
+        ),),
         ListView.builder(
           shrinkWrap: true,
           itemCount: controller.skillProgress.length,

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/ui/widget/auto_sized_icon.dart';
 import 'package:get/get.dart';
 
 import '../../../../../domain/model/athlete.dart';
+import '../../../../widget/placeholder/profile_image_placeholder.dart';
 import '../../tenant_controller.dart';
 
 class AthleteListTile extends StatelessWidget {
@@ -19,23 +21,15 @@ class AthleteListTile extends StatelessWidget {
       confirmDismiss: (direction) => Get.find<TenantController>().confirmAthleteDismissed(model),
       onDismissed: (direction) => Get.find<TenantController>().onAthleteDismissed(model),
       background: Container(color: Colors.red, child: Row(
-        children: [
-          Icon(Icons.delete_forever),
+        children: const [
+          AutoSizedIcon(Icons.delete_forever, color: Colors.white, padding: EdgeInsets.all(16),),
           //Text('Delete'),
         ],
       ),),
-      child: Card(
+      child: Container(
         margin: const EdgeInsets.all(8),
         child: ListTile(
-          leading: Container(
-            width: 54,
-            height: 54,
-            margin: EdgeInsets.symmetric(vertical: 4),
-            decoration: const BoxDecoration(
-              color: Colors.black,
-              shape: BoxShape.circle,
-            ),
-          ),
+          leading: ProfileImagePlaceholder(Icons.person, padding: EdgeInsets.symmetric(vertical: 4),),
           title: Text(model.fullName),
         ),
       ),
