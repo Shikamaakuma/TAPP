@@ -8,10 +8,10 @@ import '../../tenant_controller.dart';
 
 class AthleteListTile extends StatelessWidget {
   final AthleteModel model;
+  final bool editMode;
 
 
-
-  const AthleteListTile({required super.key, required this.model});
+  const AthleteListTile({required super.key, required this.model, required this.editMode});
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +31,7 @@ class AthleteListTile extends StatelessWidget {
         child: ListTile(
           leading: ProfileImagePlaceholder(Icons.person, padding: EdgeInsets.symmetric(vertical: 4),),
           title: Text(model.fullName),
+          trailing: !editMode ? Text(model.averageSkill?.toStringAsPrecision(1) ?? '') : null,
         ),
       ),
     );

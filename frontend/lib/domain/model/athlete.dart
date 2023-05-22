@@ -17,6 +17,10 @@ class AthleteModel extends IdentifiedModel {
 
   String get fullName => '$firstName $lastName';
 
+  double? get averageSkill => currentProgress.values.length > 0
+      ? currentProgress.values.map((e) => e.score).reduce((value, element) => value + element) / currentProgress.values.length
+      : null;
+
   Map<SkillModel, ProgressModel> get currentProgress => {
         for (MapEntry<SkillModel, List<ProgressModel>> entry
             in skillProgress.entries)

@@ -24,20 +24,34 @@ class AthleteListScreen extends StatelessWidget {
               success: (controller) => Container(
                 padding: const EdgeInsets.all(8),
                 child: controller.tenantDetailModel.athletes.isNotEmpty
+                    ? controller.athleteOrderMode.value
                     ? ReorderableListView.builder(
                         itemCount: controller.tenantDetailModel.athletes.length,
                         itemBuilder: (BuildContext context, int index) {
                           AthleteModel model =
                               controller.tenantDetailModel.athletes[index];
-                          return GestureDetector(key: Key('${model.id}'), 
-                          onTap: () => Get.toNamed('/tenant/${controller.tenantModel.id}/athletes/${model.id}'),
-                          child: AthleteListTile(
+                          return AthleteListTile(
                             model: model,
                             key: Key('${model.id}'),
-                          ),);
+                            editMode: true,
+                          );
                         },
                         onReorder: controller.onAthleteReorder,
                       )
+                    : ListView.builder(
+                  itemCount: controller.tenantDetailModel.athletes.length,
+                    itemBuilder: (context, index) {
+                      AthleteModel model =
+                      controller.tenantDetailModel.athletes[index];
+                      return GestureDetector(key: Key('${model.id}'),
+                        onTap: () => Get.toNamed('/tenant/${controller.tenantModel.id}/athletes/${model.id}'),
+                        child: AthleteListTile(
+                          model: model,
+                          key: Key('${model.id}'),
+                          editMode: false,
+                        ),);
+                    },
+                )
                     : AlertBanner.info('No Athletes added yet'),
               ),
               loading: (controller) => ListView.builder(

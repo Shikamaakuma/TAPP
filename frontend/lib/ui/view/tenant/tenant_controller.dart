@@ -13,6 +13,7 @@ import 'package:get/get.dart';
 class TenantController extends StatefulGetxController {
 
   final selectedIndex = 1.obs;
+  final athleteOrderMode = false.obs;
 
   UserService get _userService => Get.find();
   TenantModel get tenantModel => _userService.selectedTenant!;
