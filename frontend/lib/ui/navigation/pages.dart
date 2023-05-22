@@ -1,5 +1,6 @@
 import 'package:frontend/ui/view/tenant/athletes/athlete_details/athlete_detail_screen.dart';
 import 'package:frontend/ui/view/tenant/athletes/athletes_screen.dart';
+import 'package:frontend/ui/view/tenant/skills/skill_detail_page_view/skill_details/skill_progress/skill_progress_screen.dart';
 import 'package:frontend/ui/view/tenant/skills/skills_screen.dart';
 import 'package:get/get.dart';
 
@@ -47,8 +48,7 @@ List<GetPage> get pages => [
                             middlewares: [AuthGuard()],
                             name: '/progress',
                             page: () => const AthleteProgressScreen()),
-                      ]
-                  ),
+                      ]),
                 ]),
             GetPage(
                 name: '/skills',
@@ -62,7 +62,13 @@ List<GetPage> get pages => [
                       middlewares: [AuthGuard()],
                       name: '/:skillId',
                       binding: TenantScreenBinding(),
-                      page: () => SkillDetailsPageView())
+                      page: () => const SkillDetailsPageView(),
+                      children: [
+                        GetPage(
+                            middlewares: [AuthGuard()],
+                            name: '/progress',
+                            page: () => const SkillProgressScreen()),
+                      ])
                 ]),
           ]),
       GetPage(

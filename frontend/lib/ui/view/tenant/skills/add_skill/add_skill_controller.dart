@@ -11,9 +11,9 @@ import 'package:get/get.dart';
 import '../../../../../domain/model/tenant.dart';
 
 class AddSkillController extends GetxController {
-
   final TenantDetailModel tenant;
 
+  final formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final descController = TextEditingController();
   final levelController = TextEditingController();
@@ -23,15 +23,16 @@ class AddSkillController extends GetxController {
   AddSkillController(this.tenant);
 
   void submit() {
-    SkillDto skillDto = SkillDto(0, nameController.text,
-        descController.text, int.parse(levelController.text));
-    TenantFeatures tenantFeatures = TenantFeatures(tenant);
-    isLoading.value = true;
-    tenantFeatures.addSkill(skillDto).then((value) {
-      Get.back<bool>(result: true);
-    }).onError((error, stackTrace) {
-      Get.back<bool>(result: false);
-    });
+    if (formKey.currentState!.validate()) {
+      SkillDto skillDto = SkillDto(0, nameController.text, descController.text,
+          int.parse(levelController.text));
+      TenantFeatures tenantFeatures = TenantFeatures(tenant);
+      isLoading.value = true;
+      tenantFeatures.addSkill(skillDto).then((value) {
+        Get.back<bool>(result: true);
+      }).onError((error, stackTrace) {
+        Get.back<bool>(result: false);
+      });
+    }
   }
-
 }

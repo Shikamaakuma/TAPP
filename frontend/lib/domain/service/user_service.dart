@@ -2,6 +2,7 @@
 
 import 'package:frontend/data/storage/user_data.dart';
 import 'package:frontend/domain/features/athlete.dart';
+import 'package:frontend/domain/features/tenant.dart';
 import 'package:frontend/domain/model/user.dart';
 import 'package:get/get.dart';
 
@@ -24,7 +25,22 @@ class UserService extends GetxController {
   UserService(this.user, this.tenants, [int? selectedTenantId])
       : _selectedTenantId = selectedTenantId;
 
+  final isLoading = true.obs;
 
+  @override
+  void onInit() {
+    super.onInit();
+
+    if (_selectedTenantId != null && tenantDetailModel.value == null) {
+      TenantFeatures.loadTenant(selectedTenant!).then((value) {
+        isLoading.value = false;
+        update();
+      });
+    } else {
+      isLoading.value = false;
+      update();
+    }
+  }
 
 
   TenantModel? get selectedTenant => tenants.firstWhere((element) => element.id == _selectedTenantId);
@@ -47,6 +63,10 @@ class UserService extends GetxController {
     }
     return athleteMap[id]!;
   }
+  SkillModel getSkill(int skillId) {
+    return tenantDetailModel.value!.skills.firstWhere((element) => element.id == skillId);
+  }
+
 
   List<AthleteModel> get athletesSorted => tenantDetailModel.value!.athletes;
   set athletesSorted(List<AthleteModel> athletes) {
@@ -63,5 +83,7 @@ class UserService extends GetxController {
   }
 
   int indexOfSkillId(int skillId) => skillsSorted.indexOf(skillsSorted.firstWhere((element) => element.id == skillId));
+
+
 
 }

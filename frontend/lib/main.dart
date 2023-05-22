@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/domain/service/auth_service.dart';
+import 'package:frontend/theme.dart';
 import 'package:frontend/ui/navigation/pages.dart';
 import 'package:get/get.dart';
 
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
       getPages: pages,
       debugShowCheckedModeBanner: false,
       scrollBehavior: AppScrollBehavior(),
+      theme: AppTheme.lightTheme,
     );
   }
 }

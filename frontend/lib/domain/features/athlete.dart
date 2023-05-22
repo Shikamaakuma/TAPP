@@ -16,6 +16,7 @@ class AthleteFeatures {
   AthleteFeatures(this.athleteModel);
 
   ProgressProviderDef get progressProvider => APIProvider.instance.progressProvider;
+  AthleteProviderDef get athleteProvider => APIProvider.instance.athleteProvider;
   UserService get userService => Get.find();
 
   Future<AthleteModel> loadProgress() async {
@@ -40,5 +41,9 @@ class AthleteFeatures {
 
   Future<void> addProgress(ProgressDto progressDto) async {
     await progressProvider.addProgress(userService.selectedTenant!.id, progressDto);
+  }
+
+  Future<void> deleteAthlete() async {
+    await athleteProvider.deleteAthlete(userService.selectedTenant!.id, athleteModel.id);
   }
 }

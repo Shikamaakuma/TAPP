@@ -3,25 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:frontend/domain/model/skill.dart';
 import 'package:frontend/packages/gettools/statefull_getbuilder.dart';
 import 'package:frontend/ui/view/tenant/athletes/athlete_details/athlete_progress/athlete_progress_controller.dart';
+import 'package:frontend/ui/view/tenant/skills/skill_detail_page_view/skill_details/skill_progress/skill_progress_controller.dart';
 import 'package:frontend/ui/view/tenant/widget/default_divider.dart';
 
-class AthleteProgressScreen extends StatelessWidget {
-  const AthleteProgressScreen({super.key});
+class SkillProgressScreen extends StatelessWidget {
+  const SkillProgressScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Progress'),),
-      body: StatefulGetBuilder<AthleteProgressController>(
-        init: AthleteProgressController(),
+      body: StatefulGetBuilder<SkillProgressController>(
+        init: SkillProgressController(),
         success: (controller) => ListView.separated(
           itemCount: controller.progress.length,
           itemBuilder: (context, index) {
-            SkillProgressModel skillProgressModel = controller.progress[index];
+            AthleteProgressModel athleteProgressModel = controller.progress[index];
             return ListTile(
-              title: Text(skillProgressModel.skillName),
-              subtitle: Text(skillProgressModel.comment ?? 'No comment added.'),
-              trailing: Text(skillProgressModel.score!.toString()),
+              title: Text(athleteProgressModel.athleteName),
+              subtitle: Text(athleteProgressModel.comment ?? 'No comment added.'),
+              trailing: Text(athleteProgressModel.score!.toString()),
             );
           }, separatorBuilder: (BuildContext context, int index) => const DefaultDivider(),
         ),

@@ -81,9 +81,16 @@ class TenantFeatures {
       for (ProgressDto progressDto in progress) {
         try {
           SkillModel skillModel = tenantDetailModel.skills.firstWhere((element) => element.id == progressDto.skillId);
+          ProgressModel progressModel = ProgressModel(progressDto.progressId, progressDto.score, progressDto.comment);
+
           final currentProgress = athleteModel.skillProgress[skillModel] ?? [];
-          currentProgress.add(ProgressModel(progressDto.progressId, progressDto.score, progressDto.comment));
+          currentProgress.add(progressModel);
           athleteModel.skillProgress[skillModel] = currentProgress;
+
+          final currentSkillProgress = skillModel.athleteProgress[athleteModel] ?? [];
+          currentSkillProgress.add(progressModel);
+          skillModel.athleteProgress[athleteModel] = currentSkillProgress;
+
         } on StateError {
           debugPrint('No athlete found for id ${progressDto.athleteId}');
         }
@@ -115,5 +122,9 @@ class TenantFeatures {
     ];
     UserService userService = Get.find();
     userService.tenantDetailModel.value = tenant;
+  }
+
+  Future<void> deleteSkill(SkillModel skillModel) async {
+    await skillProvider.deleteSkill(tenant.id, skillModel.id);
   }
 }

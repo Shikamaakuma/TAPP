@@ -25,7 +25,15 @@ class AthleteDetailPageController extends StatefulGetxController {
     currentId = int.parse(Get.parameters['athleteId'] as String);
     debugPrint('Init: Current index: $currentIndex');
     pageController = PageController(initialPage: currentIndex);
-    setSuccess();
+    if (_userService.isLoading.isTrue) {
+      _userService.addListener(() {
+        if (_userService.isLoading.value == false) {
+          setSuccess();
+        }
+      });
+    } else {
+      setSuccess();
+    }
   }
 
   

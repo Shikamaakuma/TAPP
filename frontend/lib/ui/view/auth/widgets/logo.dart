@@ -9,7 +9,7 @@ class Logo extends StatelessWidget {
       padding: const EdgeInsets.all(40),
       child: Container(
         constraints: const BoxConstraints(maxWidth: 250, minWidth: 200, minHeight: 120),
-        child: Image.asset('assets/Logo.png'),
+        child: Image.asset('assets/tapp.png'),
       ),
     );
   }

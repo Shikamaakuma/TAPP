@@ -19,7 +19,7 @@ class AthleteDetailController extends StatefulGetxController {
 
   List<SkillProgressModel> get skillProgress {
     final result = <SkillProgressModel>[];
-    for (SkillModel skill in _userService.tenantDetailModel.value!.skills) {
+    for (SkillModel skill in _userService.skillsSorted) {
       ProgressModel? lastProgress = athleteModel.currentProgress[skill];
       result.add(SkillProgressModel(lastProgress?.id, skill.id, skill.name, lastProgress?.comment, lastProgress?.score));
     }

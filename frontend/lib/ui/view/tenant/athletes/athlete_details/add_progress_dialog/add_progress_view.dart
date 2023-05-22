@@ -4,6 +4,8 @@ import 'package:frontend/domain/model/skill.dart';
 import 'package:frontend/ui/view/tenant/athletes/athlete_details/add_progress_dialog/add_progress_controller.dart';
 import 'package:get/get.dart';
 
+import '../../../../../util/validators.dart';
+
 class AddProgressView extends StatelessWidget {
   final SkillModel skillModel;
   final AthleteModel athleteModel;
@@ -17,23 +19,27 @@ class AddProgressView extends StatelessWidget {
       builder: (controller) => AlertDialog(
         title: const Text('Add progress'),
         content: Form(
+          key: controller.formKey,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextFormField(
                 controller: controller.scoreController,
+                style: const TextStyle(color: Colors.black),
+                validator: (value) => intRangeValidator(value, 1, 9),
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: 'Score 1 - 9',
+                  labelText: 'Score 1 - 9',
                 ),
               ),
               const SizedBox(height: 10,),
               TextFormField(
                 maxLines: 4,
+                style: const TextStyle(color: Colors.black),
                 controller: controller.commentController,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: 'Comment',
+                  labelText: 'Comment',
                 ),
               )
             ],

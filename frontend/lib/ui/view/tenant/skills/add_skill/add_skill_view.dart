@@ -2,12 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/packages/gettools/stateful_controller.dart';
 import 'package:frontend/packages/gettools/statefull_getbuilder.dart';
+import 'package:frontend/theme.dart';
 import 'package:frontend/ui/view/tenant/athletes/add_athlete/add_athlete_controller.dart';
 import 'package:frontend/ui/view/tenant/skills/add_skill/add_skill_controller.dart';
 import 'package:frontend/ui/widget/form/submit_button.dart';
 import 'package:get/get.dart';
 
 import '../../../../../domain/model/tenant.dart';
+import '../../../../util/validators.dart';
 
 class AddSkillView extends StatelessWidget {
   final TenantDetailModel tenant;
@@ -21,14 +23,17 @@ class AddSkillView extends StatelessWidget {
       builder: (controller) => AlertDialog(
         title: const Text('Add Skill'),
         content: Form(
+          key: controller.formKey,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextFormField(
                 controller: controller.nameController,
+                style: const TextStyle(color: Colors.black),
+                validator: emptyValidator,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: 'Name',
+                  labelText: 'Name',
                 ),
               ),
               SizedBox(
@@ -37,9 +42,11 @@ class AddSkillView extends StatelessWidget {
               TextFormField(
                 controller: controller.descController,
                 maxLines: 4,
+                style: const TextStyle(color: Colors.black),
+                validator: emptyValidator,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: 'Description',
+                  labelText: 'Description',
                 ),
               ),
               SizedBox(
@@ -48,9 +55,11 @@ class AddSkillView extends StatelessWidget {
               TextFormField(
                 controller: controller.levelController,
                 keyboardType: TextInputType.number,
+                style: const TextStyle(color: Colors.black),
+                validator: (value) => intRangeValidator(value, 1, 5),
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: 'Level 1 - 9',
+                  labelText: 'Level 1 - 5',
                 ),
               )
             ],
@@ -60,7 +69,7 @@ class AddSkillView extends StatelessWidget {
           SubmitButton(
             loading: controller.isLoading.value,
             onPressed: controller.submit,
-            text: 'ACCEPT',
+            text: 'Save',
           ),
         ],
       ),

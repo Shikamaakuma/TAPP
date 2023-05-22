@@ -40,6 +40,7 @@ dependencies:
   flutter_secure_storage: ^6.0.0
   shared_preferences: ^2.0.15
   shimmer: ^2.0.0
+  go_router: ^7.0.2
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +68,9 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/tapp.png
+    - assets/tapp_tranparent.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

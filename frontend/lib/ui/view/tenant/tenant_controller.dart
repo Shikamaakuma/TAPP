@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/domain/features/athlete.dart';
 import 'package:frontend/domain/features/tenant.dart';
 import 'package:frontend/domain/model/athlete.dart';
 import 'package:frontend/domain/model/skill.dart';
@@ -72,8 +73,8 @@ class TenantController extends StatefulGetxController {
   }
 
   void onAthleteDismissed(AthleteModel athleteModel) {
-    // TODO: Api remove
-    int index = tenantDetailModel.athletes.indexOf(athleteModel);
+    final features = AthleteFeatures(athleteModel);
+    features.deleteAthlete();
     tenantDetailModel.athletes.remove(athleteModel);
     update();
   }
@@ -120,9 +121,9 @@ class TenantController extends StatefulGetxController {
 
 
   void onSkillDismissed(SkillModel skillModel)  {
-    // TODO: Api remove
-    int index = tenantDetailModel.skills.indexOf(skillModel);
-    tenantDetailModel.athletes.remove(skillModel);
+    final feature = TenantFeatures(tenantDetailModel);
+    feature.deleteSkill(skillModel);
+    tenantDetailModel.skills.remove(skillModel);
     update();
   }
 

@@ -9,9 +9,9 @@ import 'package:frontend/ui/view/tenant/tenant_controller.dart';
 import 'package:get/get.dart';
 
 class AddAthleteController extends GetxController {
-
   final TenantDetailModel tenant;
 
+  final formKey = GlobalKey<FormState>();
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
 
@@ -19,17 +19,17 @@ class AddAthleteController extends GetxController {
 
   AddAthleteController(this.tenant);
 
-
   void submit() {
-    AthleteDto athleteDto = AthleteDto(0, firstNameController.text,
-        lastNameController.text);
-    TenantFeatures tenantFeatures = TenantFeatures(tenant);
-    isLoading.value = true;
-    tenantFeatures.addAthlete(athleteDto).then((value) {
-      Get.back<bool>(result: true);
-    }).onError((error, stackTrace) {
-      Get.back<bool>(result: false);
-    });
+    if (formKey.currentState!.validate()) {
+      AthleteDto athleteDto =
+          AthleteDto(0, firstNameController.text, lastNameController.text);
+      TenantFeatures tenantFeatures = TenantFeatures(tenant);
+      isLoading.value = true;
+      tenantFeatures.addAthlete(athleteDto).then((value) {
+        Get.back<bool>(result: true);
+      }).onError((error, stackTrace) {
+        Get.back<bool>(result: false);
+      });
+    }
   }
-
 }

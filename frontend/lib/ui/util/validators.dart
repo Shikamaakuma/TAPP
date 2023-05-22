@@ -52,3 +52,20 @@ String? confirmPasswordValidator(
   }
   return null;
 }
+
+String? intRangeValidator(String? input, int min, int max) {
+  if(input == null || input!.isEmpty) {
+    return 'Please enter a number';
+  } else {
+    int? inputInt = int.tryParse(input);
+    if (inputInt == null) {
+      return 'Please enter a number';
+    } else {
+      if (inputInt < min || inputInt > max) {
+        return 'Enter a number between $min and $max';
+      } else {
+        return null;
+      }
+    }
+  }
+}

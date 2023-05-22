@@ -3,11 +3,9 @@ import 'package:frontend/domain/service/user_service.dart';
 import 'package:frontend/packages/gettools/stateful_controller.dart';
 import 'package:get/get.dart';
 
-import '../../../../../../domain/model/athlete.dart';
-import '../../../../../../domain/model/progress.dart';
 
 class SkillProgressController extends StatefulGetxController {
-  late final SkillModel _athleteModel;
+  late final SkillModel _skillModel;
   final List<int> filterList = [];
   UserService get _userService => Get.find();
 
@@ -15,20 +13,20 @@ class SkillProgressController extends StatefulGetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    int athleteId = int.parse(Get.parameters['athleteId'] as String);
-    String? skillIdString = Get.parameters['skillId'];
-    if (skillIdString != null) {
-      int? skillId = int.tryParse(skillIdString);
-      if (skillId != null) {
-        filterList.add(skillId);
+    int skillId = int.parse(Get.parameters['skillId'] as String);
+    String? athleteIdString = Get.parameters['athleteId'];
+    if (athleteIdString != null) {
+      int? athleteId = int.tryParse(athleteIdString);
+      if (athleteId != null) {
+        filterList.add(athleteId);
       }
     }
-    _userService.getAthlete(athleteId).then((value) {
-      _athleteModel = value;
-      setSuccess();
-    });
+
+    _skillModel = _userService.getSkill(skillId);
+    setSuccess();
+
   }
 
-  List<SkillProgressModel> get progress =>
-      _athleteModel.getProgress(filterList);
+  List<AthleteProgressModel> get progress =>
+      _skillModel.getProgress(filterList);
 }

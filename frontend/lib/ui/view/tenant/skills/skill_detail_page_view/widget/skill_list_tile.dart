@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/domain/model/skill.dart';
 import 'package:frontend/ui/view/tenant/tenant_controller.dart';
+import 'package:frontend/ui/view/tenant/widget/difficulty_widget.dart';
 import 'package:get/get.dart';
 
 import '../../../../../widget/auto_sized_icon.dart';
@@ -25,11 +26,12 @@ class SkillListTile extends StatelessWidget {
             ],
           ),),
           child: Container(
-            margin: const EdgeInsets.all(8),
+            margin: const EdgeInsets.all(2),
             child: ListTile(
               leading: ProfileImagePlaceholder(Icons.lightbulb, padding: EdgeInsets.symmetric(vertical: 4),),
               title: Text(skillModel.name),
               subtitle: Text(skillModel.description, maxLines: 1, overflow: TextOverflow.ellipsis,),
+              trailing: !editMode ? DifficultyWidget(difficulty: skillModel.level) : null,
             ),)),
     );
   }

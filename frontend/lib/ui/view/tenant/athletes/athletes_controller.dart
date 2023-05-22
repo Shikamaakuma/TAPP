@@ -67,9 +67,6 @@ class AthletesController extends StatefulGetxController {
   }
 
   void onSortAthletesClicked() {
-    if(athleteOrderMode.isTrue) {
-      final features = TenantFeatures(_userService.tenantDetailModel.value!);
-    }
     athleteOrderMode.value = !athleteOrderMode.value;
     update();
   }

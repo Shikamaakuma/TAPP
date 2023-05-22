@@ -16,37 +16,49 @@ class SkillDetailsPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Athlete Details'),
-      ),
-      body: StatefulGetBuilder<SkillDetailPageController>(
-        init: SkillDetailPageController(),
-        success: (controller) {
-          debugPrint('Name: ${controller.currentName}, Left: ${controller.pagesLeft}, Right: ${controller.pagesRight}');
-          return Column(
-            children: [
-              AthleteSelectionWidget(
-                currentName: controller.currentName,
-                numbersLeft: controller.pagesLeft,
-                numbersRight: controller.pagesRight,
-                onLeftClick: controller.onLeftClick,
-                onRightClick: controller.onRightClick,
-              ),
-              Expanded(child: PageView(
-                scrollDirection: Axis.horizontal,
-                controller: controller.pageController,
-                onPageChanged: controller.onPageChanged,
-                children: [
-                  for (SkillModel skillModel in controller.skillList)
-                    SkillDetailScreen(skillModel: skillModel)
-                ],
-              ),)
-            ],
-          );},
+    return GetBuilder<SkillDetailPageController>(
+      init: SkillDetailPageController(),
+      builder: (controller) => Scaffold(
+        appBar: AppBar(
+          title: const Text('Athlete Details'),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.list),
+              tooltip: 'List progress',
+              onPressed: controller.listProgress,
+            ),
+          ],
+        ),
+        body: StatefulGetBuilder<SkillDetailPageController>(
+          success: (controller) {
+            debugPrint(
+                'Name: ${controller.currentName}, Left: ${controller.pagesLeft}, Right: ${controller.pagesRight}');
+            return Column(
+              children: [
+                AthleteSelectionWidget(
+                  currentName: controller.currentName,
+                  numbersLeft: controller.pagesLeft,
+                  numbersRight: controller.pagesRight,
+                  onLeftClick: controller.onLeftClick,
+                  onRightClick: controller.onRightClick,
+                ),
+                Expanded(
+                  child: PageView(
+                    scrollDirection: Axis.horizontal,
+                    controller: controller.pageController,
+                    onPageChanged: controller.onPageChanged,
+                    children: [
+                      for (SkillModel skillModel in controller.skillList)
+                        SkillDetailScreen(skillModel: skillModel)
+                    ],
+                  ),
+                )
+              ],
+            );
+          },
           loading: (controller) => Center(
-          child
-          : CircularProgressIndicator(),
+            child: CircularProgressIndicator(),
+          ),
         ),
       ),
     );

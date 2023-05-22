@@ -22,7 +22,7 @@ class SkillDetailController extends StatefulGetxController {
     final result = <AthleteProgressModel>[];
     for (AthleteModel athleteModel in _userService.athletesSorted) {
       ProgressModel? lastProgress = athleteModel.currentProgress[skillModel];
-      result.add(AthleteProgressModel(athleteModel.id, athleteModel.fullName, lastProgress?.score));
+      result.add(AthleteProgressModel(lastProgress?.id, athleteModel.id, athleteModel.fullName, lastProgress?.comment, lastProgress?.score));
     }
 
     return result;
