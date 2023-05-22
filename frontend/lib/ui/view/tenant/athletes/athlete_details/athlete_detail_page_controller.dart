@@ -46,4 +46,8 @@ class AthleteDetailPageController extends StatefulGetxController {
   void onRightClick() {
     pageController.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.linear);
   }
+
+  void listProgress() {
+    Get.toNamed('/tenant/${_userService.selectedTenant!.id}/athletes/$currentId/progress');
+  }
 }

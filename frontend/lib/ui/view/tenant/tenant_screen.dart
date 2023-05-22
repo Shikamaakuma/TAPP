@@ -49,7 +49,7 @@ class TenantScreen extends StatelessWidget {
                   color: Colors.black,
                   borderRadius: BorderRadius.circular(16)
                 ),
-                child: Container( color: Colors.grey ,child: Expanded(
+                child: Container( color: Colors.grey ,child: const Expanded(
                 child: Center(child: Text('No image yet'),),
                 ),),
               ),),

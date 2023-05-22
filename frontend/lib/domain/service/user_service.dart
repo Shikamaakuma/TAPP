@@ -20,8 +20,11 @@ class UserService extends GetxController {
 
   UserDataStorage get userDataStorage => UserDataSharedPreferences();
 
+
   UserService(this.user, this.tenants, [int? selectedTenantId])
       : _selectedTenantId = selectedTenantId;
+
+
 
 
   TenantModel? get selectedTenant => tenants.firstWhere((element) => element.id == _selectedTenantId);
@@ -46,10 +49,18 @@ class UserService extends GetxController {
   }
 
   List<AthleteModel> get athletesSorted => tenantDetailModel.value!.athletes;
+  set athletesSorted(List<AthleteModel> athletes) {
+    userDataStorage.saveAthleteSortOrder(selectedTenant!.id, [for (AthleteModel a in athletes) a.id]);
+    tenantDetailModel.value!.athletes = athletes;
+  }
 
   int indexOfAthleteId(int athleteId) => athletesSorted.indexOf(athletesSorted.firstWhere((element) => element.id == athleteId));
 
   List<SkillModel> get skillsSorted => tenantDetailModel.value!.skills;
+  set skillsSorted(List<SkillModel> skills) {
+    userDataStorage.saveSkillSortOrder(selectedTenant!.id, [for (SkillModel s in skills) s.id]);
+    tenantDetailModel.value!.skills = skills;
+  }
 
   int indexOfSkillId(int skillId) => skillsSorted.indexOf(skillsSorted.firstWhere((element) => element.id == skillId));
 

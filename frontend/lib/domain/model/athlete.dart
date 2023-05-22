@@ -27,4 +27,17 @@ class AthleteModel extends IdentifiedModel {
           entry.key: entry.value.reduce(
               (value, element) => value.id > element.id ? value : element)
       };
+
+  List<SkillProgressModel> getProgress([List<int> filterSkillIds = const []]) {
+    List<SkillProgressModel> progress = [
+      for (MapEntry<SkillModel, List<ProgressModel>> entry in skillProgress.entries)
+        if (filterSkillIds.isEmpty || filterSkillIds.contains(entry.key.id))
+          ...[
+            for(ProgressModel p in entry.value)
+              SkillProgressModel(p.id, entry.key.id, entry.key.name, p.comment, p.score)
+          ]
+    ];
+    progress.sort((a, b) => a.progressId! - b.progressId!);
+    return progress;
+  }
 }

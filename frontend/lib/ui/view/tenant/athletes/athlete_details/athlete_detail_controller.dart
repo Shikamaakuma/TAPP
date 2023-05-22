@@ -40,4 +40,9 @@ class AthleteDetailController extends StatefulGetxController {
     });
   }
 
+  void onSkillProgressPressed(SkillProgressModel skillProgress) {
+    Get.toNamed('/tenant/${_userService.selectedTenant!.id}/athletes/${athleteModel.id}/progress', parameters: {
+      'skillId': skillProgress.skillId.toString()
+    });
+  }
 }

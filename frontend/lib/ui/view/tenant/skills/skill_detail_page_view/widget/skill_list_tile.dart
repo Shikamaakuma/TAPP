@@ -8,8 +8,8 @@ import '../../../../../widget/placeholder/profile_image_placeholder.dart';
 
 class SkillListTile extends StatelessWidget {
   final SkillModel skillModel;
-
-  const SkillListTile({required super.key, required this.skillModel});
+  final bool editMode;
+  const SkillListTile({required super.key, required this.skillModel, this.editMode = false});
 
   @override
   Widget build(BuildContext context) {

@@ -16,34 +16,54 @@ class AthleteDetailScreen extends StatelessWidget {
     return GetBuilder<AthleteDetailController>(
       init: AthleteDetailController(athleteModel),
       tag: athleteModel.id.toString(),
-      builder: (controller) => Column(children: [
-        AspectRatio(aspectRatio: 16/9,
-        child: Container(
-          decoration: const BoxDecoration(
-            color: Colors.grey,
-            shape: BoxShape.circle,
-          ),
-          child: AutoSizedIcon(Icons.person, color: Colors.white,),
-        ),),
-        ListView.separated(
-          shrinkWrap: true,
-          itemCount: controller.skillProgress.length,
-          itemBuilder: (context, index) {
-            SkillProgressModel skillProgress = controller.skillProgress[index];
-            return GestureDetector(
-              onTap: () => controller.onSkillTapped(skillProgress),
-              child: ListTile(
-                title: Text(skillProgress.skillName),
-                trailing: Text(skillProgress.score.toString()),
+      builder: (controller) => Column(
+        children: [
+          AspectRatio(
+            aspectRatio: 16 / 9,
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.grey,
+                shape: BoxShape.circle,
               ),
-            );
-          }, separatorBuilder: (BuildContext context, int index) => Divider(
-          color: Colors.grey,
-          indent: 16,
-          endIndent: 16,
-        ),
-        ),
-      ],),
+              child: AutoSizedIcon(
+                Icons.person,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          ListView.separated(
+            shrinkWrap: true,
+            itemCount: controller.skillProgress.length,
+            itemBuilder: (context, index) {
+              SkillProgressModel skillProgress =
+                  controller.skillProgress[index];
+              return GestureDetector(
+                onTap: () => controller.onSkillTapped(skillProgress),
+                child: ListTile(
+                  title: Text(skillProgress.skillName),
+                  trailing: Row(mainAxisSize: MainAxisSize.min, children: [
+                    Text(skillProgress.score != null
+                        ? skillProgress.score.toString()
+                        : 'Not set'),
+                    if (skillProgress.score != null)
+                      IconButton(
+                        icon: Icon(Icons.list),
+                        color: Theme.of(context).primaryColor,
+                        onPressed: () =>
+                            controller.onSkillProgressPressed(skillProgress),
+                      )
+                  ]),
+                ),
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) => Divider(
+              color: Colors.grey,
+              indent: 16,
+              endIndent: 16,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

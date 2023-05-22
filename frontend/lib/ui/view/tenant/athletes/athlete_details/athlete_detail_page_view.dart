@@ -12,12 +12,21 @@ class AthleteDetailsPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return GetBuilder<AthleteDetailPageController>(
+        init: AthleteDetailPageController(),
+        builder: (controller) => Scaffold(
       appBar: AppBar(
         title: const Text('Athlete Details'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.list),
+            tooltip: 'List progress',
+            onPressed: controller.listProgress,
+          ),
+        ],
       ),
       body: StatefulGetBuilder<AthleteDetailPageController>(
-        init: AthleteDetailPageController(),
+
         success: (controller) {
           debugPrint('Name: ${controller.currentName}, Left: ${controller.pagesLeft}, Right: ${controller.pagesRight}');
           return Column(
@@ -45,6 +54,6 @@ class AthleteDetailsPageView extends StatelessWidget {
           : CircularProgressIndicator(),
         ),
       ),
-    );
+    ),);
   }
 }

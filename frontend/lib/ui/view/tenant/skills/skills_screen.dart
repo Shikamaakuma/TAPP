@@ -7,6 +7,7 @@ import 'package:frontend/ui/widget/shimmer_widgets.dart';
 import 'package:get/get.dart';
 
 import '../../../../packages/alert_banner.dart';
+import '../widget/default_divider.dart';
 import 'skill_detail_page_view/widget/skill_list_tile.dart';
 import 'skill_detail_page_view/widget/skill_loading_list_tile.dart';
 
@@ -20,11 +21,37 @@ class SkillListScreen extends StatelessWidget {
       builder: (controller) => Scaffold(
       appBar: AppBar(
         title: const Text('Skills'),
+        actions: [
+          controller.skillOrderMode.isFalse ? IconButton(
+            icon: const Icon(Icons.sort),
+            tooltip: 'Sort skills',
+            onPressed: controller.onSortSkillsClicked,
+          ) :  IconButton(
+            icon: const Icon(Icons.check),
+            tooltip: 'Sorting finished',
+            onPressed: controller.onSortSkillsClicked,
+          )
+        ],
       ),
       body: StatefulGetBuilder<TenantController>(
         success: (controller) => Container(
           padding: const EdgeInsets.all(8),
-          child: controller.tenantDetailModel.skills.isNotEmpty ? ListView.separated(
+          child: controller.tenantDetailModel.skills.isNotEmpty
+            ? controller.skillOrderMode.value
+            ? ReorderableListView.builder(
+            itemCount: controller.tenantDetailModel.skills.length,
+            itemBuilder: (BuildContext context, int index) {
+              SkillModel model = controller.tenantDetailModel.skills[index];
+              return SkillListTile(
+                skillModel: model,
+                key: Key('${model.id}'),
+                editMode: true,
+              );
+            },
+            onReorder: controller.onSkillReorder,
+          )
+              :
+          ListView.separated(
             itemCount: controller.tenantDetailModel.skills.length,
             itemBuilder: (BuildContext context, int index) {
               SkillModel model = controller.tenantDetailModel.skills[index];
@@ -32,15 +59,13 @@ class SkillListScreen extends StatelessWidget {
               return GestureDetector(
                 onTap: () => controller.onSkillTap(model),
                 child: SkillListTile(key: key, skillModel: model,),);
-            }, separatorBuilder: (BuildContext context, int index) => const Divider(
-            color: Colors.grey,
-            height: 0,
-          ),) : AlertBanner.info('No Skills added yet'),
+            }, separatorBuilder: (BuildContext context, int index)  => const DefaultDivider(),
+          ) : AlertBanner.info('No Skills added yet'),
 
           ),
         loading: (controller) => LoadingShimmer(isLoading: true, child: ListView.builder(
           itemCount: 5,
-          itemBuilder: (context, index) => SkillLoadingListTile(),),
+          itemBuilder: (context, index) => const SkillLoadingListTile(),),
 
         ),
       ),

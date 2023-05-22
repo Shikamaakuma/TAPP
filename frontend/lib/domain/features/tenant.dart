@@ -11,6 +11,8 @@ import 'package:frontend/domain/service/user_service.dart';
 import 'package:get/get.dart';
 
 import '../../data/provider/api_definitions.dart';
+import '../../data/storage/definitions.dart';
+import '../../data/storage/user_data.dart';
 import '../model/progress.dart';
 
 class TenantFeatures {
@@ -23,16 +25,56 @@ class TenantFeatures {
 
   static Future<TenantFeatures> loadTenant(TenantModel tenantModel) async {
 
+    UserDataStorage userDataStorage = UserDataSharedPreferences();
+
     List<AthleteDto> athletes = await APIProvider.instance.athleteProvider.tenantAthletes(tenantModel.id);
     List<SkillDto> skill = await APIProvider.instance.skillProvider.skills();
 
-    TenantDetailModel tenantDetailModel = TenantDetailModel(tenantModel.id,
-        tenantModel.name, tenantModel.description, 'No image yet', [
-      for (SkillDto skill in skill) SkillModel.fromDto(skill)
-    ], [
+    List<AthleteModel> allAthleteModels = [
       for (AthleteDto athlete in athletes)
         AthleteModel.fromDto(athlete)
-    ]);
+    ];
+
+    List<int>? athleteSortOrder = await userDataStorage.loadAthleteSortOrder(tenantModel.id);
+    List<AthleteModel> sortedAthleteModes = [];
+    if (athleteSortOrder != null) {
+
+      for (int i in athleteSortOrder) {
+        try {
+          AthleteModel athlete = allAthleteModels.firstWhere((element) => element.id == i);
+          sortedAthleteModes.add(athlete);
+          allAthleteModels.remove(athlete);
+        } catch (e) {}
+      }
+      sortedAthleteModes.addAll(allAthleteModels);
+    } else {
+      sortedAthleteModes = allAthleteModels;
+    }
+
+    List<SkillModel> allSkillModels = [
+      for (SkillDto skill in skill) SkillModel.fromDto(skill)
+    ];
+    List<int>? skillSortOrder = await userDataStorage.loadSkillSortOrder(tenantModel.id);
+    List<SkillModel> sortedSkillModels = [];
+    if (skillSortOrder != null) {
+
+      for (int i in skillSortOrder) {
+        try {
+          SkillModel skill = allSkillModels.firstWhere((element) => element.id == i);
+          sortedSkillModels.add(skill);
+          allSkillModels.remove(skill);
+        } catch (e) {}
+      }
+      sortedSkillModels.addAll(allSkillModels);
+    } else {
+      sortedSkillModels = allSkillModels;
+    }
+
+
+      TenantDetailModel tenantDetailModel = TenantDetailModel(tenantModel.id,
+        tenantModel.name, tenantModel.description, 'No image yet', sortedSkillModels, sortedAthleteModes);
+
+
 
     for (AthleteModel athleteModel in tenantDetailModel.athletes) {
       List<ProgressDto> progress = await APIProvider.instance.progressProvider.athleteProgress(tenantModel.id, athleteModel.id);

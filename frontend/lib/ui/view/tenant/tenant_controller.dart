@@ -15,6 +15,7 @@ class TenantController extends StatefulGetxController {
 
   final selectedIndex = 1.obs;
   final athleteOrderMode = false.obs;
+  final skillOrderMode = false.obs;
 
   UserService get _userService => Get.find();
   TenantModel get tenantModel => _userService.selectedTenant!;
@@ -66,7 +67,7 @@ class TenantController extends StatefulGetxController {
     }
     final item = tempAthletes.removeAt(oldIndex);
     tempAthletes.insert(newIndex, item);
-    tenantDetailModel.athletes = tempAthletes;
+    _userService.athletesSorted = tempAthletes;
     update();
   }
 
@@ -135,5 +136,26 @@ class TenantController extends StatefulGetxController {
           ],
         )
     ) ?? false;
+  }
+
+  void onSkillReorder(int oldIndex,int newIndex) {
+    final tempSkills = tenantDetailModel.skills;
+    if (oldIndex < newIndex) {
+      newIndex -= 1;
+    }
+    final item = tempSkills.removeAt(oldIndex);
+    tempSkills.insert(newIndex, item);
+    _userService.skillsSorted = tempSkills;
+    update();
+  }
+
+  void onSortAthletesClicked() {
+    athleteOrderMode.value = !athleteOrderMode.value;
+    update();
+  }
+
+  void onSortSkillsClicked() {
+    skillOrderMode.value = !skillOrderMode.value;
+    update();
   }
 }
