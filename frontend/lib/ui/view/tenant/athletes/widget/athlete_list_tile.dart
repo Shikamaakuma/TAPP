@@ -22,7 +22,7 @@ class AthleteListTile extends StatelessWidget {
       onDismissed: (direction) => Get.find<TenantController>().onAthleteDismissed(model),
       background: Container(color: Colors.red, child: Row(
         children: const [
-          AutoSizedIcon(Icons.delete_forever, color: Colors.white, padding: EdgeInsets.all(16),),
+          AutoSizedIcon(Icons.delete_forever, color: Colors.white, margin: EdgeInsets.all(16),),
           //Text('Delete'),
         ],
       ),),

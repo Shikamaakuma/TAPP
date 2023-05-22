@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 import '../../data/storage/definitions.dart';
 import '../model/athlete.dart';
+import '../model/skill.dart';
 import '../model/tenant.dart';
 
 class UserService extends GetxController {
@@ -45,6 +46,10 @@ class UserService extends GetxController {
 
   List<AthleteModel> get athletesSorted => tenantDetailModel.value!.athletes;
 
-  int indexOfId(int athleteId) => athletesSorted.indexOf(athletesSorted.firstWhere((element) => element.id == athleteId));
+  int indexOfAthleteId(int athleteId) => athletesSorted.indexOf(athletesSorted.firstWhere((element) => element.id == athleteId));
+
+  List<SkillModel> get skillsSorted => tenantDetailModel.value!.skills;
+
+  int indexOfSkillId(int skillId) => skillsSorted.indexOf(skillsSorted.firstWhere((element) => element.id == skillId));
 
 }

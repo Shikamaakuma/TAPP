@@ -9,6 +9,7 @@ import '../view/auth/password_recovery/password_recovery_screen.dart';
 import '../view/auth/registration/registration_screen.dart';
 import '../view/start/start_screen.dart';
 import '../view/tenant/athletes/athlete_details/athlete_detail_page_view.dart';
+import '../view/tenant/skills/skill_detail_page_view/skill_detail_page_view.dart';
 import '../view/tenant/tenant_screen.dart';
 import '../view/tenant_list/tenant_list_view.dart';
 import 'bindings.dart';
@@ -45,6 +46,15 @@ List<GetPage> get pages => [
               name: '/skills',
               page: () => SkillListScreen(),
               binding: TenantScreenBinding(),
+                middlewares: [
+                  AuthGuard()
+                ],
+                children: [
+                  GetPage(
+                      middlewares: [AuthGuard()],
+                      name: '/:skillId',
+                      page: () => SkillDetailsPageView())
+                ]
             ),
           ]),
       GetPage(

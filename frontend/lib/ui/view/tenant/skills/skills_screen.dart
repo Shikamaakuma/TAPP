@@ -7,7 +7,8 @@ import 'package:frontend/ui/widget/shimmer_widgets.dart';
 import 'package:get/get.dart';
 
 import '../../../../packages/alert_banner.dart';
-import '../../../widget/placeholder/profile_image_placeholder.dart';
+import 'skill_detail_page_view/widget/skill_list_tile.dart';
+import 'skill_detail_page_view/widget/skill_loading_list_tile.dart';
 
 class SkillListScreen extends StatelessWidget {
   const SkillListScreen({super.key});
@@ -27,7 +28,10 @@ class SkillListScreen extends StatelessWidget {
             itemCount: controller.tenantDetailModel.skills.length,
             itemBuilder: (BuildContext context, int index) {
               SkillModel model = controller.tenantDetailModel.skills[index];
-              return SkillListTile(name: model.name);
+              Key key = Key('${model.id}');
+              return GestureDetector(
+                onTap: () => controller.onSkillTap(model),
+                child: SkillListTile(key: key, skillModel: model,),);
             }) : AlertBanner.info('No Skills added yet'),
 
           ),
@@ -41,46 +45,10 @@ class SkillListScreen extends StatelessWidget {
         onPressed: controller.addSkillPressed,
         child: const Icon(Icons.add),
       ),
-      bottomNavigationBar: BottomMenu(selectedIndex: 2, selectedTenantId: Get.find<TenantController>().tenantModel.id,),
+      bottomNavigationBar: BottomMenu(selectedIndex: 2, selectedTenantId: controller.tenantModel.id,),
     ),);
   }
 }
 
-class SkillListTile extends StatelessWidget {
-  final String name;
 
-  const SkillListTile({super.key, required this.name});
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: ListTile(
-        leading: ProfileImagePlaceholder(Icons.lightbulb, padding: EdgeInsets.symmetric(vertical: 4),),
-        title: Text(name),
-      ),);
-  }
-}
-
-class SkillLoadingListTile extends StatelessWidget {
-
-  const SkillLoadingListTile({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.all(8),
-      child: ListTile(
-        leading: Container(
-          width: 54,
-          height: 54,
-          margin: EdgeInsets.symmetric(vertical: 4),
-          decoration: const BoxDecoration(
-            color: Colors.black,
-            shape: BoxShape.circle,
-          ),
-        ),
-        title: const ShimmerText(),
-      ),);
-  }
-}

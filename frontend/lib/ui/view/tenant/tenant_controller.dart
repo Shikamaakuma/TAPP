@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/domain/features/tenant.dart';
 import 'package:frontend/domain/model/athlete.dart';
+import 'package:frontend/domain/model/skill.dart';
 import 'package:frontend/domain/model/tenant.dart';
 import 'package:frontend/domain/service/auth_service.dart';
 import 'package:frontend/domain/service/user_service.dart';
@@ -103,4 +104,27 @@ class TenantController extends StatefulGetxController {
     Get.offAllNamed('tenants');
   }
 
+  void onSkillTap(SkillModel model) {
+    Get.toNamed('/tenant/${tenantModel.id}/skills/${model.id}');
+  }
+
+
+  void onSkillDismissed(SkillModel skillModel)  {
+    // TODO: Api remove
+    int index = tenantDetailModel.skills.indexOf(skillModel);
+    tenantDetailModel.athletes.remove(skillModel);
+    update();
+  }
+
+  Future<bool> confirmSkillDismissed(SkillModel skillModel) async {
+    return await Get.dialog<bool>(
+        AlertDialog(title: Text('Delete skill'),
+          content: Text('Do you want to remove the skill ${skillModel.name} permanently?'),
+          actions: [
+            TextButton(onPressed: () => Get.back<bool>(result: false), child: Text('No')),
+            TextButton(onPressed: () => Get.back<bool>(result: true), child: Text('Yes'))
+          ],
+        )
+    ) ?? false;
+  }
 }
