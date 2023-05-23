@@ -1,0 +1,29 @@
+package tapp.org.tapp.Controllers;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import tapp.org.tapp.Models.TenantSkill;
+import tapp.org.tapp.Repository.TenantSkillRepository;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/v1/")
+public class TenantSkillController {
+	@Autowired
+	private TenantSkillRepository tenantSkillRepository;
+
+	@GetMapping("/{tenantId}/tenantskills")
+	public List<TenantSkill> getAllTenantSkills(@PathVariable long tenantId){
+		return tenantSkillRepository.findByTenantId(tenantId);
+	}
+
+	@PostMapping("/{tenantId}/tenantskill/{skillId}")
+	public TenantSkill addTenantskill(@PathVariable long tenantId, @PathVariable long skillId, @RequestBody TenantSkill tenantSkill) {
+		tenantSkill.setTenantId(tenantId);
+		tenantSkill.setSkillId(skillId);
+		return tenantSkillRepository.save(tenantSkill);
+	}
+}
+
