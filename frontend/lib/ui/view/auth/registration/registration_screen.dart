@@ -10,8 +10,11 @@ class RegistrationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AuthScaffold(
-      title: 'signUp'.tr,
-      child: const RegistrationForm(),
+      title: 'Register',
+      child: const Center(
+          child: Text(
+            'This features is in development. Please get in touch with our team to join the app.',
+            style: TextStyle(color: Colors.white), textAlign: TextAlign.center,)),
     );
   }
 }

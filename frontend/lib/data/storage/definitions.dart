@@ -16,4 +16,9 @@ abstract class UserDataStorage {
   Future<int> loadSelectedTenantId();
   Future<void> saveSelectedTenantId(int? selectedTenantId);
   Future<void> delete();
+  Future<void> saveAthleteSortOrder(int tenantId, List<int> athleteIds);
+  Future<List<int>?> loadAthleteSortOrder(int tenantId);
+  Future<void> saveSkillSortOrder(int tenantId, List<int> skillIds);
+  Future<List<int>?> loadSkillSortOrder(int tenantId);
 }
+

@@ -9,9 +9,12 @@ class PasswordRecoveryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AuthScaffold(
-      title: 'resetPassword'.tr,
-      child: const PasswordRecoveryForm(),
+    return const AuthScaffold(
+      title: 'Reset passwort',
+      child: Center(
+          child: Text(
+              'This features is in development. Please get in touch with our team to reset your passwort.',
+              style: TextStyle(color: Colors.white), textAlign: TextAlign.center,)),
     );
   }
 }

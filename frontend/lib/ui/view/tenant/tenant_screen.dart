@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/packages/gettools/statefull_getbuilder.dart';
 import 'package:frontend/ui/view/tenant/tenant_controller.dart';
-import 'package:frontend/ui/widget/shimmer_loading.dart';
 import 'package:frontend/ui/widget/shimmer_widgets.dart';
 import 'package:get/get.dart';
-import 'package:shimmer/shimmer.dart';
 
+import '../../widget/tapp_scaffold.dart';
 import 'bottom_bar.dart';
 
 
@@ -16,7 +15,7 @@ class TenantScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<TenantController>(
       init: TenantController(),
-      builder: (controller) => Scaffold(
+      builder: (controller) => TappScaffold(
         appBar: AppBar(
           title: Text(controller.tenantModel.name),
           actions: <Widget>[
@@ -49,7 +48,7 @@ class TenantScreen extends StatelessWidget {
                   color: Colors.black,
                   borderRadius: BorderRadius.circular(16)
                 ),
-                child: Container( color: Colors.grey ,child: Expanded(
+                child: Container( color: Colors.grey ,child: const Expanded(
                 child: Center(child: Text('No image yet'),),
                 ),),
               ),),

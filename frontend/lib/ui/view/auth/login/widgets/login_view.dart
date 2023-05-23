@@ -24,19 +24,19 @@ class LoginView extends StatelessWidget {
             style: TextStyle(
                 decoration: TextDecoration.underline,
                 fontSize: 15,
-                color: Colors.black),
+                color: Colors.white),
           ),
         ),
         TextButton(
           onPressed: () {
-            Get.toNamed('/reset');
+            Get.toNamed('/reset-password');
           },
           child: const Text(
             "Forgot your password?",
             style: TextStyle(
                 decoration: TextDecoration.underline,
                 fontSize: 15,
-                color: Colors.black),
+                color: Colors.white),
           ),
         ),
       ],

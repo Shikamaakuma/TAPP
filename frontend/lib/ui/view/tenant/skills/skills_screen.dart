@@ -7,6 +7,11 @@ import 'package:frontend/ui/widget/shimmer_widgets.dart';
 import 'package:get/get.dart';
 
 import '../../../../packages/alert_banner.dart';
+import '../../../widget/tapp_scaffold.dart';
+import '../widget/default_divider.dart';
+import '../widget/sort_proxy_decorator.dart';
+import 'skill_detail_page_view/widget/skill_list_tile.dart';
+import 'skill_detail_page_view/widget/skill_loading_list_tile.dart';
 
 class SkillListScreen extends StatelessWidget {
   const SkillListScreen({super.key});
@@ -15,24 +20,58 @@ class SkillListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<TenantController>(
       init: TenantController(),
-      builder: (controller) => Scaffold(
+      builder: (controller) => TappScaffold(
       appBar: AppBar(
         title: const Text('Skills'),
+        actions: [
+          controller.skillOrderMode.isFalse ? IconButton(
+            icon: const Icon(Icons.sort),
+            tooltip: 'Sort skills',
+            onPressed: controller.onSortSkillsClicked,
+          ) :  IconButton(
+            icon: const Icon(Icons.check),
+            tooltip: 'Sorting finished',
+            onPressed: controller.onSortSkillsClicked,
+          )
+        ],
       ),
       body: StatefulGetBuilder<TenantController>(
         success: (controller) => Container(
           padding: const EdgeInsets.all(8),
-          child: controller.tenantDetailModel.skills.isNotEmpty ? ListView.builder(
+          child: controller.tenantDetailModel.skills.isNotEmpty
+            ? controller.skillOrderMode.value
+            ? ReorderableListView.builder(
+            buildDefaultDragHandles: false,
+            proxyDecorator: (child, index, animation) =>
+                SortProxyDecorator(index: index, animation: animation, child: child),
             itemCount: controller.tenantDetailModel.skills.length,
             itemBuilder: (BuildContext context, int index) {
               SkillModel model = controller.tenantDetailModel.skills[index];
-              return SkillListTile(name: model.name);
-            }) : AlertBanner.info('No Skills added yet'),
+              return SkillListTile(
+                index: index,
+                skillModel: model,
+                key: Key('${model.id}'),
+                editMode: true,
+              );
+            },
+            onReorder: controller.onSkillReorder,
+          )
+              :
+          ListView.separated(
+            itemCount: controller.tenantDetailModel.skills.length,
+            itemBuilder: (BuildContext context, int index) {
+              SkillModel model = controller.tenantDetailModel.skills[index];
+              Key key = Key('${model.id}');
+              return GestureDetector(
+                onTap: () => controller.onSkillTap(model),
+                child: SkillListTile(index: index, key: key, skillModel: model,),);
+            }, separatorBuilder: (BuildContext context, int index)  => const DefaultDivider(),
+          ) : AlertBanner.info('No Skills added yet'),
 
           ),
         loading: (controller) => LoadingShimmer(isLoading: true, child: ListView.builder(
           itemCount: 5,
-          itemBuilder: (context, index) => SkillLoadingListTile(),),
+          itemBuilder: (context, index) => const SkillLoadingListTile(),),
 
         ),
       ),
@@ -40,54 +79,10 @@ class SkillListScreen extends StatelessWidget {
         onPressed: controller.addSkillPressed,
         child: const Icon(Icons.add),
       ),
-      bottomNavigationBar: BottomMenu(selectedIndex: 2, selectedTenantId: Get.find<TenantController>().tenantModel.id,),
+      bottomNavigationBar: BottomMenu(selectedIndex: 2, selectedTenantId: controller.tenantModel.id,),
     ),);
   }
 }
 
-class SkillListTile extends StatelessWidget {
-  final String name;
 
-  const SkillListTile({super.key, required this.name});
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: ListTile(
-        leading: Container(
-          width: 54,
-          height: 54,
-          margin: EdgeInsets.symmetric(vertical: 4),
-          decoration: const BoxDecoration(
-            color: Colors.black,
-            shape: BoxShape.circle,
-          ),
-        ),
-        title: Text(name),
-      ),);
-  }
-}
-
-class SkillLoadingListTile extends StatelessWidget {
-
-  const SkillLoadingListTile({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.all(8),
-      child: ListTile(
-        leading: Container(
-          width: 54,
-          height: 54,
-          margin: EdgeInsets.symmetric(vertical: 4),
-          decoration: const BoxDecoration(
-            color: Colors.black,
-            shape: BoxShape.circle,
-          ),
-        ),
-        title: const ShimmerText(),
-      ),);
-  }
-}
