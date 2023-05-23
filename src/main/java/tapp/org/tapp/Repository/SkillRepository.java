@@ -34,6 +34,6 @@ public interface SkillRepository extends JpaRepository<Skill, Long>, JpaSpecific
 
 	@Modifying
 	@Transactional
-	@Query("update Skill skill set skill.skillDescription = ?2, skill.skillLevel = ?3, skill.skillName = ?4 where skill.skillId=?1" )
-	void updateSkill(Long skillID, String skillDescription, int skillLevel, String skillName);
+	@Query("update Skill skill set skill.skillDescription = ?2, skill.skillLevel = ?3, skill.skillName = ?4, skill.imageType = ?5, skill.picture = ?6 where skill.skillId=?1" )
+	void updateSkill(Long skillID, String skillDescription, int skillLevel, String skillName, String imageType, byte[] picture);
 }
