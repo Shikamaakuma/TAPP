@@ -17,14 +17,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    print('MyApp');
+
     return GetMaterialApp(
-      title: 'TAPP',
-      initialRoute: '/start',
-      getPages: pages,
-      debugShowCheckedModeBanner: false,
-      scrollBehavior: AppScrollBehavior(),
-      theme: AppTheme.lightTheme,
+            title: 'TAPP',
+            initialRoute: '/start',
+            getPages: pages,
+            debugShowCheckedModeBanner: false,
+            scrollBehavior: AppScrollBehavior(),
+            theme: AppTheme.lightTheme,
+
     );
   }
 }

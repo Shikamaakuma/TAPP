@@ -4,6 +4,7 @@ import 'package:frontend/ui/view/tenant/tenant_controller.dart';
 import 'package:frontend/ui/widget/shimmer_widgets.dart';
 import 'package:get/get.dart';
 
+import '../../widget/tapp_scaffold.dart';
 import 'bottom_bar.dart';
 
 
@@ -14,7 +15,7 @@ class TenantScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<TenantController>(
       init: TenantController(),
-      builder: (controller) => Scaffold(
+      builder: (controller) => TappScaffold(
         appBar: AppBar(
           title: Text(controller.tenantModel.name),
           actions: <Widget>[

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../widget/tapp_scaffold.dart';
 import '../widgets/logo.dart';
 
 class AuthScaffold extends StatelessWidget {
@@ -10,7 +11,7 @@ class AuthScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return TappScaffold(
       appBar: AppBar(
         title: Text(title),
       ),

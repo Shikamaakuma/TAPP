@@ -10,6 +10,7 @@ import 'package:frontend/ui/view/tenant/widget/default_divider.dart';
 import 'package:frontend/ui/view/tenant/widget/sort_proxy_decorator.dart';
 import 'package:get/get.dart';
 
+import '../../../widget/tapp_scaffold.dart';
 import 'widget/athlete_list_tile.dart';
 import 'widget/athlete_loading_list_tile.dart';
 
@@ -27,7 +28,7 @@ class AthleteListScreen extends StatelessWidget {
 
     return GetBuilder<TenantController>(
       init: TenantController(),
-      builder: ((controller) => Scaffold(
+      builder: ((controller) => TappScaffold(
             appBar: AppBar(
               title: const Text('Athletes'),
               actions: [

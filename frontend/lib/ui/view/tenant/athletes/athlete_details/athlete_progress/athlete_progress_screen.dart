@@ -5,12 +5,14 @@ import 'package:frontend/packages/gettools/statefull_getbuilder.dart';
 import 'package:frontend/ui/view/tenant/athletes/athlete_details/athlete_progress/athlete_progress_controller.dart';
 import 'package:frontend/ui/view/tenant/widget/default_divider.dart';
 
+import '../../../../../widget/tapp_scaffold.dart';
+
 class AthleteProgressScreen extends StatelessWidget {
   const AthleteProgressScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return TappScaffold(
       appBar: AppBar(title: const Text('Progress'),),
       body: StatefulGetBuilder<AthleteProgressController>(
         init: AthleteProgressController(),
@@ -25,7 +27,7 @@ class AthleteProgressScreen extends StatelessWidget {
             );
           }, separatorBuilder: (BuildContext context, int index) => const DefaultDivider(),
         ),
-        loading: (controller) => Center(
+        loading: (controller) => const Center(
           child
               : CircularProgressIndicator(),
         ),

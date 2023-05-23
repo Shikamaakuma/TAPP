@@ -9,6 +9,7 @@ import 'package:frontend/ui/view/tenant/athletes/athlete_details/widget/athletes
 import 'package:frontend/ui/view/tenant/skills/skill_detail_page_view/skill_detail_page_controller.dart';
 import 'package:get/get.dart';
 
+import '../../../../widget/tapp_scaffold.dart';
 import 'skill_details/skill_detail_screen.dart';
 
 class SkillDetailsPageView extends StatelessWidget {
@@ -18,7 +19,7 @@ class SkillDetailsPageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<SkillDetailPageController>(
       init: SkillDetailPageController(),
-      builder: (controller) => Scaffold(
+      builder: (controller) => TappScaffold(
         appBar: AppBar(
           title: const Text('Athlete Details'),
           actions: [
@@ -56,7 +57,7 @@ class SkillDetailsPageView extends StatelessWidget {
               ],
             );
           },
-          loading: (controller) => Center(
+          loading: (controller) => const Center(
             child: CircularProgressIndicator(),
           ),
         ),

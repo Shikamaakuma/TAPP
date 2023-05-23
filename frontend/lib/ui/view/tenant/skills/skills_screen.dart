@@ -7,6 +7,7 @@ import 'package:frontend/ui/widget/shimmer_widgets.dart';
 import 'package:get/get.dart';
 
 import '../../../../packages/alert_banner.dart';
+import '../../../widget/tapp_scaffold.dart';
 import '../widget/default_divider.dart';
 import '../widget/sort_proxy_decorator.dart';
 import 'skill_detail_page_view/widget/skill_list_tile.dart';
@@ -19,7 +20,7 @@ class SkillListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<TenantController>(
       init: TenantController(),
-      builder: (controller) => Scaffold(
+      builder: (controller) => TappScaffold(
       appBar: AppBar(
         title: const Text('Skills'),
         actions: [
