@@ -44,7 +44,7 @@ public class AthleteController {
 
 	@PostMapping("/{tenantID}/athletes/{athleteID}")
 	public void updateAthlete(@PathVariable Long tenantID,@PathVariable Long athleteID, @RequestBody Athlete athlete) {
-		athleteRepository.updateAthlete(tenantID, athleteID, athlete.getFirstName(), athlete.getLastName());
+		athleteRepository.updateAthlete(tenantID, athleteID, athlete.getFirstName(), athlete.getLastName(), athlete.getImageType(),athlete.getPicture());
 	}
 
 	@DeleteMapping("/{tenantID}/athletes/{athleteID}")

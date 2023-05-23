@@ -15,6 +15,13 @@ public class Tenant {
 	@Column(name="tenantname")
 	private String tenantName;
 
+	@Lob
+	@Column(name="picture")
+	private byte[] picture;
+
+	@Column(name="imagetype")
+	private String imageType;
+
 
 	public Tenant() {
 	}
@@ -38,6 +45,14 @@ public class Tenant {
 
 	public void setTenantName(String tenantName) {
 		this.tenantName = tenantName;
+	}
+
+	public byte[] getPicture() {
+		return picture;
+	}
+
+	public void setPicture(byte[] picture) {
+		this.picture = picture;
 	}
 
 	@Override

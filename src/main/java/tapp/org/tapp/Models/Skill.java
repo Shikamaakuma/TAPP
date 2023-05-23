@@ -20,14 +20,27 @@ public class Skill {
 	@Column(name="level")
 	private int skillLevel;
 
+	@Lob
+	@Column(name="picture")
+	private byte[] picture;
+
+	@Column(name="imagetype")
+	private String imageType;
+
 	public Skill() {
 	}
 
 	public Skill(Long skillId, String skillName, String skillDescription, int skillLevel) {
+		this(skillId,skillName,skillDescription,skillLevel,"",null);
+	}
+
+	public Skill(Long skillId, String skillName, String skillDescription, int skillLevel, String imageType, byte[] picture) {
 		this.skillId = skillId;
 		this.skillName = skillName;
 		this.skillDescription = skillDescription;
 		this.skillLevel = skillLevel;
+		this.imageType = imageType;
+		this.picture = picture;
 	}
 
 	public Long getSkillId() {
@@ -62,6 +75,21 @@ public class Skill {
 		this.skillLevel = skillLevel;
 	}
 
+	public String getImageType() {
+		return imageType;
+	}
+
+	public void setImageType(String imageType) {
+		this.imageType = imageType;
+	}
+
+	public void setPicture(byte[] picture) {
+		this.picture = picture;
+	}
+
+	public byte[] getPicture() {
+		return picture;
+	}
 
 	@Override
 	public boolean equals(Object o) {
