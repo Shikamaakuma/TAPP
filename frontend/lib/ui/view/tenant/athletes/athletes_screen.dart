@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:frontend/domain/model/athlete.dart';
 import 'package:frontend/packages/alert_banner.dart';
@@ -5,6 +7,7 @@ import 'package:frontend/packages/gettools/statefull_getbuilder.dart';
 import 'package:frontend/ui/view/tenant/bottom_bar.dart';
 import 'package:frontend/ui/view/tenant/tenant_controller.dart';
 import 'package:frontend/ui/view/tenant/widget/default_divider.dart';
+import 'package:frontend/ui/view/tenant/widget/sort_proxy_decorator.dart';
 import 'package:get/get.dart';
 
 import 'widget/athlete_list_tile.dart';
@@ -15,6 +18,13 @@ class AthleteListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final Color oddItemColor = colorScheme.secondary.withOpacity(0.05);
+    final Color evenItemColor = colorScheme.secondary.withOpacity(0.15);
+    final Color draggableItemColor = colorScheme.secondary;
+
+
     return GetBuilder<TenantController>(
       init: TenantController(),
       builder: ((controller) => Scaffold(
@@ -39,10 +49,14 @@ class AthleteListScreen extends StatelessWidget {
                     ? controller.athleteOrderMode.value
                     ? ReorderableListView.builder(
                         itemCount: controller.tenantDetailModel.athletes.length,
+                        buildDefaultDragHandles: false,
+                        proxyDecorator: (child, index, animation) =>
+                            SortProxyDecorator(index: index, animation: animation, child: child),
                         itemBuilder: (BuildContext context, int index) {
                           AthleteModel model =
                               controller.tenantDetailModel.athletes[index];
                           return AthleteListTile(
+                            index: index,
                             model: model,
                             key: Key('${model.id}'),
                             editMode: true,
@@ -58,6 +72,7 @@ class AthleteListScreen extends StatelessWidget {
                       return GestureDetector(key: Key('${model.id}'),
                         onTap: () => Get.toNamed('/tenant/${controller.tenantModel.id}/athletes/${model.id}'),
                         child: AthleteListTile(
+                          index: index,
                           model: model,
                           key: Key('${model.id}'),
                           editMode: false,

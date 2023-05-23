@@ -6,33 +6,38 @@ import 'package:get/get.dart';
 
 import '../../../../../widget/auto_sized_icon.dart';
 import '../../../../../widget/placeholder/profile_image_placeholder.dart';
+import '../../../widget/sort_list_tile.dart';
 
 class SkillListTile extends StatelessWidget {
+  final int index;
   final SkillModel skillModel;
   final bool editMode;
-  const SkillListTile({required super.key, required this.skillModel, this.editMode = false});
+  const SkillListTile(
+      {required super.key,
+      required this.skillModel,
+      this.editMode = false,
+      required this.index});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<TenantController>(
-      builder: (controller) => Dismissible(key: key!,
-          direction: DismissDirection.startToEnd,
-          confirmDismiss: (direction) => controller.confirmSkillDismissed(skillModel),
-          onDismissed: (direction) => controller.onSkillDismissed(skillModel),
-          background: Container(color: Colors.red, child: Row(
-            children: const [
-              AutoSizedIcon(Icons.delete_forever, color: Colors.white, margin: EdgeInsets.all(16),),
-              //Text('Delete'),
-            ],
-          ),),
-          child: Container(
-            margin: const EdgeInsets.all(2),
-            child: ListTile(
-              leading: ProfileImagePlaceholder(Icons.lightbulb, padding: EdgeInsets.symmetric(vertical: 4),),
-              title: Text(skillModel.name),
-              subtitle: Text(skillModel.description, maxLines: 1, overflow: TextOverflow.ellipsis,),
-              trailing: !editMode ? DifficultyWidget(difficulty: skillModel.level) : null,
-            ),)),
+    return SortableDismissAbleListTile(
+        key: key,
+        index: index,
+        editMode: editMode,
+        confirmDismiss: (direction) =>
+            Get.find<TenantController>().confirmSkillDismissed(skillModel),
+        onDismissed: (direction) => Get.find<TenantController>().onSkillDismissed(skillModel),
+        title: Text(skillModel.name),
+        leading: const ProfileImagePlaceholder(
+          Icons.lightbulb,
+          padding: EdgeInsets.symmetric(vertical: 4),
+        ),
+        subtitle: Text(
+          skillModel.description,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        trailing: DifficultyWidget(difficulty: skillModel.level),
     );
   }
 }

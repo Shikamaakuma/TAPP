@@ -23,12 +23,12 @@ class LoginForm extends StatelessWidget {
               children: [
                 EmailInputField(
                   controller: controller.emailController,
-                  hint: 'tenantEmail'.tr,
+                  hint: 'Email',
                   textInputAction: TextInputAction.next,
                 ),
                 PasswordInputField(
                   controller: controller.passwordController,
-                  hint: 'password'.tr,
+                  hint: 'Password',
                   validator: emptyValidator,
                   textInputAction: TextInputAction.done,
                   onFieldSubmitted: (_) {
@@ -38,7 +38,7 @@ class LoginForm extends StatelessWidget {
                 const SizedBox(height: 16),
                 SubmitButton(
                   onPressed: controller.onSubmit,
-                  text: 'login'.tr,
+                  text: 'Login',
                   loading: controller.loading.value,
                 ),
               ],

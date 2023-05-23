@@ -37,7 +37,7 @@ class TenantListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return Container(
       margin: const EdgeInsets.all(8),
       child: GestureDetector(
         onTap: () => controller.onTenantSelected(tenantModel),

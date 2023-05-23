@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../auth/widgets/logo.dart';
 import 'start_controller.dart';
 
 class StartScreen extends StatelessWidget {
@@ -12,7 +13,7 @@ class StartScreen extends StatelessWidget {
     return GetBuilder<StartController>(
       init: StartController(),
       builder: (controller) => const Scaffold(
-        body: Center(child: Text('TAPP'),),
+        body: Center(child: const Logo(),),
       ),
     );
   }

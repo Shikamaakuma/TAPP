@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 
 import '../../../../packages/alert_banner.dart';
 import '../widget/default_divider.dart';
+import '../widget/sort_proxy_decorator.dart';
 import 'skill_detail_page_view/widget/skill_list_tile.dart';
 import 'skill_detail_page_view/widget/skill_loading_list_tile.dart';
 
@@ -39,10 +40,14 @@ class SkillListScreen extends StatelessWidget {
           child: controller.tenantDetailModel.skills.isNotEmpty
             ? controller.skillOrderMode.value
             ? ReorderableListView.builder(
+            buildDefaultDragHandles: false,
+            proxyDecorator: (child, index, animation) =>
+                SortProxyDecorator(index: index, animation: animation, child: child),
             itemCount: controller.tenantDetailModel.skills.length,
             itemBuilder: (BuildContext context, int index) {
               SkillModel model = controller.tenantDetailModel.skills[index];
               return SkillListTile(
+                index: index,
                 skillModel: model,
                 key: Key('${model.id}'),
                 editMode: true,
@@ -58,7 +63,7 @@ class SkillListScreen extends StatelessWidget {
               Key key = Key('${model.id}');
               return GestureDetector(
                 onTap: () => controller.onSkillTap(model),
-                child: SkillListTile(key: key, skillModel: model,),);
+                child: SkillListTile(index: index, key: key, skillModel: model,),);
             }, separatorBuilder: (BuildContext context, int index)  => const DefaultDivider(),
           ) : AlertBanner.info('No Skills added yet'),
 

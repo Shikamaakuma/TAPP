@@ -33,6 +33,7 @@ class InputField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hint,
         suffixIcon: suffixIcon,
+        hintStyle: TextStyle(color: Colors.grey),
       ),
       obscureText: obscureText ?? false,
       textAlignVertical: TextAlignVertical.center,
