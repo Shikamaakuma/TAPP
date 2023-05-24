@@ -36,7 +36,7 @@ class SkillListScreen extends StatelessWidget {
           )
         ],
       ),
-      body: StatefulGetBuilder<TenantController>(
+      body: StatefulGetBuilder<SkillListController>(
         success: (controller) => Container(
           padding: const EdgeInsets.all(8),
           child: controller.tenantDetailModel.skills.isNotEmpty

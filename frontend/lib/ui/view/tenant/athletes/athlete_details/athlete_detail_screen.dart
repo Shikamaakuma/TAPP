@@ -29,11 +29,13 @@ class AthleteDetailScreen extends StatelessWidget {
                   shape: BoxShape.circle,
                 ),
                 child: controller.athleteModel.image != null
-                    ? Image.memory(controller.athleteModel.image!.bytes, fit: BoxFit.cover,)
-                : AutoSizedIcon(
-                  Icons.person,
-                  color: Colors.white,
-                ),
+                    ? CircleAvatar(
+                        backgroundImage: MemoryImage(athleteModel.image!.bytes),
+                      )
+                    : AutoSizedIcon(
+                        Icons.person,
+                        color: Colors.white,
+                      ),
               ),
             ),
             ListView.separated(

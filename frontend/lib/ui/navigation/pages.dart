@@ -1,5 +1,6 @@
 import 'package:frontend/ui/view/tenant/athletes/athlete_details/athlete_detail_screen.dart';
 import 'package:frontend/ui/view/tenant/athletes/athletes_screen.dart';
+import 'package:frontend/ui/view/tenant/athletes/edit_athlete/edit_athlete_screen.dart';
 import 'package:frontend/ui/view/tenant/skills/skill_detail_page_view/skill_details/skill_progress/skill_progress_screen.dart';
 import 'package:frontend/ui/view/tenant/skills/skills_screen.dart';
 import 'package:get/get.dart';
@@ -21,13 +22,16 @@ import 'middleware/auth_guard.dart';
 
 List<GetPage> get pages => [
       GetPage(name: '/start', page: () => StartScreen()),
-      GetPage(
-          name: '/tenants',
-          page: () => TenantListScreen(),
-          children: [
-            GetPage(name: '/add', page: () => EditTenantScreen(edit: false,), middlewares: [AuthGuard()])
-          ],
-          middlewares: [AuthGuard()]),
+      GetPage(name: '/tenants', page: () => TenantListScreen(), children: [
+        GetPage(
+            name: '/add',
+            page: () => EditTenantScreen(
+                  edit: false,
+                ),
+            middlewares: [AuthGuard()])
+      ], middlewares: [
+        AuthGuard()
+      ]),
       GetPage(
           name: '/tenant/:tenantId',
           page: () => TenantScreen(),
@@ -36,7 +40,12 @@ List<GetPage> get pages => [
             AuthGuard()
           ],
           children: [
-            GetPage(name: '/edit', page: () => EditTenantScreen(edit: true,), middlewares: [AuthGuard()]),
+            GetPage(
+                name: '/edit',
+                page: () => EditTenantScreen(
+                      edit: true,
+                    ),
+                middlewares: [AuthGuard()]),
             GetPage(
                 name: '/athletes',
                 page: () => const AthleteListScreen(),
@@ -46,10 +55,22 @@ List<GetPage> get pages => [
                 ],
                 children: [
                   GetPage(
+                    name: '/add',
+                    page: () => const EditAthleteScreen(
+                      edit: false,
+                    ),
+                    middlewares: [AuthGuard()],
+                  ),
+                  GetPage(
                       middlewares: [AuthGuard()],
                       name: '/:athleteId',
                       page: () => const AthleteDetailsPageView(),
                       children: [
+                        GetPage(
+                          name: '/edit',
+                          page: () => const EditAthleteScreen(),
+                          middlewares: [AuthGuard()],
+                        ),
                         GetPage(
                             middlewares: [AuthGuard()],
                             name: '/progress',
@@ -64,20 +85,24 @@ List<GetPage> get pages => [
                   AuthGuard()
                 ],
                 children: [
-                  GetPage(name: '/add', page: () => const EditSkillScreen(edit: false,),
-                    middlewares: [
-                      AuthGuard()
-                    ],),
+                  GetPage(
+                    name: '/add',
+                    page: () => const EditSkillScreen(
+                      edit: false,
+                    ),
+                    middlewares: [AuthGuard()],
+                  ),
                   GetPage(
                       middlewares: [AuthGuard()],
                       name: '/:skillId',
                       binding: TenantScreenBinding(),
                       page: () => const SkillDetailsPageView(),
                       children: [
-                        GetPage(name: '/edit', page: () => const EditSkillScreen(),
-                          middlewares: [
-                            AuthGuard()
-                          ],),
+                        GetPage(
+                          name: '/edit',
+                          page: () => const EditSkillScreen(),
+                          middlewares: [AuthGuard()],
+                        ),
                         GetPage(
                             middlewares: [AuthGuard()],
                             name: '/progress',

@@ -58,4 +58,16 @@ class AthleteDetailPageController extends StatefulGetxController {
   void listProgress() {
     Get.toNamed('/tenant/${_userService.selectedTenant!.id}/athletes/$currentId/progress');
   }
+
+  void editAthlete() {
+    AthleteModel model = athleteList.firstWhere((element) => element.id == currentId);
+    Get.toNamed('/tenant/${_userService.selectedTenant!.id}/athletes/$currentId/edit',
+        arguments: model)?.then(
+            (value) {
+          setLoading();
+          setSuccess();
+        }
+    );
+
+  }
 }

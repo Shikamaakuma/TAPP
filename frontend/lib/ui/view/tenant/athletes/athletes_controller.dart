@@ -53,6 +53,10 @@ class AthleteListController extends StatefulGetxController {
   }
 
   void addAthletePressed() {
+
+    Get.toNamed('/tenant/${tenantModel.id}/athletes/add');
+    /*
+
     Get.dialog<bool>(AddAthleteView(tenantDetailModel)).then((value) {
       if (value != null && value == true) {
         showSuccessSnackBar('Done', 'Athlete added');
@@ -60,7 +64,7 @@ class AthleteListController extends StatefulGetxController {
       } else if(value == false) {
         showErrorSnackBar('Error', 'Could not add athlete');
       }
-    });
+    });*/
   }
 
   void onAthleteReorder(int oldIndex,int newIndex) {

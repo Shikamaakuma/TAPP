@@ -118,6 +118,7 @@ class TenantFeatures {
     ];
     UserService userService = Get.find();
     userService.tenantDetailModel.value = tenant;
+    userService.update();
   }
 
   Future<void> addSkill(SkillDto skillDto) async {
@@ -128,6 +129,7 @@ class TenantFeatures {
     ];
     UserService userService = Get.find();
     userService.tenantDetailModel.value = tenant;
+    userService.update();
   }
 
   Future<void> deleteSkill(SkillModel skillModel) async {

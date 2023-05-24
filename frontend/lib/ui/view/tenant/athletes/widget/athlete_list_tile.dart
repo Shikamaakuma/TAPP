@@ -33,7 +33,11 @@ class AthleteListTile extends StatelessWidget {
       onDismissed: (direction) =>
           controller.onAthleteDismissed(model),
       title: Text(model.fullName),
-      leading: const ProfileImagePlaceholder(
+      leading: model.image != null
+          ? CircleAvatar(
+        backgroundImage: MemoryImage(model.image!.bytes),
+      )
+          :const ProfileImagePlaceholder(
         Icons.person,
         padding: EdgeInsets.symmetric(vertical: 4),
       ),

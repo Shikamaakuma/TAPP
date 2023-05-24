@@ -29,7 +29,9 @@ class SkillDetailScreen extends StatelessWidget {
                 color: Colors.grey,
                 shape: BoxShape.circle,
               ),
-              child: AutoSizedIcon(
+              child: skillModel.image != null 
+              ? Image.memory(skillModel.image!.bytes, fit: BoxFit.cover,)
+                  : AutoSizedIcon(
                 Icons.person,
                 color: Colors.white,
               ),

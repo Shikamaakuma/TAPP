@@ -8,21 +8,21 @@ import 'package:frontend/ui/widget/tapp_scaffold.dart';
 import '../../../../util/validators.dart';
 import '../../../../widget/form/submit_button.dart';
 import '../../widget/difficulty_selection_widget.dart';
-import 'edit_skill_controller.dart';
+import 'edit_athlete_controller.dart';
 
-class EditSkillScreen extends StatelessWidget {
+class EditAthleteScreen extends StatelessWidget {
   final bool edit;
 
-  const EditSkillScreen({super.key, this.edit = true});
+  const EditAthleteScreen({super.key, this.edit = true});
 
   @override
   Widget build(BuildContext context) {
     return TappScaffold(
       appBar: AppBar(
-        title: Text(edit ? 'Edit skill' : 'Add skill'),
+        title: Text(edit ? 'Edit athlete' : 'Add Athlete'),
       ),
-      body: StatefulGetBuilder<EditSkillController>(
-        init: EditSkillController(edit),
+      body: StatefulGetBuilder<EditAthleteController>(
+        init: EditAthleteController(edit),
         success: (controller) => Padding(
           padding: const EdgeInsets.all(8),
           child: Form(
@@ -56,40 +56,22 @@ class EditSkillScreen extends StatelessWidget {
                         validator: emptyValidator,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: 'Name',
+                          labelText: 'Firstname',
                         ),
                       ),
                       const SizedBox(
                         height: 10,
                       ),
                       TextFormField(
-                        controller: controller.descController,
+                        controller: controller.lastNameController,
                         maxLines: 4,
                         style: const TextStyle(color: Colors.black),
                         validator: emptyValidator,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: 'Description',
+                          labelText: 'Lastname',
                         ),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                        height: 75,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                        children: [
-                          const Text('Level:' ,textScaleFactor: 1.2,),
-                          DifficultySelectionWidget(
-                            size: 50,
-                            difficulty: controller.level.value,
-                            onSelected: (level) => controller.level.value = level,
-                          )
-                        ],
-                      ),)
                     ],
                   ),
                 ),

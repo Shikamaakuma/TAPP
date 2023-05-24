@@ -71,7 +71,7 @@ class SkillListController extends StatefulGetxController {
     });*/
   }
 
-  void onSkillTap(SkillModel model) {
+  void onSkillTap(SkillModel model) async {
     Get.toNamed('/tenant/${tenantModel.id}/skills/${model.id}');
   }
 

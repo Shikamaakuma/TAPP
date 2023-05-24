@@ -30,7 +30,11 @@ class SkillListTile extends StatelessWidget {
             controller.confirmSkillDismissed(skillModel),
         onDismissed: (direction) => controller.onSkillDismissed(skillModel),
         title: Text(skillModel.name),
-        leading: const ProfileImagePlaceholder(
+        leading: skillModel.image != null
+            ? CircleAvatar(
+          backgroundImage: MemoryImage(skillModel.image!.bytes),
+        )
+        :const ProfileImagePlaceholder(
           Icons.lightbulb,
           padding: EdgeInsets.symmetric(vertical: 4),
         ),
