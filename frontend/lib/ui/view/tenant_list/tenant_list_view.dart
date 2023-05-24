@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/domain/model/tenant.dart';
 import 'package:frontend/ui/view/tenant_list/tenant_list_controller.dart';
+import 'package:frontend/ui/widget/placeholder/profile_image_placeholder.dart';
 import 'package:get/get.dart';
 
 import '../../../packages/gettools/statefull_getbuilder.dart';
@@ -56,6 +57,9 @@ class TenantListTile extends StatelessWidget {
             color: Colors.black,
             shape: BoxShape.circle,
           ),
+          child: tenantModel.image != null ?
+          CircleAvatar( child: Image.memory(tenantModel.image!.bytes, fit: BoxFit.cover,)) :
+          ProfileImagePlaceholder(Icons.cases_outlined),
         ),
         title: Text(tenantModel.name),
       ),),);

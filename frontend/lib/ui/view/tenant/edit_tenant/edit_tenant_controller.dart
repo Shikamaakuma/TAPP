@@ -35,6 +35,7 @@ class EditTenantController extends StatefulGetxController {
 
       nameController.text = _tenantModel!.name;
       descriptionController.text = _tenantModel!.description ?? '';
+      imageBytes = _tenantModel?.image?.bytes;
       setSuccess();
     } else {
       setSuccess();

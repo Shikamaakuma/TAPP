@@ -29,4 +29,11 @@ class TenantProviderMocked extends ProviderBase implements TenantProviderDef {
     throw UnimplementedError();
   }
 
+  @override
+  Future<List<TenantDto>> getTenants() {
+    // TODO: implement getTenants
+    throw UnimplementedError();
+  }
+
+
 }

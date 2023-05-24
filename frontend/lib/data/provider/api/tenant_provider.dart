@@ -30,4 +30,16 @@ class TenantApiProvider extends ProviderBase implements TenantProviderDef {
     Response response = await post('add_tenant', tenantDto.toMap);
     debugPrint('Add Athlete: ${response.statusCode}');
   }
+
+  @override
+  Future<List<TenantDto>> getTenants() async {
+    Response response = await get('tenants',);
+
+    return [
+      for (dynamic json in response.body)
+        TenantDto.fromJson(json)
+    ];
+  }
+
+
 }

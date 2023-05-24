@@ -30,8 +30,8 @@ class EditTenantScreen extends StatelessWidget {
                   onTap: controller.selectImage,
                   child: AspectRatio(aspectRatio: 16/9,
                     child: controller.imageBytes != null
-                        ? Image.memory(controller.imageBytes!)
-                        : ProfileImagePlaceholder(Icons.add_a_photo_outlined, padding: EdgeInsets.all(16),),
+                        ? Image.memory(controller.imageBytes!, fit: BoxFit.cover,)
+                        : const ProfileImagePlaceholder(Icons.add_a_photo_outlined, padding: EdgeInsets.all(16),),
                       ),
                     ),
                 const SizedBox(
@@ -40,10 +40,11 @@ class EditTenantScreen extends StatelessWidget {
                 TextFormField(
                   controller: controller.nameController,
                   validator: emptyValidator,
-                  style: const TextStyle(color: Colors.black),
+                  style: const TextStyle(color: Colors.white),
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Name',
+                    labelStyle: TextStyle(color: Colors.grey),
                   ),
                 ),
                 const SizedBox(
@@ -52,11 +53,11 @@ class EditTenantScreen extends StatelessWidget {
                 TextFormField(
                   controller: controller.descriptionController,
                   maxLines: 4,
-                  validator: emptyValidator,
-                  style: const TextStyle(color: Colors.black),
+                  style: const TextStyle(color: Colors.white),
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Description',
+                    labelStyle: TextStyle(color: Colors.grey),
                   ),
                 ),
                 const SizedBox(height: 10,),

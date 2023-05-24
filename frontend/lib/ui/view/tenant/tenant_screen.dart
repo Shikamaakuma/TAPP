@@ -53,8 +53,10 @@ class TenantScreen extends StatelessWidget {
                   color: Colors.black,
                   borderRadius: BorderRadius.circular(16)
                 ),
-                child: Container( color: Colors.grey ,child: const Expanded(
-                child: Center(child: Text('No image yet'),),
+                child: Container( color: Colors.grey ,child: Expanded(
+                child: controller.tenantModel.image != null ?
+                    Image.memory(controller.tenantModel.image!.bytes, fit: BoxFit.cover,)
+                : Center(child: Text('No image yet'),),
                 ),),
               ),),
             const SizedBox(height: 24,),

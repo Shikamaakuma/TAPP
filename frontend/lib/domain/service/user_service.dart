@@ -1,5 +1,7 @@
 
 
+import 'package:frontend/data/dto/tenant_dto.dart';
+import 'package:frontend/data/provider/api.dart';
 import 'package:frontend/data/storage/user_data.dart';
 import 'package:frontend/domain/features/athlete.dart';
 import 'package:frontend/domain/features/tenant.dart';
@@ -14,7 +16,7 @@ import '../model/tenant.dart';
 class UserService extends GetxController {
 
   final UserModel user;
-  final List<TenantModel> tenants;
+  List<TenantModel> tenants;
   int? _selectedTenantId;
   final tenantDetailModel = Rxn<TenantDetailModel>();
   final athleteMap = <int, AthleteModel>{};
@@ -30,6 +32,12 @@ class UserService extends GetxController {
   @override
   void onInit() {
     super.onInit();
+
+    APIProvider.instance.tenantProvider.getTenants().then((value) {
+      tenants = [for(TenantDto t in value)TenantModel.fromDto(t)];
+      userDataStorage.saveTentants(tenants);
+      update();
+    });
 
     if (_selectedTenantId != null && tenantDetailModel.value == null) {
       TenantFeatures.loadTenant(selectedTenant!).then((value) {

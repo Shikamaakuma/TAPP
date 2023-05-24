@@ -3,7 +3,7 @@ import 'dart:typed_data';
 
 class ImageDto {
   final Uint8List bytes;
-  final String mimetype;
+  final String? mimetype;
 
   ImageDto(this.bytes, this.mimetype);
 
