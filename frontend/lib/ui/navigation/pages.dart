@@ -11,6 +11,7 @@ import '../view/auth/registration/registration_screen.dart';
 import '../view/start/start_screen.dart';
 import '../view/tenant/athletes/athlete_details/athlete_detail_page_view.dart';
 import '../view/tenant/athletes/athlete_details/athlete_progress/athlete_progress_screen.dart';
+import '../view/tenant/edit_tenant/edit_tenant_screen.dart';
 import '../view/tenant/skills/skill_detail_page_view/skill_detail_page_view.dart';
 import '../view/tenant/tenant_screen.dart';
 import '../view/tenant_list/tenant_list_view.dart';
@@ -22,6 +23,9 @@ List<GetPage> get pages => [
       GetPage(
           name: '/tenants',
           page: () => TenantListScreen(),
+          children: [
+            GetPage(name: '/add', page: () => EditTenantScreen(edit: false,), middlewares: [AuthGuard()])
+          ],
           middlewares: [AuthGuard()]),
       GetPage(
           name: '/tenant/:tenantId',
@@ -31,6 +35,7 @@ List<GetPage> get pages => [
             AuthGuard()
           ],
           children: [
+            GetPage(name: '/edit', page: () => EditTenantScreen(edit: true,), middlewares: [AuthGuard()]),
             GetPage(
                 name: '/athletes',
                 page: () => const AthleteListScreen(),

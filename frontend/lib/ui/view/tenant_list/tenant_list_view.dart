@@ -10,12 +10,14 @@ class TenantListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return GetBuilder<SelectTenantController>(
+      init: SelectTenantController(),
+      builder: (controller) => Scaffold(
       appBar: AppBar(
         title: const Text('Select Tenant'),
       ),
       body: StatefulGetBuilder<SelectTenantController>(
-        init: SelectTenantController(),
+
         success: (controller) => ListView.builder(
             itemCount: controller.tenants.length,
             itemBuilder: (context, index) => TenantListTile(
@@ -25,7 +27,11 @@ class TenantListScreen extends StatelessWidget {
           child: CircularProgressIndicator(),
         ),
       ),
-    );
+      floatingActionButton: FloatingActionButton(
+        onPressed: controller.addTenantPressed,
+        child: const Icon(Icons.add),
+      ),
+    ),);
   }
 }
 

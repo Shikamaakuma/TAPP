@@ -11,6 +11,7 @@ import 'package:frontend/ui/view/tenant/widget/sort_proxy_decorator.dart';
 import 'package:get/get.dart';
 
 import '../../../widget/tapp_scaffold.dart';
+import 'athletes_controller.dart';
 import 'widget/athlete_list_tile.dart';
 import 'widget/athlete_loading_list_tile.dart';
 
@@ -20,14 +21,8 @@ class AthleteListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final Color oddItemColor = colorScheme.secondary.withOpacity(0.05);
-    final Color evenItemColor = colorScheme.secondary.withOpacity(0.15);
-    final Color draggableItemColor = colorScheme.secondary;
-
-
-    return GetBuilder<TenantController>(
-      init: TenantController(),
+    return GetBuilder<AthleteListController>(
+      init: AthleteListController(),
       builder: ((controller) => TappScaffold(
             appBar: AppBar(
               title: const Text('Athletes'),

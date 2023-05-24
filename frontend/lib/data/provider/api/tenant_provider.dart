@@ -1,8 +1,10 @@
 
+import 'package:flutter/material.dart';
 import 'package:frontend/data/dto/skill_dto.dart';
 import 'package:frontend/data/dto/tenant_dto.dart';
 import 'package:frontend/data/provider/api/provider_base.dart';
 import 'package:frontend/data/provider/api_definitions.dart';
+import 'package:get/get.dart';
 
 import '../../dto/athlete_dto.dart';
 
@@ -21,5 +23,11 @@ class TenantApiProvider extends ProviderBase implements TenantProviderDef {
         SkillDto(1, 'Klettern', 'draussen', 6)
       ]
     );
+  }
+
+  @override
+  Future<void> updateTenant(TenantDto tenantDto) async {
+    Response response = await post('add_tenant', tenantDto.toMap);
+    debugPrint('Add Athlete: ${response.statusCode}');
   }
 }

@@ -32,6 +32,7 @@ abstract class SkillProviderDef {
 
 abstract class TenantProviderDef {
   Future<TenantDetailDto> tenantDetails(int tenantId);
+  Future<void> updateTenant(TenantDto tenantDto);
 }
 
 abstract class ProgressProviderDef {

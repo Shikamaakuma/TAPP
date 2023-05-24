@@ -23,4 +23,10 @@ class TenantProviderMocked extends ProviderBase implements TenantProviderDef {
     );
   }
 
+  @override
+  Future<void> updateTenant(TenantDto tenantDto) {
+    // TODO: implement updateTenant
+    throw UnimplementedError();
+  }
+
 }

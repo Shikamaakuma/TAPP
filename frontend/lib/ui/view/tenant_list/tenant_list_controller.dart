@@ -8,6 +8,7 @@ class SelectTenantController extends StatefulGetxController {
   UserService get userService => Get.find();
 
   List<TenantModel> get tenants => userService.tenants;
+  
 
   @override
   void onInit() {
@@ -21,4 +22,8 @@ class SelectTenantController extends StatefulGetxController {
     Get.offAllNamed('/tenant/${selectedTenant.id}');
   }
 
+
+  void addTenantPressed() {
+    Get.toNamed('/tenants/add');
+  }
 }

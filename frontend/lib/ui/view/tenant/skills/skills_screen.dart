@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/domain/model/skill.dart';
 import 'package:frontend/packages/gettools/statefull_getbuilder.dart';
 import 'package:frontend/ui/view/tenant/bottom_bar.dart';
+import 'package:frontend/ui/view/tenant/skills/skill_list_controller.dart';
 import 'package:frontend/ui/view/tenant/tenant_controller.dart';
 import 'package:frontend/ui/widget/shimmer_widgets.dart';
 import 'package:get/get.dart';
@@ -18,8 +19,8 @@ class SkillListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<TenantController>(
-      init: TenantController(),
+    return GetBuilder<SkillListController>(
+      init: SkillListController(),
       builder: (controller) => TappScaffold(
       appBar: AppBar(
         title: const Text('Skills'),

@@ -23,6 +23,11 @@ class TenantFeatures {
   SkillProviderDef get skillProvider => APIProvider.instance.skillProvider;
   AthleteProviderDef get athleteProvider => APIProvider.instance.athleteProvider;
 
+  static Future<void> newTenant(TenantDto dto) async {
+    await APIProvider.instance.tenantProvider.updateTenant(dto);
+  }
+
+
   static Future<TenantFeatures> loadTenant(TenantModel tenantModel) async {
 
     UserDataStorage userDataStorage = UserDataSharedPreferences();
@@ -72,7 +77,7 @@ class TenantFeatures {
 
 
       TenantDetailModel tenantDetailModel = TenantDetailModel(tenantModel.id,
-        tenantModel.name, tenantModel.description, 'No image yet', sortedSkillModels, sortedAthleteModes);
+        tenantModel.name, tenantModel.description, tenantModel.image, 'No image yet', sortedSkillModels, sortedAthleteModes);
 
 
 
@@ -99,6 +104,7 @@ class TenantFeatures {
 
     UserService userService = Get.find();
     userService.tenantDetailModel.value = tenantDetailModel;
+    userService.update();
 
     return TenantFeatures(tenantDetailModel);
   }
@@ -126,5 +132,12 @@ class TenantFeatures {
 
   Future<void> deleteSkill(SkillModel skillModel) async {
     await skillProvider.deleteSkill(tenant.id, skillModel.id);
+  }
+
+  Future<void> updateTenant(TenantDto tenantDto) async {
+    await tenantProvider.updateTenant(tenantDto);
+    UserService userService = Get.find();
+    userService.selectedTenant = TenantModel.fromDto(tenantDto);
+    await loadTenant(Get.find<UserService>().selectedTenant!);
   }
 }

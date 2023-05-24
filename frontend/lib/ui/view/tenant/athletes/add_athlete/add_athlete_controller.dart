@@ -1,4 +1,5 @@
 import 'dart:html';
+import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:frontend/data/dto/athlete_dto.dart';

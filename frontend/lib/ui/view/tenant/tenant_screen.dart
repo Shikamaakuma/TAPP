@@ -29,6 +29,11 @@ class TenantScreen extends StatelessWidget {
               tooltip: 'Select tenant',
               onPressed: controller.selectTenant,
             ),
+            IconButton(
+              icon: const Icon(Icons.edit),
+              tooltip: 'Edit tenant',
+              onPressed: controller.editTenant,
+            ),
           ],
         ),
         bottomNavigationBar: BottomMenu(selectedIndex: 0,
@@ -59,7 +64,7 @@ class TenantScreen extends StatelessWidget {
                 numberOfLines: 3,
               ),
             if (c.loading.isFalse)
-              Text(c.tenantDetailModel.description)
+              Text(c.tenantDetailModel.description ?? 'No description added.')
           ]),),),),
         ),
       );

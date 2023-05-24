@@ -47,7 +47,7 @@ class AuthService extends GetxController with GetxServiceMixin {
 
       UserModel user = UserModel(response.user.id, response.user.username, response.user.email);
       List<TenantModel> tenants = [
-        for (TenantDto t in response.tenants) TenantModel(t.id, t.name, 'No description implemented')
+        for (TenantDto t in response.tenants) TenantModel.fromDto(t)
       ];
 
       await authDataStorage.saveAccessToken(response.token);

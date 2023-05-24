@@ -46,6 +46,12 @@ class UserService extends GetxController {
   TenantModel? get selectedTenant => tenants.firstWhere((element) => element.id == _selectedTenantId);
   set selectedTenant(TenantModel? tenantId) {
     _selectedTenantId = tenantId?.id;
+    if(tenantId != null) {
+      final oldTenant = tenants.firstWhere((element) => element.id == tenantId.id);
+      int index = tenants.indexOf(oldTenant);
+      tenants.insert(index, tenantId);
+      tenants.remove(oldTenant);
+    }
     userDataStorage.saveSelectedTenantId(_selectedTenantId);
   }
 

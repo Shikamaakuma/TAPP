@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/ui/view/tenant/athletes/athletes_controller.dart';
+import 'package:frontend/ui/view/tenant/athletes/athletes_screen.dart';
 import 'package:frontend/ui/view/tenant/widget/difficulty_widget.dart';
 import 'package:frontend/ui/widget/auto_sized_icon.dart';
 import 'package:get/get.dart';
@@ -21,14 +23,15 @@ class AthleteListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AthleteListController controller = Get.find();
     return SortableDismissAbleListTile(
       key: key,
       index: index,
       editMode: editMode,
       confirmDismiss: (direction) =>
-          Get.find<TenantController>().confirmAthleteDismissed(model),
+          controller.confirmAthleteDismissed(model),
       onDismissed: (direction) =>
-          Get.find<TenantController>().onAthleteDismissed(model),
+          controller.onAthleteDismissed(model),
       title: Text(model.fullName),
       leading: const ProfileImagePlaceholder(
         Icons.person,
