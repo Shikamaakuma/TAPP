@@ -14,7 +14,7 @@ class StartScreen extends StatelessWidget {
     return GetBuilder<StartController>(
       init: StartController(),
       builder: (controller) => TappScaffold(
-        appBar: AppBar(title: Text('Tapp'),),
+        appBar: AppBar(title: const Text('Tapp'),),
         body: const Center(child: Logo(),),
       ),
     );
