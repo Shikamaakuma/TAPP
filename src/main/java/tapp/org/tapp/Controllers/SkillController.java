@@ -65,7 +65,7 @@ public class SkillController {
 
 	@PostMapping("/skills/{skillID}")
 	public void updateSkill(@PathVariable Long skillID, @RequestBody Skill skill){
-		skillRepository.updateSkill(skillID,skill.getSkillDescription(),skill.getSkillLevel(),skill.getSkillName());
+		skillRepository.updateSkill(skillID,skill.getSkillDescription(),skill.getSkillLevel(),skill.getSkillName(),skill.getImageType(), skill.getPicture());
 	}
 
 	@DeleteMapping("/skills/{skillID}")
