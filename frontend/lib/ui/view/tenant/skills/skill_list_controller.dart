@@ -57,6 +57,10 @@ class SkillListController extends StatefulGetxController {
   }
 
   void addSkillPressed() {
+
+    Get.toNamed('/tenant/${tenantModel.id}/skills/add');
+
+    /*
     Get.dialog<bool>(AddSkillView(tenantDetailModel)).then((value) {
       if (value != null && value == true) {
         showSuccessSnackBar('Done', 'Skill added');
@@ -64,7 +68,7 @@ class SkillListController extends StatefulGetxController {
       } else {
         showErrorSnackBar('Error', 'Could not add skill');
       }
-    });
+    });*/
   }
 
   void onSkillTap(SkillModel model) {

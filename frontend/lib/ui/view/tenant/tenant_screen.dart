@@ -40,7 +40,7 @@ class TenantScreen extends StatelessWidget {
             selectedTenantId: controller.tenantModel.id),
         body: StatefulGetBuilder<TenantController>(
           success: (c) => Container(
-            margin: EdgeInsets.all(4),
+            margin: const EdgeInsets.all(4),
             child: LoadingShimmer(
               isLoading: c.loading.value,
               child: Column(
@@ -56,7 +56,7 @@ class TenantScreen extends StatelessWidget {
                 child: Container( color: Colors.grey ,child: Expanded(
                 child: controller.tenantModel.image != null ?
                     Image.memory(controller.tenantModel.image!.bytes, fit: BoxFit.cover,)
-                : Center(child: Text('No image yet'),),
+                : const Center(child: Text('No image yet'),),
                 ),),
               ),),
             const SizedBox(height: 24,),

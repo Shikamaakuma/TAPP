@@ -18,7 +18,7 @@ class TenantProviderMocked extends ProviderBase implements TenantProviderDef {
         AthleteDto(1, 'Dominik', 'Villiger')
       ],
       [
-        SkillDto(1, 'Klettern', 'Am berg', 1)
+        SkillDto(1, 'Klettern', 'Am berg', 1, null)
       ]
     );
   }

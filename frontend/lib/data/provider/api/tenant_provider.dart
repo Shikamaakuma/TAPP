@@ -20,7 +20,7 @@ class TenantApiProvider extends ProviderBase implements TenantProviderDef {
         AthleteDto(1, 'Dominik', 'Villiger')
       ],
       [
-        SkillDto(1, 'Klettern', 'draussen', 6)
+        SkillDto(1, 'Klettern', 'draussen', 6, null)
       ]
     );
   }

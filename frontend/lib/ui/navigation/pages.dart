@@ -12,6 +12,7 @@ import '../view/start/start_screen.dart';
 import '../view/tenant/athletes/athlete_details/athlete_detail_page_view.dart';
 import '../view/tenant/athletes/athlete_details/athlete_progress/athlete_progress_screen.dart';
 import '../view/tenant/edit_tenant/edit_tenant_screen.dart';
+import '../view/tenant/skills/edit_skill/edit_skill_screen.dart';
 import '../view/tenant/skills/skill_detail_page_view/skill_detail_page_view.dart';
 import '../view/tenant/tenant_screen.dart';
 import '../view/tenant_list/tenant_list_view.dart';
@@ -63,12 +64,20 @@ List<GetPage> get pages => [
                   AuthGuard()
                 ],
                 children: [
+                  GetPage(name: '/add', page: () => const EditSkillScreen(edit: false,),
+                    middlewares: [
+                      AuthGuard()
+                    ],),
                   GetPage(
                       middlewares: [AuthGuard()],
                       name: '/:skillId',
                       binding: TenantScreenBinding(),
                       page: () => const SkillDetailsPageView(),
                       children: [
+                        GetPage(name: '/edit', page: () => const EditSkillScreen(),
+                          middlewares: [
+                            AuthGuard()
+                          ],),
                         GetPage(
                             middlewares: [AuthGuard()],
                             name: '/progress',

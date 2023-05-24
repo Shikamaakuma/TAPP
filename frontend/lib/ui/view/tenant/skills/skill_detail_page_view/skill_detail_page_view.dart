@@ -28,6 +28,11 @@ class SkillDetailsPageView extends StatelessWidget {
               tooltip: 'List progress',
               onPressed: controller.listProgress,
             ),
+            IconButton(
+              icon: const Icon(Icons.edit),
+              tooltip: 'Edit skill',
+              onPressed: controller.editSkill,
+            ),
           ],
         ),
         body: StatefulGetBuilder<SkillDetailPageController>(

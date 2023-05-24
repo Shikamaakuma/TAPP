@@ -1,3 +1,4 @@
+import 'package:frontend/data/dto/image_dto.dart';
 import 'package:frontend/data/dto/skill_dto.dart';
 import 'package:frontend/domain/model/athlete.dart';
 import 'package:frontend/domain/model/progress.dart';
@@ -9,13 +10,14 @@ class SkillModel extends IdentifiedModel{
   final String name;
   final String description;
   final int level;
+  final ImageDto? image;
 
   Map<AthleteModel, List<ProgressModel>> athleteProgress = {};
 
-  SkillModel(super.id, this.name, this.description, this.level);
+  SkillModel(super.id, this.name, this.description, this.level, this.image);
 
   factory SkillModel.fromDto(SkillDto dto) {
-    return SkillModel(dto.id, dto.name, dto.description, dto.level);
+    return SkillModel(dto.id, dto.name, dto.description, dto.level, dto.image);
   }
 
   double? get averageSkill => currentProgress.values.isNotEmpty
