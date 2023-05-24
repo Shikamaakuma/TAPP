@@ -28,7 +28,9 @@ class AthleteDetailScreen extends StatelessWidget {
                   color: Colors.grey,
                   shape: BoxShape.circle,
                 ),
-                child: AutoSizedIcon(
+                child: controller.athleteModel.image != null
+                    ? Image.memory(controller.athleteModel.image!.bytes, fit: BoxFit.cover,)
+                : AutoSizedIcon(
                   Icons.person,
                   color: Colors.white,
                 ),

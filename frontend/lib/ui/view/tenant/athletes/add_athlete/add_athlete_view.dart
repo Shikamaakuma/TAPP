@@ -20,7 +20,7 @@ class AddAthleteView extends StatelessWidget {
     return GetBuilder<AddAthleteController>(
       init: AddAthleteController(tenant),
       builder: (controller) => AlertDialog(
-        title: Text('Add Athlete'),
+        title: const Text('Add Athlete'),
         content: Form(
           key: controller.formKey,
           child: Column(
@@ -46,7 +46,10 @@ class AddAthleteView extends StatelessWidget {
                   border: OutlineInputBorder(),
                   labelText: 'Lastname',
                 ),
-              )
+              ),
+              const SizedBox(height: 10,),
+              TextButton(onPressed: controller.selectImage,
+                  child: Text('Image: ${controller.image?.name}')),
             ],
           ),
         ),
