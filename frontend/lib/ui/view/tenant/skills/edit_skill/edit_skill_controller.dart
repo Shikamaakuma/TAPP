@@ -12,6 +12,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../../../../data/dto/image_dto.dart';
 import '../../../../../domain/features/tenant.dart';
 import '../../../../../domain/service/user_service.dart';
+import '../../../../widget/snackbar.dart';
 
 
 class EditSkillController extends StatefulGetxController {
@@ -85,8 +86,10 @@ class EditSkillController extends StatefulGetxController {
           .value!);
       features.addSkill(tenantDto).then((value) {
         Get.back<bool>(result: true);
+        showSuccessSnackBar('Success', 'Updated skill');
       }).onError((error, stackTrace) {
         Get.back<bool>(result: false);
+        showErrorSnackBar('Error', '$error');
       });
     }
 

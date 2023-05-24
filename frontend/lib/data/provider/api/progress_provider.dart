@@ -10,6 +10,9 @@ class ProgressApiProvider extends ProviderBase implements ProgressProviderDef {
     Response response = await post('$tenantId/progress/${progressDto.athleteId}',
         progressDto.toMap);
     debugPrint('Add progress: ${response.statusCode}');
+    if(response.statusCode != 200) {
+      throw Exception();
+    }
   }
 
   @override

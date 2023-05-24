@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/packages/gettools/statefull_getbuilder.dart';
-import 'package:frontend/ui/view/tenant/edit_tenant/edit_tenant_controller.dart';
-import 'package:frontend/ui/widget/auto_sized_icon.dart';
 import 'package:frontend/ui/widget/placeholder/profile_image_placeholder.dart';
 import 'package:frontend/ui/widget/tapp_scaffold.dart';
 
@@ -53,7 +51,7 @@ class EditSkillScreen extends StatelessWidget {
                       ),
                       TextFormField(
                         controller: controller.nameController,
-                        style: const TextStyle(color: Colors.black),
+                        style: const TextStyle(color: Colors.white),
                         validator: emptyValidator,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
@@ -66,7 +64,7 @@ class EditSkillScreen extends StatelessWidget {
                       TextFormField(
                         controller: controller.descController,
                         maxLines: 4,
-                        style: const TextStyle(color: Colors.black),
+                        style: const TextStyle(color: Colors.white),
                         validator: emptyValidator,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),

@@ -25,6 +25,7 @@ class TenantFeatures {
 
   static Future<void> newTenant(TenantDto dto) async {
     await APIProvider.instance.tenantProvider.updateTenant(dto);
+    UserService userService = Get.find();
   }
 
 

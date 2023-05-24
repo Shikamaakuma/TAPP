@@ -64,7 +64,6 @@ class EditAthleteScreen extends StatelessWidget {
                       ),
                       TextFormField(
                         controller: controller.lastNameController,
-                        maxLines: 4,
                         style: const TextStyle(color: Colors.white),
                         validator: emptyValidator,
                         decoration: const InputDecoration(

@@ -6,6 +6,7 @@ import 'package:frontend/ui/widget/placeholder/profile_image_placeholder.dart';
 
 import '../../../util/validators.dart';
 import '../../../widget/form/submit_button.dart';
+import '../../../widget/tapp_scaffold.dart';
 
 class EditTenantScreen extends StatelessWidget {
   final bool edit;
@@ -14,7 +15,7 @@ class EditTenantScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return TappScaffold(
       appBar: AppBar(
         title: Text(edit ? 'Edit tenant' : 'Add tenant'),
       ),

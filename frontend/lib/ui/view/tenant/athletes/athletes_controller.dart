@@ -79,16 +79,26 @@ class AthleteListController extends StatefulGetxController {
   }
 
   void onAthleteDismissed(AthleteModel athleteModel) {
-    final features = AthleteFeatures(athleteModel);
-    features.deleteAthlete();
     tenantDetailModel.athletes.remove(athleteModel);
     update();
+    showSuccessSnackBar('Success', 'Athlete deleted');
   }
 
   Future<bool> confirmAthleteDismissed(AthleteModel athleteModel) async {
-    return await Get.dialog<bool>(
+    bool dismiss = await Get.dialog<bool>(
         ConfirmAthleteDeleteDialog(athleteName: athleteModel.fullName,)
     ) ?? false;
+    if (!dismiss) {
+      return false;
+    }
+    final features = AthleteFeatures(athleteModel);
+    try {
+      await features.deleteAthlete();
+      return true;
+    } catch (e) {
+      showErrorSnackBar('Error', 'Could not remove user');
+      return false;
+    }
   }
 
   void onSortAthletesClicked() {

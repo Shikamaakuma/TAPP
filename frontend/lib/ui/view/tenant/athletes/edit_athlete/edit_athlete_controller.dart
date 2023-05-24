@@ -7,6 +7,7 @@ import 'package:frontend/data/dto/tenant_dto.dart';
 import 'package:frontend/domain/model/athlete.dart';
 import 'package:frontend/domain/model/skill.dart';
 import 'package:frontend/packages/gettools/stateful_controller.dart';
+import 'package:frontend/ui/widget/snackbar.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -82,8 +83,9 @@ class EditAthleteController extends StatefulGetxController {
           .value!);
       features.addAthlete(tenantDto).then((value) {
         Get.back<bool>(result: true);
+        showSuccessSnackBar('Success', 'Athlete added');
       }).onError((error, stackTrace) {
-        Get.back<bool>(result: false);
+        showErrorSnackBar('Error', 'Could not add athlete');
       });
     }
 
