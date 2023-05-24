@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import '../../widget/tapp_scaffold.dart';
 import 'bottom_bar.dart';
 
-
 class TenantScreen extends StatelessWidget {
   const TenantScreen({super.key});
 
@@ -25,7 +24,7 @@ class TenantScreen extends StatelessWidget {
               onPressed: controller.logout,
             ),
             IconButton(
-              icon: const Icon(Icons.cases),
+              icon: const Icon(Icons.cases_outlined),
               tooltip: 'Select tenant',
               onPressed: controller.selectTenant,
             ),
@@ -36,40 +35,53 @@ class TenantScreen extends StatelessWidget {
             ),
           ],
         ),
-        bottomNavigationBar: BottomMenu(selectedIndex: 0,
-            selectedTenantId: controller.tenantModel.id),
+        bottomNavigationBar: BottomMenu(
+            selectedIndex: 0, selectedTenantId: controller.tenantModel.id),
         body: StatefulGetBuilder<TenantController>(
           success: (c) => Container(
-            margin: const EdgeInsets.all(4),
             child: LoadingShimmer(
               isLoading: c.loading.value,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-              AspectRatio(aspectRatio: 16/9,
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(16)
-                ),
-                child: Container( color: Colors.grey ,child: Expanded(
-                child: controller.tenantModel.image != null ?
-                    Image.memory(controller.tenantModel.image!.bytes, fit: BoxFit.cover,)
-                : const Center(child: Text('No image yet'),),
-                ),),
-              ),),
-            const SizedBox(height: 24,),
-            if (c.loading.value)
-              const ShimmerTextMultiLine(
-                lastWidth: 240,
-                numberOfLines: 3,
-              ),
-            if (c.loading.isFalse)
-              Text(c.tenantDetailModel.description ?? 'No description added.')
-          ]),),),),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AspectRatio(
+                      aspectRatio: 16 / 9,
+                      child: Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(16)),
+                        child: Container(
+                          color: Colors.grey,
+                          child: controller.tenantModel.image != null
+                              ? Image.memory(
+                                  controller.tenantModel.image!.bytes,
+                                  fit: BoxFit.cover,
+                                )
+                              : const Center(
+                                  child: Text('No image yet'),
+                                ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8),
+                      child: c.loading.value
+                          ? const ShimmerTextMultiLine(
+                              lastWidth: 240,
+                              numberOfLines: 3,
+                            )
+                          : Text(c.tenantDetailModel.description ??
+                              'No description added.'),
+                    )
+                  ]),
+            ),
+          ),
         ),
-      );
+      ),
+    );
   }
-
 }

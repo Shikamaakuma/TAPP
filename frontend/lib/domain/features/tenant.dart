@@ -33,7 +33,7 @@ class TenantFeatures {
     UserDataStorage userDataStorage = UserDataSharedPreferences();
 
     List<AthleteDto> athletes = await APIProvider.instance.athleteProvider.tenantAthletes(tenantModel.id);
-    List<SkillDto> skill = await APIProvider.instance.skillProvider.skills();
+    List<SkillDto> skill = await APIProvider.instance.skillProvider.tenantSkills(tenantModel.id);
 
     List<AthleteModel> allAthleteModels = [
       for (AthleteDto athlete in athletes)
@@ -123,7 +123,7 @@ class TenantFeatures {
 
   Future<void> addSkill(SkillDto skillDto) async {
     await skillProvider.addSkill(tenant.id, skillDto);
-    List<SkillDto> skills = await skillProvider.skills();
+    List<SkillDto> skills = await skillProvider.tenantSkills(tenant.id);
     tenant.skills = [
       for (SkillDto skill in skills) SkillModel.fromDto(skill)
     ];

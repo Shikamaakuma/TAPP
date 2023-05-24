@@ -86,7 +86,7 @@ class SkillListController extends StatefulGetxController {
   Future<bool> confirmSkillDismissed(SkillModel skillModel) async {
     return await Get.dialog<bool>(
         AlertDialog(title: Text('Delete skill'),
-          content: Text('Do you want to remove the skill ${skillModel.name} permanently?'),
+          content: Text('Do you want to remove the skill ${skillModel.name} permanently?', style: const TextStyle(color: Colors.black)),
           actions: [
             TextButton(onPressed: () => Get.back<bool>(result: false), child: Text('No')),
             TextButton(onPressed: () => Get.back<bool>(result: true), child: Text('Yes'))

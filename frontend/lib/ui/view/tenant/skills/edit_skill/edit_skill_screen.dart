@@ -5,6 +5,7 @@ import 'package:frontend/ui/widget/auto_sized_icon.dart';
 import 'package:frontend/ui/widget/placeholder/profile_image_placeholder.dart';
 import 'package:frontend/ui/widget/tapp_scaffold.dart';
 
+import '../../../../../theme.dart';
 import '../../../../util/validators.dart';
 import '../../../../widget/form/submit_button.dart';
 import '../../widget/difficulty_selection_widget.dart';
@@ -85,6 +86,8 @@ class EditSkillScreen extends StatelessWidget {
                           const Text('Level:' ,textScaleFactor: 1.2,),
                           DifficultySelectionWidget(
                             size: 50,
+                            selectedColor: AppTheme.primaryColor,
+                            unselectedColor: Colors.white,
                             difficulty: controller.level.value,
                             onSelected: (level) => controller.level.value = level,
                           )

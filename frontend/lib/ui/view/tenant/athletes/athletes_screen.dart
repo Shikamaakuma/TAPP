@@ -38,7 +38,7 @@ class AthleteListScreen extends StatelessWidget {
                 )
               ],
             ),
-            body: StatefulGetBuilder<TenantController>(
+            body: StatefulGetBuilder<AthleteListController>(
               success: (controller) => Container(
                 padding: const EdgeInsets.all(8),
                 child: controller.tenantDetailModel.athletes.isNotEmpty

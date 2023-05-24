@@ -8,14 +8,6 @@ import 'package:frontend/data/provider/api_definitions.dart';
 import 'package:get/get.dart';
 
 class SkillApiProvider extends ProviderBase implements SkillProviderDef  {
-  @override
-  Future<List<SkillDto>> skills() async {
-    Response response = await get('skills');
-    return [
-      for(dynamic json in response.body)
-        SkillDto.fromJson(json)
-    ];
-  }
 
   @override
   Future<List<SkillDto>> tenantSkills(int tenantId) async {

@@ -58,7 +58,7 @@ class TenantListTile extends StatelessWidget {
             shape: BoxShape.circle,
           ),
           child: tenantModel.image != null ?
-          CircleAvatar( child: Image.memory(tenantModel.image!.bytes, fit: BoxFit.cover,)) :
+          CircleAvatar( backgroundImage: MemoryImage(tenantModel.image!.bytes)) :
           ProfileImagePlaceholder(Icons.cases_outlined),
         ),
         title: Text(tenantModel.name),

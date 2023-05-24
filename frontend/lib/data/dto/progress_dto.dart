@@ -5,8 +5,9 @@ class ProgressDto {
   final int athleteId;
   final int score;
   final String? comment;
+  final DateTime? dateTime;
 
-  ProgressDto(this.progressId, this.skillId, this.athleteId, this.score, this.comment);
+  ProgressDto(this.progressId, this.skillId, this.athleteId, this.score, this.comment, [this.dateTime]);
 
   factory ProgressDto.fromJson(dynamic json) {
     return ProgressDto(json['progressId'],
