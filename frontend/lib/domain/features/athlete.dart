@@ -2,9 +2,11 @@
 
 import 'package:frontend/data/dto/progress_dto.dart';
 import 'package:frontend/data/provider/api.dart';
+import 'package:frontend/domain/features/tenant.dart';
 import 'package:frontend/domain/model/athlete.dart';
 import 'package:frontend/domain/model/progress.dart';
 import 'package:frontend/domain/model/skill.dart';
+import 'package:frontend/domain/model/tenant.dart';
 import 'package:frontend/domain/service/user_service.dart';
 import 'package:get/get.dart';
 
@@ -41,6 +43,7 @@ class AthleteFeatures {
 
   Future<void> addProgress(ProgressDto progressDto) async {
     await progressProvider.addProgress(userService.selectedTenant!.id, progressDto);
+    await TenantFeatures(userService.tenantDetailModel.value!).addProgress(progressDto);
   }
 
   Future<void> deleteAthlete() async {

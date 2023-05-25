@@ -13,7 +13,7 @@ class BottomMenu extends StatelessWidget {
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.sports),
-          label: 'Tenant',
+          label: 'Group',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),

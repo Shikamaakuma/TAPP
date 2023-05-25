@@ -14,7 +14,9 @@ class AddProgressController extends GetxController {
   final formKey = GlobalKey<FormState>();
   final commentController = TextEditingController();
 
-  AddProgressController(this.athleteModel, this.skillModel);
+  AddProgressController(this.athleteModel, this.skillModel) {
+    level.value = athleteModel.currentProgress[athleteModel]?.score ?? 3;
+  }
 
   void submit() {
     if (formKey.currentState!.validate()) {
