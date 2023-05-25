@@ -1,7 +1,6 @@
 import 'dart:html';
 
 import 'package:flutter/cupertino.dart';
-import 'package:frontend/data/dto/athlete_dto.dart';
 import 'package:frontend/data/dto/skill_dto.dart';
 import 'package:frontend/domain/features/tenant.dart';
 import 'package:frontend/packages/gettools/stateful_controller.dart';
@@ -24,6 +23,8 @@ class AddSkillController extends GetxController {
 
   void submit() {
     if (formKey.currentState!.validate()) {
+
+      /*
       SkillDto skillDto = SkillDto(0, nameController.text, descController.text,
           int.parse(levelController.text));
       TenantFeatures tenantFeatures = TenantFeatures(tenant);
@@ -33,6 +34,8 @@ class AddSkillController extends GetxController {
       }).onError((error, stackTrace) {
         Get.back<bool>(result: false);
       });
+
+       */
     }
   }
 }

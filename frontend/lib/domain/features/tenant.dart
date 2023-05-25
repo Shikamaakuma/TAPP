@@ -23,12 +23,18 @@ class TenantFeatures {
   SkillProviderDef get skillProvider => APIProvider.instance.skillProvider;
   AthleteProviderDef get athleteProvider => APIProvider.instance.athleteProvider;
 
+  static Future<void> newTenant(TenantDto dto) async {
+    await APIProvider.instance.tenantProvider.updateTenant(dto);
+    UserService userService = Get.find();
+  }
+
+
   static Future<TenantFeatures> loadTenant(TenantModel tenantModel) async {
 
     UserDataStorage userDataStorage = UserDataSharedPreferences();
 
     List<AthleteDto> athletes = await APIProvider.instance.athleteProvider.tenantAthletes(tenantModel.id);
-    List<SkillDto> skill = await APIProvider.instance.skillProvider.skills();
+    List<SkillDto> skill = await APIProvider.instance.skillProvider.tenantSkills(tenantModel.id);
 
     List<AthleteModel> allAthleteModels = [
       for (AthleteDto athlete in athletes)
@@ -72,7 +78,7 @@ class TenantFeatures {
 
 
       TenantDetailModel tenantDetailModel = TenantDetailModel(tenantModel.id,
-        tenantModel.name, tenantModel.description, 'No image yet', sortedSkillModels, sortedAthleteModes);
+        tenantModel.name, tenantModel.description, tenantModel.image, 'No image yet', sortedSkillModels, sortedAthleteModes);
 
 
 
@@ -99,6 +105,7 @@ class TenantFeatures {
 
     UserService userService = Get.find();
     userService.tenantDetailModel.value = tenantDetailModel;
+    userService.update();
 
     return TenantFeatures(tenantDetailModel);
   }
@@ -112,19 +119,28 @@ class TenantFeatures {
     ];
     UserService userService = Get.find();
     userService.tenantDetailModel.value = tenant;
+    userService.update();
   }
 
   Future<void> addSkill(SkillDto skillDto) async {
     await skillProvider.addSkill(tenant.id, skillDto);
-    List<SkillDto> skills = await skillProvider.skills();
+    List<SkillDto> skills = await skillProvider.tenantSkills(tenant.id);
     tenant.skills = [
       for (SkillDto skill in skills) SkillModel.fromDto(skill)
     ];
     UserService userService = Get.find();
     userService.tenantDetailModel.value = tenant;
+    userService.update();
   }
 
   Future<void> deleteSkill(SkillModel skillModel) async {
     await skillProvider.deleteSkill(tenant.id, skillModel.id);
+  }
+
+  Future<void> updateTenant(TenantDto tenantDto) async {
+    await tenantProvider.updateTenant(tenantDto);
+    UserService userService = Get.find();
+    userService.selectedTenant = TenantModel.fromDto(tenantDto);
+    await loadTenant(Get.find<UserService>().selectedTenant!);
   }
 }

@@ -73,6 +73,6 @@ tasks.register('flutterCopy', Copy) {
 
 tasks.register('fullBuild') {
     dependsOn(flutterCopy)
-    dependsOn(build)
+    finalizedBy(build)
 }
 

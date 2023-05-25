@@ -28,6 +28,9 @@ class AthleteApiProvider extends ProviderBase implements AthleteProviderDef {
   Future<void> deleteAthlete(int tenantId, int athleteId) async {
     Response response = await delete('$tenantId/athletes/$athleteId');
     debugPrint('Delete athlete: ${response.statusCode}');
+    if (response.statusCode != 200) {
+      throw Exception('Could not delete user');
+    }
   }
   
 }

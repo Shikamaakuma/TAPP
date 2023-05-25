@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import '../../../../../widget/auto_sized_icon.dart';
 import '../../../../../widget/placeholder/profile_image_placeholder.dart';
 import '../../../widget/sort_list_tile.dart';
+import '../../skill_list_controller.dart';
 
 class SkillListTile extends StatelessWidget {
   final int index;
@@ -20,15 +21,20 @@ class SkillListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SkillListController controller = Get.find();
     return SortableDismissAbleListTile(
         key: key,
         index: index,
         editMode: editMode,
         confirmDismiss: (direction) =>
-            Get.find<TenantController>().confirmSkillDismissed(skillModel),
-        onDismissed: (direction) => Get.find<TenantController>().onSkillDismissed(skillModel),
+            controller.confirmSkillDismissed(skillModel),
+        onDismissed: (direction) => controller.onSkillDismissed(skillModel),
         title: Text(skillModel.name),
-        leading: const ProfileImagePlaceholder(
+        leading: skillModel.image != null
+            ? CircleAvatar(
+          backgroundImage: MemoryImage(skillModel.image!.bytes),
+        )
+        :const ProfileImagePlaceholder(
           Icons.lightbulb,
           padding: EdgeInsets.symmetric(vertical: 4),
         ),

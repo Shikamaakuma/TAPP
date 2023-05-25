@@ -18,9 +18,22 @@ class TenantProviderMocked extends ProviderBase implements TenantProviderDef {
         AthleteDto(1, 'Dominik', 'Villiger')
       ],
       [
-        SkillDto(1, 'Klettern', 'Am berg', 1)
+        SkillDto(1, 'Klettern', 'Am berg', 1, null)
       ]
     );
   }
+
+  @override
+  Future<void> updateTenant(TenantDto tenantDto) {
+    // TODO: implement updateTenant
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<TenantDto>> getTenants() {
+    // TODO: implement getTenants
+    throw UnimplementedError();
+  }
+
 
 }

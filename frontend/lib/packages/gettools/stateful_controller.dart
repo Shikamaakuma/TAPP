@@ -24,6 +24,7 @@ abstract class StatefulGetxController extends GetxController {
   final errorMessage = Rxn<String>();
 
   void setSuccess([bool empty = false]) {
+    setLoading();
     success.value = true;
     loading.value = false;
     loadingMore.value = false;

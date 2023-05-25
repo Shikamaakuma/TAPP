@@ -20,53 +20,69 @@ class SkillDetailScreen extends StatelessWidget {
     return GetBuilder<SkillDetailController>(
       init: SkillDetailController(skillModel),
       tag: skillModel.id.toString(),
-      builder: (controller) => Column(
-        children: [
-          AspectRatio(
-            aspectRatio: 16 / 9,
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.grey,
-                shape: BoxShape.circle,
-              ),
-              child: AutoSizedIcon(
-                Icons.person,
-                color: Colors.white,
+      builder: (controller) => SingleChildScrollView(
+        child: Column(
+          children: [
+            AspectRatio(
+              aspectRatio: 16 / 9,
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Colors.grey,
+                  shape: BoxShape.circle,
+                ),
+                child: skillModel.image != null
+                    ? Image.memory(
+                        skillModel.image!.bytes,
+                        fit: BoxFit.cover,
+                      )
+                    : AutoSizedIcon(
+                        Icons.person,
+                        color: Colors.white,
+                      ),
               ),
             ),
-          ),
-          Text(skillModel.description),
-          Row(
-            children: [
-              Text('Difficulty'),
-              DifficultyWidget(
-                difficulty: skillModel.level,
+            Padding(
+              padding: EdgeInsets.all(8),
+              child: Text(skillModel.description),
+            ),
+            Padding(
+              padding: EdgeInsets.all(8),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text('Level:'),
+                  DifficultyWidget(
+                    difficulty: skillModel.level,
+                  ),
+                ],
               ),
-            ],
-          ),
-          DefaultDivider(),
-          ListView.builder(
-            shrinkWrap: true,
-            itemCount: controller.skillProgress.length,
-            itemBuilder: (context, index) {
-              AthleteProgressModel skillProgress =
-                  controller.skillProgress[index];
-              return GestureDetector(
-                onTap: () => controller.onSkillTapped(skillProgress),
-                child: ListTile(
-                  title: Text(skillProgress.athleteName),
-                  trailing: skillProgress.score != null
-                      ? DifficultyWidget(
-                          difficulty: skillProgress.score!,
-                          maxDifficulty: 9,
-                          iconData: Icons.sports_soccer,
-                        )
-                      : Text('No progress set'),
-                ),
-              );
-            },
-          ),
-        ],
+            ),
+            const DefaultDivider(),
+            ListView.separated(
+              separatorBuilder: (context, index) => const DefaultDivider(),
+              shrinkWrap: true,
+              itemCount: controller.skillProgress.length,
+              itemBuilder: (context, index) {
+                AthleteProgressModel skillProgress =
+                    controller.skillProgress[index];
+                return GestureDetector(
+                  onTap: () => controller.onSkillTapped(skillProgress),
+                  child: ListTile(
+                    title: Text(skillProgress.athleteName),
+                    trailing: skillProgress.score != null
+                        ? DifficultyWidget(
+                            difficulty: skillProgress.score!,
+                            maxDifficulty: 9,
+                            iconData: Icons.sports_soccer,
+                          )
+                        : Text('No progress set'),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

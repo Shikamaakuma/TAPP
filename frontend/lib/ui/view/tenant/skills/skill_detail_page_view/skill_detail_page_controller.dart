@@ -51,4 +51,15 @@ class SkillDetailPageController extends StatefulGetxController {
   void listProgress() {
     Get.toNamed('/tenant/${_userService.selectedTenant!.id}/skills/$currentId/progress');
   }
+
+  void editSkill() {
+    SkillModel model = skillList.firstWhere((element) => element.id == currentId);
+    Get.toNamed('/tenant/${_userService.selectedTenant!.id}/skills/$currentId/edit',
+        arguments: model)?.then(
+            (value) {
+          setLoading();
+          setSuccess();
+        }
+    );
+  }
 }

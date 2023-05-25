@@ -7,9 +7,12 @@ import 'package:get/get_connect/http/src/response/response.dart';
 class ProgressApiProvider extends ProviderBase implements ProgressProviderDef {
   @override
   Future<void> addProgress(int tenantId, ProgressDto progressDto) async {
-    Response response = await post('$tenantId/athletes/${progressDto.athleteId}',
+    Response response = await post('$tenantId/progress/${progressDto.athleteId}',
         progressDto.toMap);
     debugPrint('Add progress: ${response.statusCode}');
+    if(response.statusCode != 200) {
+      throw Exception();
+    }
   }
 
   @override

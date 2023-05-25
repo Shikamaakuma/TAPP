@@ -9,8 +9,9 @@ class AddProgressController extends GetxController {
   final SkillModel skillModel;
   final AthleteModel athleteModel;
 
+  final level = 3.obs;
+
   final formKey = GlobalKey<FormState>();
-  final scoreController = TextEditingController();
   final commentController = TextEditingController();
 
   AddProgressController(this.athleteModel, this.skillModel);
@@ -18,7 +19,7 @@ class AddProgressController extends GetxController {
   void submit() {
     if (formKey.currentState!.validate()) {
       ProgressDto progressDto = ProgressDto(0, skillModel.id, athleteModel.id,
-          int.parse(scoreController.text), commentController.text);
+          level.value, commentController.text);
       AthleteFeatures athleteFeatures = AthleteFeatures(athleteModel);
       athleteFeatures.addProgress(progressDto).then((value) {
         Get.back<bool>(result: true);

@@ -23,6 +23,11 @@ class AthleteDetailsPageView extends StatelessWidget {
               tooltip: 'List progress',
               onPressed: controller.listProgress,
             ),
+            IconButton(
+              icon: const Icon(Icons.edit),
+              tooltip: 'Edit athlete',
+              onPressed: controller.editAthlete,
+            ),
           ],
         ),
         body: StatefulGetBuilder<AthleteDetailPageController>(

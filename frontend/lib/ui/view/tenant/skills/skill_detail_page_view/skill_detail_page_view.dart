@@ -21,12 +21,17 @@ class SkillDetailsPageView extends StatelessWidget {
       init: SkillDetailPageController(),
       builder: (controller) => TappScaffold(
         appBar: AppBar(
-          title: const Text('Athlete Details'),
+          title: const Text('Skill Details'),
           actions: [
             IconButton(
               icon: const Icon(Icons.list),
               tooltip: 'List progress',
               onPressed: controller.listProgress,
+            ),
+            IconButton(
+              icon: const Icon(Icons.edit),
+              tooltip: 'Edit skill',
+              onPressed: controller.editSkill,
             ),
           ],
         ),
