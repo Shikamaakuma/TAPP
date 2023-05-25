@@ -8,6 +8,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,6 +48,7 @@ public class AthleteController {
 		athleteRepository.updateAthlete(tenantID, athleteID, athlete.getFirstName(), athlete.getLastName(), athlete.getImageType(),athlete.getPicture());
 	}
 
+	@Transactional
 	@DeleteMapping("/{tenantID}/athletes/{athleteID}")
 	public void deleteAthlete(@PathVariable Long tenantID, @PathVariable Long athleteID){
 		Athlete athlete = athleteRepository.getReferenceById(athleteID);

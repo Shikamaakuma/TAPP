@@ -31,6 +31,13 @@ public class Tenant {
 		this.tenantName = tenantName;
 	}
 
+	public Tenant(Long tenantId, String tenantName, String imageType, byte[] picture) {
+		this.tenantId = tenantId;
+		this.tenantName = tenantName;
+		this.imageType = imageType;
+		this.picture = picture;
+	}
+
 	public Long getTenantId() {
 		return tenantId;
 	}
@@ -45,6 +52,14 @@ public class Tenant {
 
 	public void setTenantName(String tenantName) {
 		this.tenantName = tenantName;
+	}
+
+	public String getImageType() {
+		return imageType;
+	}
+
+	public void setImageType(String imageType) {
+		this.imageType = imageType;
 	}
 
 	public byte[] getPicture() {

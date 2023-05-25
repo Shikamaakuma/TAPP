@@ -23,5 +23,10 @@ public class TenantController {
 	public Tenant addTenant(@RequestBody Tenant tenant) {
 		return tenantRepository.save(tenant);
 	}
+
+	@PostMapping("/{tenantId}/tenant")
+	public  void updateTenant(@PathVariable long tenantId, @RequestBody Tenant tenant){
+		tenantRepository.updateTenant(tenantId,tenant.getTenantName(),tenant.getImageType(), tenant.getPicture());
+	};
 }
 

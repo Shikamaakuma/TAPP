@@ -1,6 +1,7 @@
 package tapp.org.tapp.Controllers;
 
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,6 +42,7 @@ public class SkillController {
 		return saved;
 	}
 
+	@Transactional
 	@DeleteMapping("/{tenantID}/skills/{skillID}")
 	public void deleteSkillFromTenant(@PathVariable Long tenantID, @PathVariable Long skillID){
 		tenantSkillRepository.delete(new TenantSkill(skillID,tenantID));
@@ -68,6 +70,7 @@ public class SkillController {
 		skillRepository.updateSkill(skillID,skill.getSkillDescription(),skill.getSkillLevel(),skill.getSkillName(),skill.getImageType(), skill.getPicture());
 	}
 
+	@Transactional
 	@DeleteMapping("/skills/{skillID}")
 	public void deleteSkill(@PathVariable Long skillID){
 		skillRepository.deleteById(skillID);
