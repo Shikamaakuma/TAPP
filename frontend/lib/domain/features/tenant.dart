@@ -143,4 +143,16 @@ class TenantFeatures {
     userService.selectedTenant = TenantModel.fromDto(tenantDto);
     await loadTenant(Get.find<UserService>().selectedTenant!);
   }
+
+  addProgress(ProgressDto progressDto) {
+    SkillModel skillModel = tenant.skills.firstWhere((element) => element.id == progressDto.skillId);
+    AthleteModel athleteModel = tenant.athletes.firstWhere((element) => element.id == progressDto.athleteId);
+    List<ProgressModel> athleteProgress =  skillModel.athleteProgress[athleteModel] ?? [];
+    athleteProgress.add(ProgressModel(progressDto.progressId, progressDto.score, progressDto.comment));
+    skillModel.athleteProgress[athleteModel] = athleteProgress;
+    List<ProgressModel> skillProgress =  athleteModel.skillProgress[skillModel] ?? [];
+    skillProgress.add(ProgressModel(progressDto.progressId, progressDto.score, progressDto.comment));
+    athleteModel.skillProgress[skillModel] = skillProgress;
+    Get.find<UserService>().update();
+  }
 }

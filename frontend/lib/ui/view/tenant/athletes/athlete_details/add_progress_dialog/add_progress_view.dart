@@ -40,7 +40,7 @@ class AddProgressView extends StatelessWidget {
                   selectedColor: AppTheme.primaryColor,
                   unselectedColor: Colors.grey,
                   difficulty: controller.level.value,
-                  size: 40,
+                  size: 25,
                   onSelected: (level) => controller.level.value = level,),),
               const SizedBox(height: 10,),
               TextFormField(
