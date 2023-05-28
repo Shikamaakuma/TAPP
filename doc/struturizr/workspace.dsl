@@ -12,7 +12,7 @@ workspace {
 
     model {
         user_athlete = person "Athele" {
-        	tags PERSON ROLE
+        	tags PERSON ROLE PLANNED
         }
         user_coach = person "Coach" {
         	tags PERSON ROLE
@@ -36,6 +36,19 @@ workspace {
         		
         		user_athlete -> this "Uses"
         		user_coach -> this "Uses"
+
+        		view_component  = component "View" {
+
+        		}
+
+        		controller_component = component "Controller" {
+
+        		}
+
+        		
+
+        		user_athlete -> view_component "Uses"
+        		user_coach -> view_component "Uses"
         	}
         	
         	api = container "API" {
@@ -92,6 +105,11 @@ workspace {
 			color #ffffff
 			background #0011bb
 		}
+
+		element PLANNED {
+		    color red
+		}
+
         }
         
     }
