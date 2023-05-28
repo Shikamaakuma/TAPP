@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// Default [Scaffold] for the application.
+/// Sets max width to 700.
 class TappScaffold extends StatelessWidget {
   final AppBar? appBar;
   final Widget body;

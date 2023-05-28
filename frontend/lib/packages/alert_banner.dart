@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 
+/// Default alert banner
 class AlertBanner extends StatelessWidget {
 
   final Color backgroundColor;
@@ -14,7 +15,7 @@ class AlertBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(4),
+      padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(4)),
         color: backgroundColor

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// An [Icon] adjusted to the available vertical size
 class AutoSizedIcon extends StatelessWidget {
   final IconData iconData;
   final Color backgroundColor;

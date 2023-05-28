@@ -8,7 +8,6 @@
 
 workspace {
 
-    !identifiers hierarchical
 
     model {
         user_athlete = person "Athele" {
@@ -45,7 +44,27 @@ workspace {
 
         		}
 
-        		
+        		service_component = component "Service" {
+
+        		}
+
+        		api_provider_component = component "Api Provider" {
+
+        		}
+
+        		local_storage_provider_component = component "Local Storage Provider" {
+
+        		}
+
+        		local_storage_component = component "Local Storage" {
+        		    tags DATABASE
+        		}
+
+        		view_component -> controller_component "Sends user actions and listens for updates"
+				controller_component -> service_component ""
+				service_component -> api_provider_component
+				service_component -> local_storage_provider_component
+				local_storage_provider_component -> local_storage_component
 
         		user_athlete -> view_component "Uses"
         		user_coach -> view_component "Uses"
@@ -56,7 +75,7 @@ workspace {
         		technology "Java and Spring Boot"
         		description "Provides a REST API"
         		
-        		web_app -> this "Uses"
+        		api_provider_component -> this "Uses"
         		this -> emailSystem "Sends e-mails using"
         	}
         	
@@ -82,6 +101,10 @@ workspace {
         container softwareSystem "Containers_All" {
             include *
         }
+
+		component web_app "Components" {
+			include *
+		}
         
         styles {
 		element PERSON {
@@ -107,7 +130,7 @@ workspace {
 		}
 
 		element PLANNED {
-		    color red
+		    background red
 		}
 
         }

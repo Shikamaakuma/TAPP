@@ -20,6 +20,7 @@ class SkillModel extends IdentifiedModel{
     return SkillModel(dto.id, dto.name, dto.description, dto.level, dto.image);
   }
 
+  /// Average skill level over all skill with a progress
   double? get averageSkill => currentProgress.values.isNotEmpty
       ? currentProgress.values.map((e) => e.score).reduce((value, element) => value + element) / currentProgress.values.length
       : null;

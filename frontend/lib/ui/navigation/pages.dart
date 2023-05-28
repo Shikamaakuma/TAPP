@@ -20,12 +20,13 @@ import '../view/tenant_list/tenant_list_view.dart';
 import 'bindings.dart';
 import 'middleware/auth_guard.dart';
 
+/// Contains all routes of the application
 List<GetPage> get pages => [
-      GetPage(name: '/start', page: () => StartScreen()),
-      GetPage(name: '/tenants', page: () => TenantListScreen(), children: [
+      GetPage(name: '/start', page: () => const StartScreen()),
+      GetPage(name: '/tenants', page: () => const TenantListScreen(), children: [
         GetPage(
             name: '/add',
-            page: () => EditTenantScreen(
+            page: () => const EditTenantScreen(
                   edit: false,
                 ),
             middlewares: [AuthGuard()])
@@ -34,7 +35,7 @@ List<GetPage> get pages => [
       ]),
       GetPage(
           name: '/tenant/:tenantId',
-          page: () => TenantScreen(),
+          page: () => const TenantScreen(),
           binding: TenantScreenBinding(),
           middlewares: [
             AuthGuard()
@@ -42,7 +43,7 @@ List<GetPage> get pages => [
           children: [
             GetPage(
                 name: '/edit',
-                page: () => EditTenantScreen(
+                page: () => const EditTenantScreen(
                       edit: true,
                     ),
                 middlewares: [AuthGuard()]),
