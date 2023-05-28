@@ -1,6 +1,7 @@
 import 'package:frontend/data/dto/tenant_dto.dart';
 import 'package:frontend/data/dto/user_dto.dart';
 
+/// Api representation of a Login response
 class LoginResponseDto {
   final String token;
   final UserDto user;
@@ -21,6 +22,7 @@ class LoginRequestDto {
   };
 }
 
+/// Represents the data sent to the api to register
 class RegisterRequestDto {
   String email;
   String password;
