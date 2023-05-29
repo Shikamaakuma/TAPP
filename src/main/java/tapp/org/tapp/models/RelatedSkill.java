@@ -1,10 +1,21 @@
-package tapp.org.tapp.Models;
+package tapp.org.tapp.models;
 
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 import java.util.Objects;
 
+/**
+ * Class for model class RelatedSkill.
+ * For one specific skill there can be two types of related skills: Required and advanced.
+ * Required skills are a requirement for this specific skill. Advanced skills can be trained once
+ * this specific has been mastered.
+ */
 
 @Entity
 @Table(name = "relatedSkills")

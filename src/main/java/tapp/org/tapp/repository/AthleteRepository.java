@@ -1,15 +1,14 @@
-package tapp.org.tapp.Repository;
+package tapp.org.tapp.repository;
 
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import tapp.org.tapp.Models.Athlete;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import tapp.org.tapp.models.Athlete;
 
-import java.util.Base64;
 import java.util.List;
 
 

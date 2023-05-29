@@ -1,11 +1,16 @@
-package tapp.org.tapp.Controllers;
+package tapp.org.tapp.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import tapp.org.tapp.Models.RelatedSkill;
-import tapp.org.tapp.Repository.RelatedSkillRepository;
-import tapp.org.tapp.Repository.RelatedSkillsId;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import tapp.org.tapp.models.RelatedSkill;
+import tapp.org.tapp.repository.RelatedSkillRepository;
+import tapp.org.tapp.repository.RelatedSkillsId;
 
 import java.util.List;
 
@@ -29,12 +34,5 @@ public class RelatedSkillController {
 	public List<RelatedSkillsId> findAllrequiredskillByskillid(@PathVariable Long skillId){
 			return relatedSkillRepository.findAllrequiredskillByskillId(skillId);
 	}
-
-	@GetMapping("/required_whole/{skillId}")
-	public List<RelatedSkillsId> findAllrequiredskillByskillid2(@PathVariable Long skillId){
-		return relatedSkillRepository.findAllrequiredskillByskillId(skillId);
-	}
-
-
 }
 

@@ -1,4 +1,4 @@
-package tapp.org.tapp.Repository;
+package tapp.org.tapp.repository;
 
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.domain.Specification;
@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import tapp.org.tapp.Models.Skill;
+import tapp.org.tapp.models.Skill;
 
 import java.util.List;
 
