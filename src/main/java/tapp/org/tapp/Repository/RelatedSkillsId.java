@@ -1,4 +1,4 @@
-package tapp.org.tapp.repository;
+package tapp.org.tapp.Repository;
 
 public interface RelatedSkillsId {
 	long getSkillId();

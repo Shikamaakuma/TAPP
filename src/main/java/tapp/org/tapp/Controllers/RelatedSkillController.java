@@ -1,4 +1,4 @@
-package tapp.org.tapp.controllers;
+package tapp.org.tapp.Controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tapp.org.tapp.models.RelatedSkill;
-import tapp.org.tapp.repository.RelatedSkillRepository;
-import tapp.org.tapp.repository.RelatedSkillsId;
+import tapp.org.tapp.Models.RelatedSkill;
+import tapp.org.tapp.Repository.RelatedSkillRepository;
+import tapp.org.tapp.Repository.RelatedSkillsId;
 
 import java.util.List;
 

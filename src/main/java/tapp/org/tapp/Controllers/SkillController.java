@@ -1,4 +1,4 @@
-package tapp.org.tapp.controllers;
+package tapp.org.tapp.Controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tapp.org.tapp.models.Skill;
-import tapp.org.tapp.models.TenantSkill;
-import tapp.org.tapp.repository.SkillRepository;
-import tapp.org.tapp.repository.TenantSkillRepository;
+import tapp.org.tapp.Models.Skill;
+import tapp.org.tapp.Models.TenantSkill;
+import tapp.org.tapp.Repository.SkillRepository;
+import tapp.org.tapp.Repository.TenantSkillRepository;
 
 import java.util.List;
 
 import static org.springframework.data.jpa.domain.Specification.where;
-import static tapp.org.tapp.repository.SkillRepository.skillDescriptionContains;
-import static tapp.org.tapp.repository.SkillRepository.skillNameContains;
+import static tapp.org.tapp.Repository.SkillRepository.skillDescriptionContains;
+import static tapp.org.tapp.Repository.SkillRepository.skillNameContains;
 
 /**
  * Rest Controller for the class Skill.

@@ -1,4 +1,4 @@
-package tapp.org.tapp.models;
+package tapp.org.tapp.Models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

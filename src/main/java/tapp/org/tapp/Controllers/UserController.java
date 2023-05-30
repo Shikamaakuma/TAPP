@@ -1,4 +1,4 @@
-package tapp.org.tapp.controllers;
+package tapp.org.tapp.Controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tapp.org.tapp.models.User;
-import tapp.org.tapp.repository.UserRepository;
+import tapp.org.tapp.Models.User;
+import tapp.org.tapp.Repository.UserRepository;
 
 import java.util.List;
 

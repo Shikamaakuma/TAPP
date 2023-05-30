@@ -1,4 +1,4 @@
-package tapp.org.tapp.controllers;
+package tapp.org.tapp.Controllers;
 
 
 import jakarta.persistence.EntityManager;
@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tapp.org.tapp.models.Athlete;
-import tapp.org.tapp.repository.AthleteRepository;
+import tapp.org.tapp.Models.Athlete;
+import tapp.org.tapp.Repository.AthleteRepository;
 
 import java.util.List;
 
 import static org.springframework.data.jpa.domain.Specification.where;
-import static tapp.org.tapp.repository.AthleteRepository.isTenantID;
+import static tapp.org.tapp.Repository.AthleteRepository.isTenantID;
 
 @RestController
 @RequestMapping("/api/v1/")

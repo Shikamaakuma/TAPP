@@ -1,4 +1,4 @@
-package tapp.org.tapp.controllers;
+package tapp.org.tapp.Controllers;
 
 
 import jakarta.transaction.Transactional;
@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tapp.org.tapp.models.Athlete;
-import tapp.org.tapp.models.Progress;
-import tapp.org.tapp.repository.AthleteRepository;
-import tapp.org.tapp.repository.ProgressRepository;
+import tapp.org.tapp.Models.Athlete;
+import tapp.org.tapp.Models.Progress;
+import tapp.org.tapp.Repository.AthleteRepository;
+import tapp.org.tapp.Repository.ProgressRepository;
 
 import java.util.List;
 
