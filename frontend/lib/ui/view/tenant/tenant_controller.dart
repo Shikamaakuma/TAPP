@@ -83,7 +83,6 @@ class TenantController extends StatefulGetxController {
   void onAthleteDismissed(AthleteModel athleteModel) {
     final features = AthleteFeatures(athleteModel);
     features.deleteAthlete();
-    tenantDetailModel.athletes.remove(athleteModel);
     update();
   }
 

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import 'stateful_controller.dart';
 
+/// Stateful implementation of a [GetBuilder]
 class StatefulGetBuilder<T extends StatefulGetxController> extends StatefulWidget {
 
   final Widget Function(T  controller) success;

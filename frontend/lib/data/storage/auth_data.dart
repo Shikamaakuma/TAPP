@@ -17,7 +17,6 @@ class AuthDataSecureStorage with AuthDataStorage {
     if (token != null){
       return token;
     } else {
-      // TODO: Use expection
       throw Exception('Not logged in');
     }
   }

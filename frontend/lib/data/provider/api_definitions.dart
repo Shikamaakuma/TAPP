@@ -7,8 +7,12 @@ import '../dto/skill_dto.dart';
 import '../dto/tenant_dto.dart';
 import '../dto/user_dto.dart';
 
+/// Interface of the authencation api
 abstract class AuthProviderDef {
+  /// Performs a login
   Future<LoginResponseDto> login(LoginRequestDto loginRequest);
+
+  /// Performs a logout
   Future<void> logout();
 }
 
@@ -16,10 +20,16 @@ abstract class UserProviderDef {
   Future<List<UserDto>> listUsers();
 }
 
-
+/// Interface of the athlete api
 abstract class AthleteProviderDef {
+
+  /// List all athletes of a tenant
   Future<List<AthleteDto>> tenantAthletes(int tenantId);
+
+  /// Add a new athlete
   Future<void> addAthlete(int tenantId, AthleteDto athleteDto);
+
+  /// Delete an athlete
   Future<void> deleteAthlete(int tenantId, int athleteId);
 }
 

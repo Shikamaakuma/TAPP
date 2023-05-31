@@ -25,6 +25,7 @@ class SkillModel extends IdentifiedModel{
       ? currentProgress.values.map((e) => e.score).reduce((value, element) => value + element) / currentProgress.values.length
       : null;
 
+
   Map<AthleteModel, ProgressModel> get currentProgress => {
     for (MapEntry<AthleteModel, List<ProgressModel>> entry
     in athleteProgress.entries)

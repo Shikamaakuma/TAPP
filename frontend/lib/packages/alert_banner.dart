@@ -1,8 +1,6 @@
-
-
 import 'package:flutter/material.dart';
 
-/// Default alert banner
+/// Bootstrap like alert banner
 class AlertBanner extends StatelessWidget {
 
   final Color backgroundColor;
@@ -17,14 +15,14 @@ class AlertBanner extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(4)),
+        borderRadius: const BorderRadius.all(Radius.circular(4)),
         color: backgroundColor
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Icon(iconData, color: textColor,),
-          SizedBox(width: 16,),
+          const SizedBox(width: 16,),
           Text(text, textScaleFactor: 1.2, style: TextStyle(color: textColor),)
         ],
       ),

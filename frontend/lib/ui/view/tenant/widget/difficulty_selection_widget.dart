@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/theme.dart';
 
 class DifficultySelectionWidget extends StatelessWidget {
   final int difficulty;
