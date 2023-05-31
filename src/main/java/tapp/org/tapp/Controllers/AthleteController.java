@@ -18,6 +18,7 @@ import tapp.org.tapp.Models.Athlete;
 import tapp.org.tapp.Repository.AthleteRepository;
 
 import java.util.List;
+import java.util.Objects;
 
 import static org.springframework.data.jpa.domain.Specification.where;
 import static tapp.org.tapp.Repository.AthleteRepository.isTenantID;
@@ -67,14 +68,14 @@ public class AthleteController {
 
 	/**
 	 * Delete an athlete with the given athleteID and tenantID
-	 * @param tenantID has to be corrsponding to athlete, otherwise nothing happens
+	 * @param tenantID has to be corresponding to athlete, otherwise nothing happens
 	 * @param athleteID
 	 */
 
 	@DeleteMapping("/{tenantID}/athletes/{athleteID}")
 	public void deleteAthlete(@PathVariable Long tenantID, @PathVariable Long athleteID){
 		Athlete athlete = athleteRepository.getReferenceById(athleteID);
-		if(athlete.getTenant() != tenantID) {
+		if(!Objects.equals(athlete.getTenant(), tenantID)) {
 			return;
 		}
 		athleteRepository.deleteById(athleteID);
@@ -93,7 +94,7 @@ public class AthleteController {
 	/**
 	 * Searches athletes with the first or last name containing the search term and the correct tenant ID
 	 * @param tenantID
-	 * @param searchterm
+	 * @param searchterm String
 	 * @return List of athletes with given tenantId and searchterm
 	 */
 	@GetMapping("/{tenantID}/athletes/{searchterm}")
