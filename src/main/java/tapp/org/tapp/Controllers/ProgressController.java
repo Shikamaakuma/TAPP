@@ -78,7 +78,10 @@ public class ProgressController {
 		List<Progress> progressOfTenant = null;
 		if (!athletes.isEmpty()) {
 			for (Athlete athlete : athletes) {
-				progressOfTenant.add(progressRepository.findFirstByAthleteIdOrderByCreatedAtDesc(athlete.getId()));
+				Progress progressOfAthlete = progressRepository.findFirstByAthleteIdOrderByCreatedAtDesc(athlete.getId());
+				if(progressOfAthlete != null) {
+					progressOfTenant.add(progressOfAthlete);
+				}
 			}
 		}
 		return progressOfTenant;
