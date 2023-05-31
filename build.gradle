@@ -59,6 +59,7 @@ tasks.register('flutterBuild') {
 
         exec {
             workingDir flutterDir.toString()
+            commandLine 'flutter',  'clean'
             commandLine 'flutter', 'build', 'web'
         }
     }

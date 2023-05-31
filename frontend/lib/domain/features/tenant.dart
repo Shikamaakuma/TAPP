@@ -144,7 +144,8 @@ class TenantFeatures {
     await loadTenant(Get.find<UserService>().selectedTenant!);
   }
 
-  addProgress(ProgressDto progressDto) {
+
+  Future<void> addProgress(ProgressDto progressDto) async {
     SkillModel skillModel = tenant.skills.firstWhere((element) => element.id == progressDto.skillId);
     AthleteModel athleteModel = tenant.athletes.firstWhere((element) => element.id == progressDto.athleteId);
     List<ProgressModel> athleteProgress =  skillModel.athleteProgress[athleteModel] ?? [];

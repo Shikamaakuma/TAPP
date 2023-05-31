@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+/// Custom ScrollBehaviour to enable swiping by mouse and trackpad
 class AppScrollBehavior extends MaterialScrollBehavior {
   @override
   Set<PointerDeviceKind> get dragDevices => {

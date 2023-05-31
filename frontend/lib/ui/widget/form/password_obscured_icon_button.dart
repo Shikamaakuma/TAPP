@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/ui/widget/form/password_input_field.dart';
 
+/// [IconButton] for [PasswordInputField]
 class PasswordObscuredIconButton extends StatelessWidget {
   const PasswordObscuredIconButton({
     required this.obscured,

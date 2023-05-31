@@ -24,7 +24,7 @@ class AuthScaffold extends StatelessWidget {
             constraints: const BoxConstraints(maxWidth: 500),
             child: Column(
               children: [
-                const Logo(),
+                const TappLogo(),
                 child,
               ],
             ),

@@ -81,7 +81,6 @@ class UserService extends GetxController {
     return tenantDetailModel.value!.skills.firstWhere((element) => element.id == skillId);
   }
 
-
   List<AthleteModel> get athletesSorted => tenantDetailModel.value!.athletes;
   set athletesSorted(List<AthleteModel> athletes) {
     userDataStorage.saveAthleteSortOrder(selectedTenant!.id, [for (AthleteModel a in athletes) a.id]);

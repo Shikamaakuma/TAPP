@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
+/// Adds a loading shimmer to the [child] is [loading] is true
 class LoadingShimmer extends StatelessWidget {
 
   final bool isLoading;
@@ -24,12 +25,22 @@ class LoadingShimmer extends StatelessWidget {
 
 }
 
+
+/// Multi line loading shimmer text
 class ShimmerTextMultiLine extends StatelessWidget {
   final double width;
   final double height;
+
+  /// Width of the last line
   final double? lastWidth;
+
+  /// Height of the last line
   final double? lastHeight;
+
+  /// Distance between the lines
   final double lineSeparation;
+
+  /// Number of lines must be at least one
   final int numberOfLines;
   final CrossAxisAlignment crossAxisAlignment;
 
@@ -41,7 +52,7 @@ class ShimmerTextMultiLine extends StatelessWidget {
     this.lastHeight,
     this.lineSeparation = 12,
     this.crossAxisAlignment = CrossAxisAlignment.start,
-    this.numberOfLines = 1});
+    this.numberOfLines = 1}) : assert(numberOfLines > 0);
 
 
 
@@ -65,7 +76,7 @@ class ShimmerTextMultiLine extends StatelessWidget {
 
 }
 
-
+/// Single line shimmer
 class ShimmerText extends StatelessWidget {
 
   final double width;

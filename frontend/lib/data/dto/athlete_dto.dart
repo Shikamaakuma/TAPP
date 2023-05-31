@@ -2,6 +2,7 @@ import 'package:frontend/data/dto/base_dto.dart';
 
 import 'image_dto.dart';
 
+/// Represents the api data of an athlete
 class AthleteDto extends IdentifiedDTO {
   final String firstName;
   final String lastName;

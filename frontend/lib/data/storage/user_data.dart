@@ -10,8 +10,8 @@ class UserDataSharedPreferences implements UserDataStorage{
   static const _userDataKey = 'user_data';
   static const _tenantDataKey = 'tenant_data';
   static const _selectedTenantKey = 'selected_tenant';
-  static const _athlete_sort_order = 'athlete_sort_order';
-  static const _skill_sort_order = 'skill_sort_order';
+  static const _athleteSortOrder = 'athlete_sort_order';
+  static const _skillSortOrder = 'skill_sort_order';
 
   @override
   Future<void> delete() async {
@@ -85,7 +85,7 @@ class UserDataSharedPreferences implements UserDataStorage{
   @override
   Future<List<int>?> loadAthleteSortOrder(int tenantId) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final ids = prefs.getStringList('$_athlete_sort_order$tenantId');
+    final ids = prefs.getStringList('$_athleteSortOrder$tenantId');
     if (ids == null) {
       return null;
     } else {
@@ -96,7 +96,7 @@ class UserDataSharedPreferences implements UserDataStorage{
   @override
   Future<List<int>?> loadSkillSortOrder(int tenantId) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final ids = prefs.getStringList('$_skill_sort_order$tenantId');
+    final ids = prefs.getStringList('$_skillSortOrder$tenantId');
     if (ids == null) {
       return null;
     } else {
@@ -107,13 +107,13 @@ class UserDataSharedPreferences implements UserDataStorage{
   @override
   Future<void> saveAthleteSortOrder(int tenantId, List<int> athleteIds) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setStringList('$_athlete_sort_order$tenantId', [for(int i in athleteIds) i.toString()]);
+    prefs.setStringList('$_athleteSortOrder$tenantId', [for(int i in athleteIds) i.toString()]);
   }
 
   @override
   Future<void> saveSkillSortOrder(int tenantId, List<int> skillIds) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setStringList('$_skill_sort_order$tenantId', [for(int i in skillIds) i.toString()]);
+    prefs.setStringList('$_skillSortOrder$tenantId', [for(int i in skillIds) i.toString()]);
   }
   
 }

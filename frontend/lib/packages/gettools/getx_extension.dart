@@ -1,5 +1,3 @@
-
-
 import 'package:get/get.dart';
 
 typedef ItemCreator<S> = S Function();
