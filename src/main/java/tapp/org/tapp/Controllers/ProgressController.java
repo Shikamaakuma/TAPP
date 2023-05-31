@@ -14,6 +14,7 @@ import tapp.org.tapp.Models.Progress;
 import tapp.org.tapp.Repository.AthleteRepository;
 import tapp.org.tapp.Repository.ProgressRepository;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @RestController
@@ -69,21 +70,22 @@ public class ProgressController {
 	/**
 	 * Returns the newest progress entry for each athlete of given tenant
 	 * @param tenantId
-	 * @return List of progresses (One per athelete)
+	 * @return List of progresses (One per athlete)
 	 */
 	@Transactional
 	@GetMapping("/{tenantId}/progress/")
 	public List<Progress> findProgressByTenant(@PathVariable Long tenantId){
 		List<Athlete> athletes = athleteRepository.findAthletesByTenantID(tenantId);
-		List<Progress> progressOfTenant = null;
+		List<Progress> progressOfTenant = new LinkedList<>();
 		if (!athletes.isEmpty()) {
 			for (Athlete athlete : athletes) {
 				Progress progressOfAthlete = progressRepository.findFirstByAthleteIdOrderByCreatedAtDesc(athlete.getId());
-				if(progressOfAthlete != null) {
+				if (progressOfAthlete != null) {
 					progressOfTenant.add(progressOfAthlete);
 				}
 			}
 		}
+
 		return progressOfTenant;
 	}
 }
