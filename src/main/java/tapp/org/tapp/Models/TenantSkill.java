@@ -1,8 +1,16 @@
 package tapp.org.tapp.Models;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
 
 import java.util.Objects;
+
+/**
+ * Class for model class TenantSkill. Assigns a skill to a tenant.
+ */
 
 @Entity
 @Table(name = "tenantskill")
@@ -46,6 +54,14 @@ public class TenantSkill {
 	@Override
 	public int hashCode() {
 		return Objects.hash(skillId, tenantId);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		TenantSkill that = (TenantSkill) o;
+		return skillId == that.skillId && tenantId == that.tenantId;
 	}
 
 	@Override

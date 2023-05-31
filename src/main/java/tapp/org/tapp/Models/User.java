@@ -1,7 +1,17 @@
 package tapp.org.tapp.Models;
 
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+/**
+ * Class for model class User, which would be used for authentication of the app user.
+*/
+
 
 @Entity
 @Table(name = "users")

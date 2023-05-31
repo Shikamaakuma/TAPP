@@ -1,10 +1,20 @@
 package tapp.org.tapp.Models;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
+import jakarta.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
 import java.util.Objects;
+
+/**
+ * Class for model class progress
+ */
 
 
 @Entity
@@ -53,11 +63,11 @@ public class Progress {
 		this.progressId = progressId;
 	}
 
-	public Date getCreated_at() {
+	public Date getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreated_at(Date created) {
+	public void setCreatedAt(Date created) {
 		this.createdAt = created;
 	}
 
