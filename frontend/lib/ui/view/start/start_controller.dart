@@ -9,7 +9,7 @@ class StartController extends GetxController {
 
   AuthService get _authService => Get.find();
   late DateTime _startTime;
-  int _splashScreenMinMs = 2000;
+  final int _splashScreenMinMs = 2000;
 
   @override
   void onReady() {

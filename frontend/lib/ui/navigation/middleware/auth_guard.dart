@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../domain/service/auth_service.dart';
 
+/// Checks if a user is logged in.
 class AuthGuard extends GetMiddleware {
 
   @override

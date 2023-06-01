@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'TAPP.org'
-version = '0.0.0.2-SNAPSHOT'
+version = '1.0.0'
 sourceCompatibility = '17'
 
 repositories {
@@ -59,6 +59,7 @@ tasks.register('flutterBuild') {
 
         exec {
             workingDir flutterDir.toString()
+            commandLine 'flutter',  'clean'
             commandLine 'flutter', 'build', 'web'
         }
     }
@@ -73,6 +74,6 @@ tasks.register('flutterCopy', Copy) {
 
 tasks.register('fullBuild') {
     dependsOn(flutterCopy)
-    dependsOn(build)
+    finalizedBy(build)
 }
 

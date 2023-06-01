@@ -40,8 +40,16 @@ class TenantController extends StatefulGetxController {
 
     if (_userService.tenantDetailModel.value != null) {
       setSuccess();
+      TenantFeatures.loadTenant(tenantModel).then((value) {
+        setLoading();
+        setSuccess();
+      }).onError((error, stackTrace) {
+        setError(error.toString());
+        showErrorSnackBar('Error', error.toString());
+      });
     } else {
       TenantFeatures.loadTenant(tenantModel).then((value) {
+        setLoading();
         setSuccess();
       }).onError((error, stackTrace) {
         setError(error.toString());
@@ -75,7 +83,6 @@ class TenantController extends StatefulGetxController {
   void onAthleteDismissed(AthleteModel athleteModel) {
     final features = AthleteFeatures(athleteModel);
     features.deleteAthlete();
-    tenantDetailModel.athletes.remove(athleteModel);
     update();
   }
 
@@ -158,5 +165,14 @@ class TenantController extends StatefulGetxController {
   void onSortSkillsClicked() {
     skillOrderMode.value = !skillOrderMode.value;
     update();
+  }
+
+  void editTenant() {
+    Get.toNamed('/tenant/${tenantModel.id}/edit', arguments: tenantDetailModel)?.then(
+            (value) {
+              setLoading();
+              setSuccess();
+            }
+    );
   }
 }

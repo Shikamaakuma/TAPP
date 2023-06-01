@@ -36,7 +36,7 @@ class AddSkillView extends StatelessWidget {
                   labelText: 'Name',
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               TextFormField(
@@ -49,7 +49,7 @@ class AddSkillView extends StatelessWidget {
                   labelText: 'Description',
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               TextFormField(

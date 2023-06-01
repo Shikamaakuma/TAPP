@@ -1,8 +1,18 @@
 package tapp.org.tapp.Models;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
+import jakarta.persistence.Table;
+
 import java.util.Objects;
 
-import jakarta.persistence.*;
+/**
+ * Class for model class Athlete
+ */
 
 @Entity
 @Table(name = "athletes")
@@ -20,16 +30,26 @@ public class Athlete {
 	@Column(name="tenant")
 	private Long tenantID;
 
+	@Lob
+	@Column(name="picture")
+	private byte[] picture;
 
+	@Column(name="imagetype")
+	private String imageType;
 
 	public Athlete() {
 	}
 
 	public Athlete(String firstName, String lastName, Long tenantID) {
+		 this(firstName,lastName,tenantID,null,"");
+	}
+
+	public Athlete (String firstName, String lastName, Long tenantID, byte[] picture, String imageType) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.tenantID = tenantID;
-
+		this.picture = picture;
+		this.imageType = imageType;
 	}
 
 	public Long getId() {
@@ -48,6 +68,13 @@ public class Athlete {
 		return tenantID;
 	}
 
+	public byte[] getPicture() {
+		return picture;
+	}
+
+	public String getImageType() {
+		return imageType;
+	}
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -59,6 +86,14 @@ public class Athlete {
 
 	public void setTenantID(Long tenantID) {
 		this.tenantID = tenantID;
+	}
+
+	public void setPicture(byte[] picture) {
+		this.picture = picture;
+	}
+
+	public void setImageType(String imageType) {
+		this.imageType = imageType;
 	}
 
 	@Override

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'input_field.dart';
 import 'password_obscured_icon_button.dart';
 
+/// Tapp style [InputField] for passwords
 class PasswordInputField extends StatefulWidget {
   const PasswordInputField({
     this.controller,

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+/// Main theme of the application
 class AppTheme {
 
   static MaterialColor primaryColor = MaterialColorGenerator.from(const Color.fromRGBO(215, 35, 35, 1.0));
@@ -30,7 +31,8 @@ class AppTheme {
 
 }
 
-
+/// Generate a Matrial color from a color
+/// From https://mixable.blog/flutter-how-to-create-a-better-materialcolor-from-color/
 class MaterialColorGenerator{
   static MaterialColor from(Color color) {
     return MaterialColor(color.value, {

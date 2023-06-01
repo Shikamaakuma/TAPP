@@ -1,3 +1,6 @@
+
+/// Validates the [value] to be an valid email address.
+/// Regex code is from https://stackoverflow.com/questions/201323/how-can-i-validate-an-email-address-using-a-regular-expression
 String? emailValidator(String? value) {
   String? _msg;
   RegExp regex = RegExp(
@@ -10,31 +13,7 @@ String? emailValidator(String? value) {
   return _msg;
 }
 
-String? passWordValidator(String? value) {
-  if (value!.isEmpty) return 'Please enter some text';
-
-  bool matchPolicy = true;
-
-  if (value.length < 6) matchPolicy = false;
-
-  RegExp upperCaseRegexp = new RegExp(r'[A-Z]');
-  if (!upperCaseRegexp.hasMatch(value)) matchPolicy = false;
-
-  RegExp lowerCaseRegexp = new RegExp(r'[a-z]');
-  if (!lowerCaseRegexp.hasMatch(value)) matchPolicy = false;
-
-  RegExp digitRegexp = new RegExp(r'\d');
-  if (!digitRegexp.hasMatch(value)) matchPolicy = false;
-
-  RegExp symbolRegexp = new RegExp(r'\W');
-  if (!symbolRegexp.hasMatch(value)) matchPolicy = false;
-
-  if (matchPolicy)
-    return null;
-  else
-    return 'Password does not match policy';
-}
-
+/// Checks if the input string is not null
 String? emptyValidator(String? value) {
   if (value!.isEmpty) {
     return 'Please enter some text';

@@ -1,9 +1,19 @@
 package tapp.org.tapp.Models;
 
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
+import jakarta.persistence.Table;
 
 import java.util.Objects;
+
+/**
+ * Class for model class Tenant. A tenant (or club) can have athletes and skills.
+ */
 
 @Entity
 @Table(name = "tenants")
@@ -14,6 +24,13 @@ public class Tenant {
 
 	@Column(name="tenantname")
 	private String tenantName;
+
+	@Lob
+	@Column(name="picture")
+	private byte[] picture;
+
+	@Column(name="imagetype")
+	private String imageType;
 
 
 	public Tenant() {
@@ -38,6 +55,14 @@ public class Tenant {
 
 	public void setTenantName(String tenantName) {
 		this.tenantName = tenantName;
+	}
+
+	public byte[] getPicture() {
+		return picture;
+	}
+
+	public void setPicture(byte[] picture) {
+		this.picture = picture;
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/domain/model/athlete.dart';
 import 'package:frontend/domain/model/skill.dart';
-import 'package:frontend/packages/gettools/statefull_getbuilder.dart';
 import 'package:frontend/ui/view/tenant/athletes/athlete_details/athlete_detail_controller.dart';
 import 'package:frontend/ui/view/tenant/widget/default_divider.dart';
 import 'package:frontend/ui/view/tenant/widget/difficulty_widget.dart';
@@ -28,10 +27,14 @@ class AthleteDetailScreen extends StatelessWidget {
                   color: Colors.grey,
                   shape: BoxShape.circle,
                 ),
-                child: AutoSizedIcon(
-                  Icons.person,
-                  color: Colors.white,
-                ),
+                child: controller.athleteModel.image != null
+                    ? CircleAvatar(
+                        backgroundImage: MemoryImage(athleteModel.image!.bytes),
+                      )
+                    : AutoSizedIcon(
+                        Icons.person,
+                        color: Colors.white,
+                      ),
               ),
             ),
             ListView.separated(

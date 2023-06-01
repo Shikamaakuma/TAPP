@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../util/validators.dart';
 import 'input_field.dart';
 
+/// Tapp style [InputField] for emails
 class EmailInputField extends StatelessWidget {
   const EmailInputField({
     this.controller,

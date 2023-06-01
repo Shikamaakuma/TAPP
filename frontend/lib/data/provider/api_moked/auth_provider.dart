@@ -9,7 +9,7 @@ class AuthProviderMocked implements AuthProviderDef {
     return LoginResponseDto('abc', UserDto(
       1, 'domi', 'domi@mail.ch'
     ), [
-      TenantDto(1, 'Kletterverein')
+      TenantDto(1, 'Kletterverein', null, null)
     ]);
   }
 

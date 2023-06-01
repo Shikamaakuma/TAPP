@@ -17,7 +17,7 @@ class AuthApiProvider extends ProviderBase implements AuthProviderDef  {
       1, username, loginRequest.email
     ), [
       for (dynamic json in response.body)
-        TenantDto(json['tenantId'], json['tenantName'])
+        TenantDto.fromJson(json)
     ]);
   }
 

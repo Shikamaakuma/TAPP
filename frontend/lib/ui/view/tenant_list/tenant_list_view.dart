@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/domain/model/tenant.dart';
 import 'package:frontend/ui/view/tenant_list/tenant_list_controller.dart';
+import 'package:frontend/ui/widget/placeholder/profile_image_placeholder.dart';
 import 'package:get/get.dart';
 
 import '../../../packages/gettools/statefull_getbuilder.dart';
@@ -10,12 +11,14 @@ class TenantListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return GetBuilder<SelectTenantController>(
+      init: SelectTenantController(),
+      builder: (controller) => Scaffold(
       appBar: AppBar(
         title: const Text('Select Tenant'),
       ),
       body: StatefulGetBuilder<SelectTenantController>(
-        init: SelectTenantController(),
+
         success: (controller) => ListView.builder(
             itemCount: controller.tenants.length,
             itemBuilder: (context, index) => TenantListTile(
@@ -25,7 +28,11 @@ class TenantListScreen extends StatelessWidget {
           child: CircularProgressIndicator(),
         ),
       ),
-    );
+      floatingActionButton: FloatingActionButton(
+        onPressed: controller.addTenantPressed,
+        child: const Icon(Icons.add),
+      ),
+    ),);
   }
 }
 
@@ -50,6 +57,9 @@ class TenantListTile extends StatelessWidget {
             color: Colors.black,
             shape: BoxShape.circle,
           ),
+          child: tenantModel.image != null ?
+          CircleAvatar( backgroundImage: MemoryImage(tenantModel.image!.bytes)) :
+          ProfileImagePlaceholder(Icons.cases_outlined),
         ),
         title: Text(tenantModel.name),
       ),),);

@@ -9,9 +9,5 @@ import java.util.List;
 
 @Repository
 public interface RelatedSkillRepository extends JpaRepository<RelatedSkill, Long> {
-	//List<RelatedSkill> findAllrequiredskillByskillId(long skillId);
 	List<RelatedSkillsId> findAllrequiredskillByskillId(long skillId);
-
-
-
 }

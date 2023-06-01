@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Tapp style [InputField]
 class InputField extends StatelessWidget {
   const InputField({
     this.controller,

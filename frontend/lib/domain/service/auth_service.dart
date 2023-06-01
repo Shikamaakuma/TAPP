@@ -20,17 +20,17 @@ class AuthService extends GetxController with GetxServiceMixin {
   final accessToken = Rxn<String>();
   final isLoading = true.obs;
 
-  final AuthDataStorage authDataStorage = AuthDataSecureStorage();
-  final UserDataStorage userDataStorage = UserDataSharedPreferences();
+  final AuthDataStorage _authDataStorage = AuthDataSecureStorage();
+  final UserDataStorage _userDataStorage = UserDataSharedPreferences();
 
   @override
   void onInit() {
     super.onInit();
-    authDataStorage.loadAccessToken().then(
+    _authDataStorage.loadAccessToken().then(
             (value) async {
-              UserModel user = await userDataStorage.loadUser();
-              List<TenantModel> tenants = await userDataStorage.loadTenants();
-              int selectedTenant = await userDataStorage.loadSelectedTenantId();
+              UserModel user = await _userDataStorage.loadUser();
+              List<TenantModel> tenants = await _userDataStorage.loadTenants();
+              int selectedTenant = await _userDataStorage.loadSelectedTenantId();
               Get.put(UserService(user, tenants, selectedTenant), permanent: true);
               accessToken.value = value;
               isLoading.value = false;
@@ -40,6 +40,7 @@ class AuthService extends GetxController with GetxServiceMixin {
     });
   }
 
+  /// Perform a login
   Future<void> login(LoginRequestDto loginRequest) async {
     try {
       LoginResponseDto response = await APIProvider.instance.authProvider.login(loginRequest);
@@ -47,38 +48,30 @@ class AuthService extends GetxController with GetxServiceMixin {
 
       UserModel user = UserModel(response.user.id, response.user.username, response.user.email);
       List<TenantModel> tenants = [
-        for (TenantDto t in response.tenants) TenantModel(t.id, t.name, 'No description implemented')
+        for (TenantDto t in response.tenants) TenantModel.fromDto(t)
       ];
 
-      await authDataStorage.saveAccessToken(response.token);
-      await userDataStorage.saveUser(user);
-      await userDataStorage.saveTentants(tenants);
+      await _authDataStorage.saveAccessToken(response.token);
+      await _userDataStorage.saveUser(user);
+      await _userDataStorage.saveTentants(tenants);
       Get.put(UserService(user, tenants), permanent: true);
 
     } catch (e) {
-      throw Exception();
+      throw Exception('Could not login user');
     }
   }
 
+  /// Clears the local storage and logs out the user
   Future<void> logout() async {
     try {
       await APIProvider.instance.authProvider.logout();
-      await authDataStorage.deleteAccessToken();
-      await userDataStorage.delete();
+      await _authDataStorage.deleteAccessToken();
+      await _userDataStorage.delete();
       Get.delete<UserService>();
       UserService userService = Get.find();
       userService.selectedTenant = null;
     } catch (e) {
-      print(e);
+      throw Exception('Could not login user');
     }
-  }
-
-
-  Future<void> register(RegisterRequestDto registerRequest) async {
-
-  }
-
-  Future<void> reset(ResetRequestDto resetRequest) async {
-
   }
 }

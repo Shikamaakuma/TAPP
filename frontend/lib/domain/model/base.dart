@@ -1,4 +1,5 @@
 
+/// Base for models with unique ids.
 abstract class IdentifiedModel {
   final int id;
 

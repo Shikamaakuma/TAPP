@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/domain/features/athlete.dart';
 import 'package:frontend/domain/features/tenant.dart';
 import 'package:frontend/domain/model/athlete.dart';
 import 'package:frontend/domain/model/skill.dart';
@@ -11,13 +12,17 @@ import 'package:frontend/ui/view/tenant/skills/add_skill/add_skill_view.dart';
 import 'package:frontend/ui/widget/snackbar.dart';
 import 'package:get/get.dart';
 
-class AthletesController extends StatefulGetxController {
+import 'widget/confirm_athlete_delete_dialog.dart';
+
+class AthleteListController extends StatefulGetxController {
 
   final athleteOrderMode = false.obs;
 
   UserService get _userService => Get.find();
   TenantModel get tenantModel => _userService.selectedTenant!;
   TenantDetailModel get tenantDetailModel => _userService.tenantDetailModel.value!;
+  List<AthleteModel> get athletes => _userService.tenantDetailModel.value!.athletes;
+
 
   @override
   void onInit() {
@@ -25,17 +30,41 @@ class AthletesController extends StatefulGetxController {
     _userService.addListener(() {
       update();
     });
+    if (_userService.selectedTenant == null) {
+      try {
+        int? tenantId = Get.parameters['tenantId'] as int;
+        if (tenantId != null) {
+          _userService.selectedTenant = _userService.tenants.firstWhere((element) => element.id == tenantId);
+        }
+      } catch (e) {}
+    }
+
+
+    if (_userService.tenantDetailModel.value != null) {
+      setSuccess();
+    } else {
+      TenantFeatures.loadTenant(tenantModel).then((value) {
+        setSuccess();
+      }).onError((error, stackTrace) {
+        setError(error.toString());
+        showErrorSnackBar('Error', error.toString());
+      });
+    }
   }
 
   void addAthletePressed() {
+
+    Get.toNamed('/tenant/${tenantModel.id}/athletes/add');
+    /*
+
     Get.dialog<bool>(AddAthleteView(tenantDetailModel)).then((value) {
       if (value != null && value == true) {
         showSuccessSnackBar('Done', 'Athlete added');
         update();
-      } else {
+      } else if(value == false) {
         showErrorSnackBar('Error', 'Could not add athlete');
       }
-    });
+    });*/
   }
 
   void onAthleteReorder(int oldIndex,int newIndex) {
@@ -45,29 +74,36 @@ class AthletesController extends StatefulGetxController {
     }
     final item = tempAthletes.removeAt(oldIndex);
     tempAthletes.insert(newIndex, item);
-    tenantDetailModel.athletes = tempAthletes;
+    _userService.athletesSorted = tempAthletes;
     update();
   }
 
   void onAthleteDismissed(AthleteModel athleteModel) {
     tenantDetailModel.athletes.remove(athleteModel);
     update();
+    showSuccessSnackBar('Success', 'Athlete deleted');
   }
 
   Future<bool> confirmAthleteDismissed(AthleteModel athleteModel) async {
-    return await Get.dialog<bool>(
-        AlertDialog(title: Text('Delete Athlete'),
-          content: Text('Do you want to remove the athlete ${athleteModel.fullName} permanently?'),
-          actions: [
-            TextButton(onPressed: () => Get.back<bool>(result: false), child: const Text('No')),
-            TextButton(onPressed: () => Get.back<bool>(result: true), child: const Text('Yes'))
-          ],
-        )
+    bool dismiss = await Get.dialog<bool>(
+        ConfirmAthleteDeleteDialog(athleteName: athleteModel.fullName,)
     ) ?? false;
+    if (!dismiss) {
+      return false;
+    }
+    final features = AthleteFeatures(athleteModel);
+    try {
+      await features.deleteAthlete();
+      return true;
+    } catch (e) {
+      showErrorSnackBar('Error', 'Could not remove user');
+      return false;
+    }
   }
 
   void onSortAthletesClicked() {
     athleteOrderMode.value = !athleteOrderMode.value;
     update();
   }
+
 }

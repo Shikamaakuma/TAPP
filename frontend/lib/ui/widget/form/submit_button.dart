@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Tapp Style [ElevatedButton] for submits with a loading state
 class SubmitButton extends StatelessWidget {
   const SubmitButton({
     required this.onPressed,

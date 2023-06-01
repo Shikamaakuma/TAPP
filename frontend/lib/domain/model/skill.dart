@@ -1,3 +1,4 @@
+import 'package:frontend/data/dto/image_dto.dart';
 import 'package:frontend/data/dto/skill_dto.dart';
 import 'package:frontend/domain/model/athlete.dart';
 import 'package:frontend/domain/model/progress.dart';
@@ -9,18 +10,21 @@ class SkillModel extends IdentifiedModel{
   final String name;
   final String description;
   final int level;
+  final ImageDto? image;
 
   Map<AthleteModel, List<ProgressModel>> athleteProgress = {};
 
-  SkillModel(super.id, this.name, this.description, this.level);
+  SkillModel(super.id, this.name, this.description, this.level, this.image);
 
   factory SkillModel.fromDto(SkillDto dto) {
-    return SkillModel(dto.id, dto.name, dto.description, dto.level);
+    return SkillModel(dto.id, dto.name, dto.description, dto.level, dto.image);
   }
 
+  /// Average skill level over all skill with a progress
   double? get averageSkill => currentProgress.values.isNotEmpty
       ? currentProgress.values.map((e) => e.score).reduce((value, element) => value + element) / currentProgress.values.length
       : null;
+
 
   Map<AthleteModel, ProgressModel> get currentProgress => {
     for (MapEntry<AthleteModel, List<ProgressModel>> entry

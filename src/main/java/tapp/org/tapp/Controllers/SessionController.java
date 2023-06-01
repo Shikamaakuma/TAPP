@@ -9,11 +9,20 @@ import tapp.org.tapp.Repository.TenantRepository;
 
 import java.util.List;
 
+/**
+ * Skeleton session controller
+ */
+
 @RestController
 @RequestMapping("/api/v1/")
 public class SessionController {
     @Autowired
     private TenantRepository tenantRepository;
+
+    /**
+     * Returns a list of all tenants
+     * @return list of tenants
+     */
 
     @PostMapping("/login")
     public List<Tenant> login(){return tenantRepository.findAll();}
